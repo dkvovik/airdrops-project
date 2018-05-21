@@ -22,14 +22,4 @@ export class AirdropService {
       });
   }
 
-  getAirdropIcon(imageName): Observable<ResponseServer> {
-    return this.http.get(`${this.basicUrl}/file?imageName=${imageName}`)
-      .map( (response: any) => {
-        if (response.success === false) {
-          throw Observable.throw(response);
-        }
-        return response.data;
-      });
-  }
-
 }

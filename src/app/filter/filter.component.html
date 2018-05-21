@@ -219,7 +219,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let airdrop of airdrops">
-          <td>{{airdrop.tokenName}}</td>
+          <td>
+            <img src="data:image/jpeg;base64,{{airdrop.image}}" height="44px" width="44px"/>
+            {{airdrop.tokenName}}
+          </td>
           <td>{{airdrop.tokenValue | currency}}</td>
           <td>{{airdrop.startDate | date:'d MMMM y'}}</td>
           <td>{{airdrop.endDate | date:'d MMMM y'}}</td>

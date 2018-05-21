@@ -13,5 +13,5 @@ export class Airdrop {
   endDate?: string;
   __v?: number;
   socialNetworks?: string[];
-  fileName?: string;
+  image?;
 }
