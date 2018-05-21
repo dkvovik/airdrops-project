@@ -1,0 +1,88 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~variables.scss';
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #EDF0F4;
+  font-size: 17px;
+}
+h2.title {
+  font-weight: 500;
+  font-size: 17px;
+  color: #4E5C6E;
+  margin-bottom: 20px;
+}
+.btn {
+  color: #fff;
+  background-color: #3A3AFE;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1286px;
+  }
+}
+
+a {
+  font-size: 15px;
+
+  &:hover {
+    color: $app-link-color-hover;
+    text-decoration: none;
+
+    svg.icon {
+      fill: $app-link-color-hover;
+    }
+  }
+
+  svg.icon {
+    height: 20px;
+    fill: $app-link-color;
+    margin-right: 9px;
+  }
+}
+
+svg.icon {
+  fill: $app-link-color;
+
+  &.active {
+    fill: $app-link-color-active;
+  }
+
+  &:hover {
+    cursor: pointer;
+    fill: $app-link-color-hover;
+  }
+}
+
+/* css tables */
+.table {
+
+  thead th {
+    border-bottom: none;
+  }
+
+  & td, th {
+    border-top: none;
+  }
+
+  &.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #FCFCFC;
+  }
+}
+
+.main-border {
+  border: 1px solid $app-border-color;
+  border-radius: 4px;
+}
+
+#badge-today {
+  width: 5px;
+  height: 5px;
+  background: #1F5AF6;
+  border-radius: 50%;
+  position: absolute;
+  top: 36%;
+  left: 0;
+}

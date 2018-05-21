@@ -1,0 +1,84 @@
+.finded-airdrops {
+
+  &:nth-child(3n + 1) {
+    padding-left: 0;
+  }
+
+  &:nth-child(3n) {
+    padding-right: 0;
+  }
+
+  .title {
+    padding: 23px 29px 20px 29px;
+    border-bottom: 1px solid #E9E9EB;
+    margin-bottom: 0;
+  }
+
+  .finded-airdrop-wrapper:nth-child(even) {
+    background-color: #FCFCFC;
+  }
+
+  .finded-airdrop {
+    display: flex;
+    border-bottom: 1px solid #E9E9EB;
+    padding: 31px 35px 31px 20px;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    &__stat {
+      display: flex;
+      font-size: 13px;
+      color: #9BA6B2;
+      margin-left: auto;
+      align-items: center;
+
+      p {
+        margin-bottom: 3px;
+      }
+
+      .stat-text {
+        text-align: right;
+      }
+      .stat-icon {
+        margin-top: 1px;
+      }
+    }
+
+    .info-title {
+      display: flex;
+      align-items: center;
+
+      .badge-today-wrapper {
+        position: relative;
+        margin-left: 7px;
+        padding-left: 5px;
+        color: #9BA6B2;
+        font-size: 13px;
+      }
+    }
+
+    .info-social-icon svg {
+      height: 10px;
+    }
+
+    svg.rating,
+    svg.value {
+      height: 15px;
+      fill: #9BA6B2;
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+  }
+
+  .footer {
+    padding: 20px;
+    background-color: #FCFCFC;
+    text-align: center;
+
+    a {
+      color: #4E5C6E;
+    }
+  }
+}

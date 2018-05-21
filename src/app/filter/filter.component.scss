@@ -1,0 +1,72 @@
+@import '~variables.scss';
+
+.filter {
+  background-color: #fff;
+  padding: 30px;
+  margin-bottom: 10px;
+
+  h2 {
+    font-size: 1rem;
+  }
+}
+
+.button-filter-wrapper {
+  display: flex;
+  margin-bottom: 23px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .button-filter-label {
+    margin-right: 18px;
+
+    input {
+      display: none;
+
+      &:checked + .button-filter svg {
+        fill: $app-link-color-active;
+      }
+    }
+  }
+
+  .button-filter {
+
+    svg {
+      height: 16px;
+
+      &:hover {
+        fill: $app-link-color-hover;
+      }
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.table-wrapper {
+  background-color: #fff;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 10px;
+
+  th {
+    font-size: 12px;
+    color: #AAB2C0;
+    font-weight: 500;
+  }
+  td {
+    font-size: 15px;
+    font-weight: 400;
+    color: #263241;
+  }
+
+  svg.rating {
+    height: 18px;
+    fill: #B1BAC6;
+    vertical-align: sub;
+    margin-right: 8px;
+  }
+}

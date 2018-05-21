@@ -1,0 +1,58 @@
+@import '~variables.scss';
+
+.header {
+  background-color: #fff;
+
+  .logo {
+    align-items: center;
+    display: flex;
+
+    a {
+      display: flex;
+      align-items: flex-end;
+      color: #000;
+      font-weight: 500;
+      font-size: 17px;
+
+      svg {
+        fill: $app-link-color-active;
+        height: 29px;
+        margin-right: 15px;
+      }
+    }
+  }
+  .menu {
+    text-align: right;
+  }
+
+  a.mat-tab-link {
+    font-size: 15px;
+    opacity: 1;
+    font-weight: 400;
+    color: $app-link-color;
+
+    &:hover {
+      color: $app-link-color-hover;
+    }
+
+    &.mat-tab-label-active {
+      color: $app-link-color-active;
+
+      svg.icon {
+        fill: $app-link-color-active;
+      }
+    }
+  }
+
+
+}
+
+:host /deep/ {
+  .mat-tab-group.mat-primary .mat-ink-bar,
+  .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: $app-link-color-active;
+  }
+  .mat-tab-header, .mat-tab-nav-bar {
+    border-bottom: none;
+  }
+}
