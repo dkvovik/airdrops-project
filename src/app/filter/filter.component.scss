@@ -10,9 +10,25 @@
   }
 }
 
+.submit-wrapper {
+
+  .btn-clear {
+    font-weight: 400;
+    color: #B1BAC6;
+    background-color: transparent;
+    float: right;
+    padding: 0;
+    margin-bottom: 15px;
+  }
+
+  .bt-submit-filter {
+    height: 55px;
+  }
+}
+
 .button-filter-wrapper {
   display: flex;
-  margin-bottom: 23px;
+  margin-bottom: 15px;
 
   &:last-child {
     margin-bottom: 0;
@@ -20,6 +36,7 @@
 
   .button-filter-label {
     margin-right: 18px;
+    margin-bottom: 0;
 
     input {
       display: none;
@@ -43,6 +60,62 @@
     &:last-child {
       margin-right: 0;
     }
+  }
+}
+
+.range__token-value,
+.range__rating {
+
+  .range-slider {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+
+    .range-input {
+      position: relative;
+      width: 46%;
+
+      input {
+        max-width: 100%;
+        padding-left: 35px;
+      }
+    }
+
+    svg.dollar {
+      position: absolute;
+      left: 5px;
+      top: 12px;
+      fill: #b1bac6;
+      height: 17px;
+      font-weight: 500;
+    }
+  }
+}
+
+:host /deep/ range-slider {
+
+  .slidersContainer {
+    height: 5px;
+    border-radius: 5px;
+    background: #eceeef;
+    margin-top: 10px;
+  }
+  .dsliderClass {
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border: 1px solid $app-border-color;
+    border-radius: 50%;
+    bottom: -5px;
+  }
+
+  .dheilightClass {
+    background: $app-link-color-active;
   }
 }
 

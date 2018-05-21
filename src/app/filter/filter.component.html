@@ -162,17 +162,45 @@
           </label>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 range__token-value">
         <h2 class="title">Token Value</h2>
-        <mat-slider min="1" max="5" step="0.5" value="1.5"></mat-slider>
+        <div class="range-slider">
+          <range-slider [min]="minTokenValue" [max]="maxTokenValue" [toolTips]="[false,false]" [step]="stepTokenValue"
+                        [(ngModel)]="twoWayRangeTokenValue" (ngModelChange)="changed()"></range-slider>
+          <div class="form-group">
+            <span class="range-input">
+              <input type="number" [(ngModel)]="twoWayRangeTokenValue[0]" (ngModelChange)="changed()">
+              <svg class="dollar" viewBox="0 0 10 20">
+                <text data-name="$" class="dollar" transform="translate(0 16)"><tspan x="0" y="0">$</tspan></text>
+              </svg>
+            </span>
+            <span class="range-input ">
+              <input type="number" [(ngModel)]="twoWayRangeTokenValue[1]" (ngModelChange)="changed()">
+              <svg class="dollar" viewBox="0 0 10 20">
+                <text data-name="$" class="dollar" transform="translate(0 16)"><tspan x="0" y="0">$</tspan></text>
+              </svg>
+            </span>
+          </div>
+        </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 range__rating">
         <h2 class="title">Rating</h2>
-        <mat-slider min="1" max="5" step="0.5" value="1.5"></mat-slider>
+        <div class="range-slider">
+          <range-slider [min]="minRating" [max]="maxRating" [toolTips]="[false,false]" [step]="stepRating"
+                        [(ngModel)]="twoWayRangeRating" (ngModelChange)="changedRating()"></range-slider>
+          <div class="form-group">
+            <span class="range-input">
+              <input type="number" [(ngModel)]="twoWayRangeRating[0]" (ngModelChange)="changedRating()">
+            </span>
+            <span class="range-input">
+              <input type="number" [(ngModel)]="twoWayRangeRating[1]" (ngModelChange)="changedRating()">
+            </span>
+          </div>
+        </div>
       </div>
-      <div class="col-md-5">
-        <h2 class="title text-right">clear</h2>
-        <button class="btn btn-filter btn-block">Apply Filter</button>
+      <div class="col-md-5 submit-wrapper">
+        <div class="btn btn-clear" (click)="clearFormFilter()">clear</div>
+        <button class="btn bt-submit-filter btn-block">Apply Filter</button>
       </div>
     </div>
   </div>
