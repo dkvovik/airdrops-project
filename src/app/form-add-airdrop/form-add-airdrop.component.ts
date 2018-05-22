@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Airdrop } from '../shared/models/airdrop';
 
 @Component({
   selector: 'app-form-add-airdrop',
@@ -11,6 +13,7 @@ export class FormAddAirdropComponent implements OnInit {
   addedRequirements = [];
   addedHTG = [];
   addedProjectLinks = [];
+  addedSocialNetworks = [];
 
   isActiveAddLink = false;
 
@@ -21,11 +24,63 @@ export class FormAddAirdropComponent implements OnInit {
     showWeekNumbers: false
   };
 
+  formAddAirdrop: FormGroup;
+
   @Input() modalRef: BsModalRef;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    this.initFormAddAirdrop();
+  }
+
+  initFormAddAirdrop() {
+    this.formAddAirdrop = new FormGroup({
+      image: new FormControl(null, [Validators.required]),
+      tokenName: new FormControl(null, [Validators.required]),
+      projectName: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.email]),
+      whitepaperLink: new FormControl(null, ),
+      assetID: new FormControl(null, ),
+      platform: new FormControl(null, ),
+      website: new FormControl(null, ),
+      startDate: new FormControl(this.startDate, [Validators.required]),
+      endDate: new FormControl(null),
+      economyToken: new FormControl(null, ),
+      totalValue: new FormControl(null, ),
+      tokensPerClaim: new FormControl(null, ),
+      estimatedValue: new FormControl(null, ),
+      description: new FormControl(null, ),
+      comment: new FormControl(null, ),
+    });
+  }
+
+  onSubmitAddAirdrop() {
+    console.log('this.formAddAirdrop', this.formAddAirdrop);
+
+    const data: Airdrop = {...this.formAddAirdrop.value};
+    data.requirements = this.addedRequirements;
+    data.howToGetToken = this.addedHTG;
+    data.projectLinks = this.addedProjectLinks;
+    data.socialNetworks = this.addedSocialNetworks;
+
+    console.log('data', data);
+  }
+
+  onFileChange(event) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.formAddAirdrop.patchValue({
+          image: reader.result
+        });
+      };
+    }
   }
 
   addRequirement(value) {

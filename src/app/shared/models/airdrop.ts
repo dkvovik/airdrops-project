@@ -1,17 +1,23 @@
 export class Airdrop {
-  _id?: string;
-  tokenName?: string;
-  website?: string;
-  email?: string;
+  assetId?: string;
+  commentBlock?: string;
   description?: string;
-  howToGetToken?: string;
-  whitePaperLink?: string;
   economyOfToken?: string;
-  tokenValue?: number;
-  rating?: number;
-  startDate?: string;
+  email?: string;
   endDate?: string;
-  __v?: number;
-  socialNetworks?: string[];
+  estimatedValue?: string;
+  howToGetToken?: string[];
   image?;
+  projectLinks?: string[];
+  projectName?: string;
+  rating?: number;
+  requirements?: string[];
+  socialNetworks?: string[];
+  startDate?: string;
+  status?: string;
+  tokenName?: string;
+  tokenValue?: number;
+  totalValue?: string;
+  website?: string;
+  whitePaperLink?: string;
 }

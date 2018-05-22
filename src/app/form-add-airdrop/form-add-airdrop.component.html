@@ -16,51 +16,73 @@
   </button>
 </div>
 <div class="modal-body">
-  <div class="modal-body-item modal-body_header">
-    <div class="form-group row">
-      <div class="col-md-2">
+  <form [formGroup]="formAddAirdrop">
+    <div class="modal-body-item modal-body_header">
+      <div class="form-group row">
+        <div class="col-md-6">
+          <input type="file" id="image" (change)="onFileChange($event)">
+        </div>
+        <div class="col-md-3">
+          <label for="tokenName">Token Name</label>
+          <input type="text" class="form-control-plaintext" id="tokenName" formControlName="tokenName">
+        </div>
+        <div class="col-md-3">
+          <label for="projectName">Project Name</label>
+          <input type="text" class="form-control-plaintext" id="projectName" formControlName="projectName">
+        </div>
       </div>
-      <div class="col-md-5">
-        <label for="tokenName">Token Name</label>
-        <input type="text" class="form-control-plaintext" id="tokenName">
-      </div>
-      <div class="col-md-5">
-        <label for="projectName">Project Name</label>
-        <input type="text" class="form-control-plaintext" id="projectName">
-      </div>
-    </div>
 
-    <div class="form-group row">
-      <div class="col-md-6">
-        <label for="email">Email</label>
-        <input type="text" class="form-control-plaintext" id="email">
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="email">Email</label>
+          <input type="text" class="form-control-plaintext" id="email" formControlName="email">
+        </div>
+        <div class="col-md-6">
+          <label for="whitepaperLink">Whitepaper link </label>
+          <input type="text" class="form-control-plaintext" id="whitepaperLink" formControlName="whitepaperLink">
+        </div>
       </div>
-      <div class="col-md-6">
-        <label for="whitepaperLink">Whitepaper link </label>
-        <input type="text" class="form-control-plaintext" id="whitepaperLink">
-      </div>
-    </div>
 
-    <div class="form-group row">
-      <div class="col-md-6">
-        <label for="assetID">Asset ID</label>
-        <input type="text" class="form-control-plaintext" id="assetID">
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="assetID">Asset ID</label>
+          <input type="text" class="form-control-plaintext" id="assetID" formControlName="assetID">
+        </div>
+        <div class="col-md-6">
+          <label for="platform">Platform</label>
+          <input type="text" class="form-control-plaintext" id="platform" formControlName="platform">
+        </div>
       </div>
-      <div class="col-md-6">
-        <label for="platform">Platform</label>
-        <input type="text" class="form-control-plaintext" id="platform">
-      </div>
-    </div>
 
-    <div class="form-group row">
-      <div class="col-md-6">
-        <label for="requirements">Requirements</label>
-        <div class="requirements-items-wrapper">
-          <div class="requirements-input">
-            <div class="container-input">
-              <button class="btn-input right"
-                      (click)="addRequirement(addRequirementInput.value); addRequirementInput.value = ''">
-                <svg class="icon right" viewBox="0 0 17.536 17.536">
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="requirements">Requirements</label>
+          <div class="requirements-items-wrapper">
+            <div class="requirements-input">
+              <div class="container-input">
+                <button class="btn-input right"
+                        (click)="addRequirement(addRequirementInput.value); addRequirementInput.value = ''">
+                  <svg class="icon right" viewBox="0 0 17.536 17.536">
+                    <g id="Plus" transform="translate(-805.387 112.314)">
+                      <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
+                        <path id="Path_88" data-name="Path 88" class="cls-1"
+                              d="M815.9-108.2v6.4h-6.4a.792.792,0,0,0-.8.8h0a.792.792,0,0,0,.8.8h6.4v6.4a.792.792,0,0,0,.8.8h0a.792.792,0,0,0,.8-.8v-14.4a.792.792,0,0,0-.8-.8h0A.792.792,0,0,0,815.9-108.2Z"
+                              transform="translate(-808.7 109)"/>
+                        <path id="Path_89" data-name="Path 89" class="cls-1"
+                              d="M844.98-84.9H840.5a.792.792,0,0,1-.8-.8h0a.792.792,0,0,1,.8-.8h4.48a.792.792,0,0,1,.8.8h0A.813.813,0,0,1,844.98-84.9Z"
+                              transform="translate(-829.78 93.7)"/>
+                      </g>
+                    </g>
+                  </svg>
+                </button>
+                <input #addRequirementInput type="text" class="form-control-plaintext" id="requirements">
+              </div>
+            </div>
+            <div class="requirements-item bg-ligth-grey container-input"
+                 *ngFor="let addedRequirement of addedRequirements; let idx = index">
+              {{addedRequirement}}
+              <button class="btn-input right" (click)="removeAddedRequirement(idx)">
+                <svg class="icon" viewBox="0 0 17.536 17.536">
                   <g id="Plus" transform="translate(-805.387 112.314)">
                     <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
                       <path id="Path_88" data-name="Path 88" class="cls-1"
@@ -73,13 +95,23 @@
                   </g>
                 </svg>
               </button>
-              <input #addRequirementInput type="text" class="form-control-plaintext" id="requirements">
             </div>
           </div>
-          <div class="requirements-item bg-ligth-grey container-input"
-               *ngFor="let addedRequirement of addedRequirements; let idx = index">
-            {{addedRequirement}}
-            <button class="btn-input right" (click)="removeAddedRequirement(idx)">
+        </div>
+        <div class="col-md-6">
+          <label for="website">Website</label>
+          <input type="text" class="form-control-plaintext" id="website" placeholder="https://"
+                 formControlName="website">
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-body-item modal-body_subheader">
+      <div class="form-group row">
+        <div class="col-md-3">
+          <label for="startDate">Start date</label>
+          <div class="container-input">
+            <button class="btn-input left" (click)="dpStartDate.toggle()">
               <svg class="icon" viewBox="0 0 17.536 17.536">
                 <g id="Plus" transform="translate(-805.387 112.314)">
                   <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
@@ -93,102 +125,16 @@
                 </g>
               </svg>
             </button>
+            <input type="text" class="form-control-plaintext" id="startDate" disabled formControlName="startDate"
+                   #dpStartDate="bsDatepicker" bsDatepicker [bsConfig]="bsConfig"
+                   [bsValue]="startDate" value="{{startDate | date:'d MMMM y'}}">
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <label for="website">Website</label>
-        <input type="text" class="form-control-plaintext" id="website" placeholder="https://">
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-body-item modal-body_subheader">
-    <div class="form-group row">
-      <div class="col-md-3">
-        <label for="startDate">Start date</label>
-        <div class="container-input">
-          <button class="btn-input left" (click)="dpStartDate.toggle()">
-            <svg class="icon" viewBox="0 0 17.536 17.536">
-              <g id="Plus" transform="translate(-805.387 112.314)">
-                <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
-                  <path id="Path_88" data-name="Path 88" class="cls-1"
-                        d="M815.9-108.2v6.4h-6.4a.792.792,0,0,0-.8.8h0a.792.792,0,0,0,.8.8h6.4v6.4a.792.792,0,0,0,.8.8h0a.792.792,0,0,0,.8-.8v-14.4a.792.792,0,0,0-.8-.8h0A.792.792,0,0,0,815.9-108.2Z"
-                        transform="translate(-808.7 109)"/>
-                  <path id="Path_89" data-name="Path 89" class="cls-1"
-                        d="M844.98-84.9H840.5a.792.792,0,0,1-.8-.8h0a.792.792,0,0,1,.8-.8h4.48a.792.792,0,0,1,.8.8h0A.813.813,0,0,1,844.98-84.9Z"
-                        transform="translate(-829.78 93.7)"/>
-                </g>
-              </g>
-            </svg>
-          </button>
-          <input type="text" class="form-control-plaintext" id="startDate" disabled
-                 #dpStartDate="bsDatepicker" bsDatepicker [bsConfig]="bsConfig"
-                 [bsValue]="startDate" value="{{startDate | date:'d MMMM y'}}">
-        </div>
-      </div>
-      <div class="col-md-3">
-        <label for="endDate">End date</label>
-        <div class="container-input">
-          <button class="btn-input left" (click)="dpEndTime.toggle();">
-            <svg class="icon" viewBox="0 0 17.536 17.536">
-              <g id="Plus" transform="translate(-805.387 112.314)">
-                <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
-                  <path id="Path_88" data-name="Path 88" class="cls-1"
-                        d="M815.9-108.2v6.4h-6.4a.792.792,0,0,0-.8.8h0a.792.792,0,0,0,.8.8h6.4v6.4a.792.792,0,0,0,.8.8h0a.792.792,0,0,0,.8-.8v-14.4a.792.792,0,0,0-.8-.8h0A.792.792,0,0,0,815.9-108.2Z"
-                        transform="translate(-808.7 109)"/>
-                  <path id="Path_89" data-name="Path 89" class="cls-1"
-                        d="M844.98-84.9H840.5a.792.792,0,0,1-.8-.8h0a.792.792,0,0,1,.8-.8h4.48a.792.792,0,0,1,.8.8h0A.813.813,0,0,1,844.98-84.9Z"
-                        transform="translate(-829.78 93.7)"/>
-                </g>
-              </g>
-            </svg>
-          </button>
-          <input type="text" class="form-control-plaintext" id="endDate" disabled
-                 #dpEndTime="bsDatepicker" bsDatepicker [bsConfig]="bsConfig">
-        </div>
-      </div>
-      <div class="col-md-6">
-        <label for="economyToken">Economy of the token</label>
-        <input type="text" class="form-control-plaintext" id="economyToken">
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-md-6">
-        <label for="totalValue">Total value</label>
-        <input type="text" class="form-control-plaintext" id="totalValue">
-      </div>
-      <div class="col-md-6">
-        <label for="tokensPerClaim">Tokens per Claim</label>
-        <input type="text" class="form-control-plaintext" id="tokensPerClaim">
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-md-6">
-        <label for="estimatedValue">Estimated value</label>
-        <input type="text" class="form-control-plaintext" id="estimatedValue">
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-body-item modal-body_middle">
-    <div class="form-group">
-      <label for="description">Description</label>
-      <textarea class="form-control" id="description" rows="4"></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="howToGetToken">How to get a token</label>
-      <div class="row htg-item htg-item_added" *ngFor="let htg of addedHTG; let idx = index;">
-        <div class="col-md-1">
-          <div class="htg-index">
-            {{idx + 1}}
-          </div>
-        </div>
-        <div class="col-md-11">
+        <div class="col-md-3">
+          <label for="endDate">End date</label>
           <div class="container-input">
-            <button class="btn-input right" (click)="removeAddedHTG(idx)">
-              <svg class="icon right" viewBox="0 0 17.536 17.536">
+            <button class="btn-input left" (click)="dpEndTime.toggle();">
+              <svg class="icon" viewBox="0 0 17.536 17.536">
                 <g id="Plus" transform="translate(-805.387 112.314)">
                   <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
                     <path id="Path_88" data-name="Path 88" class="cls-1"
@@ -201,54 +147,50 @@
                 </g>
               </svg>
             </button>
-            <input type="text" class="form-control-plaintext" disabled value="{{htg}}">
+            <input type="text" class="form-control-plaintext" id="endDate" disabled formControlName="endDate"
+                   #dpEndTime="bsDatepicker" bsDatepicker [bsConfig]="bsConfig">
           </div>
+        </div>
+        <div class="col-md-6">
+          <label for="economyToken">Economy of the token</label>
+          <input type="text" class="form-control-plaintext" id="economyToken" formControlName="economyToken">
         </div>
       </div>
-      <div class="row htg-item">
-        <div class="col-md-1">
-          <div class="htg-index htg-index_white">
-            {{addedHTG.length + 1}}
-          </div>
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="totalValue">Total value</label>
+          <input type="text" class="form-control-plaintext" id="totalValue" formControlName="totalValue">
         </div>
-        <div class="col-md-11">
-          <div class="container-input">
-            <button class="btn-input right"
-                    (click)="addHTG(addHTGIinput.value); addHTGIinput.value = '';">
-              <svg class="icon right" viewBox="0 0 17.536 17.536">
-                <g id="Plus" transform="translate(-805.387 112.314)">
-                  <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
-                    <path id="Path_88" data-name="Path 88" class="cls-1"
-                          d="M815.9-108.2v6.4h-6.4a.792.792,0,0,0-.8.8h0a.792.792,0,0,0,.8.8h6.4v6.4a.792.792,0,0,0,.8.8h0a.792.792,0,0,0,.8-.8v-14.4a.792.792,0,0,0-.8-.8h0A.792.792,0,0,0,815.9-108.2Z"
-                          transform="translate(-808.7 109)"/>
-                    <path id="Path_89" data-name="Path 89" class="cls-1"
-                          d="M844.98-84.9H840.5a.792.792,0,0,1-.8-.8h0a.792.792,0,0,1,.8-.8h4.48a.792.792,0,0,1,.8.8h0A.813.813,0,0,1,844.98-84.9Z"
-                          transform="translate(-829.78 93.7)"/>
-                  </g>
-                </g>
-              </svg>
-            </button>
-            <input #addHTGIinput type="text" class="form-control-plaintext" id="howToGetToken">
-          </div>
+        <div class="col-md-6">
+          <label for="tokensPerClaim">Tokens per Claim</label>
+          <input type="text" class="form-control-plaintext" id="tokensPerClaim" formControlName="tokensPerClaim">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="estimatedValue">Estimated value</label>
+          <input type="text" class="form-control-plaintext" id="estimatedValue" formControlName="estimatedValue">
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal-body-item modal-body_footer">
-    <div class="form-group row">
-      <div class="col-md-6">
-        <label for="projectLinks">Project Links</label>
-        <div class="row project-links-item"
-             *ngFor="let projectLink of addedProjectLinks; let idx = index;">
-          <div class="col-md-2">
-            <div class="htg-index htg-index_white">
+    <div class="modal-body-item modal-body_middle">
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" rows="4" formControlName="description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="howToGetToken">How to get a token</label>
+        <div class="row htg-item htg-item_added" *ngFor="let htg of addedHTG; let idx = index;">
+          <div class="col-md-1">
+            <div class="htg-index">
               {{idx + 1}}
             </div>
           </div>
-          <div class="col-md-10">
+          <div class="col-md-11">
             <div class="container-input">
-              <button class="btn-input right" (click)="removeAddedProjectLink(idx)">
+              <button class="btn-input right" (click)="removeAddedHTG(idx)">
                 <svg class="icon right" viewBox="0 0 17.536 17.536">
                   <g id="Plus" transform="translate(-805.387 112.314)">
                     <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
@@ -262,15 +204,20 @@
                   </g>
                 </svg>
               </button>
-              <input type="text" class="form-control-plaintext" disabled value="{{projectLink}}">
+              <input type="text" class="form-control-plaintext" disabled value="{{htg}}">
             </div>
           </div>
         </div>
-        <div class="row project-links-item">
-          <div class="col-md-12" *ngIf="isActiveAddLink">
+        <div class="row htg-item">
+          <div class="col-md-1">
+            <div class="htg-index htg-index_white">
+              {{addedHTG.length + 1}}
+            </div>
+          </div>
+          <div class="col-md-11">
             <div class="container-input">
               <button class="btn-input right"
-                      (click)="addProjectLink(projectLinks.value); projectLinks.value = '';">
+                      (click)="addHTG(addHTGIinput.value); addHTGIinput.value = '';">
                 <svg class="icon right" viewBox="0 0 17.536 17.536">
                   <g id="Plus" transform="translate(-805.387 112.314)">
                     <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
@@ -284,21 +231,84 @@
                   </g>
                 </svg>
               </button>
-              <input #projectLinks type="text" class="form-control-plaintext" id="projectLinks" placeholder="https://"
-                     (keyup.enter)="addProjectLink(projectLinks.value); projectLinks.value = '';">
+              <input #addHTGIinput type="text" class="form-control-plaintext" id="howToGetToken">
             </div>
-          </div>
-
-          <div class="col-md-12" *ngIf="!isActiveAddLink">
-            <button class="project-links-btn btn-block" (click)="isActiveAddLink = !isActiveAddLink">+ Add Link</button>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="col-md-6">
-        <label for="comment">Comment Block</label>
-        <textarea class="form-control" id="comment" rows="3"></textarea>
+    <div class="modal-body-item modal-body_footer">
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="projectLinks">Project Links</label>
+          <div class="row project-links-item"
+               *ngFor="let projectLink of addedProjectLinks; let idx = index;">
+            <div class="col-md-2">
+              <div class="htg-index htg-index_white">
+                {{idx + 1}}
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="container-input">
+                <button class="btn-input right" (click)="removeAddedProjectLink(idx)">
+                  <svg class="icon right" viewBox="0 0 17.536 17.536">
+                    <g id="Plus" transform="translate(-805.387 112.314)">
+                      <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
+                        <path id="Path_88" data-name="Path 88" class="cls-1"
+                              d="M815.9-108.2v6.4h-6.4a.792.792,0,0,0-.8.8h0a.792.792,0,0,0,.8.8h6.4v6.4a.792.792,0,0,0,.8.8h0a.792.792,0,0,0,.8-.8v-14.4a.792.792,0,0,0-.8-.8h0A.792.792,0,0,0,815.9-108.2Z"
+                              transform="translate(-808.7 109)"/>
+                        <path id="Path_89" data-name="Path 89" class="cls-1"
+                              d="M844.98-84.9H840.5a.792.792,0,0,1-.8-.8h0a.792.792,0,0,1,.8-.8h4.48a.792.792,0,0,1,.8.8h0A.813.813,0,0,1,844.98-84.9Z"
+                              transform="translate(-829.78 93.7)"/>
+                      </g>
+                    </g>
+                  </svg>
+                </button>
+                <input type="text" class="form-control-plaintext" disabled value="{{projectLink}}">
+              </div>
+            </div>
+          </div>
+          <div class="row project-links-item">
+            <div class="col-md-12" *ngIf="isActiveAddLink">
+              <div class="container-input">
+                <button class="btn-input right"
+                        (click)="addProjectLink(projectLinks.value); projectLinks.value = '';">
+                  <svg class="icon right" viewBox="0 0 17.536 17.536">
+                    <g id="Plus" transform="translate(-805.387 112.314)">
+                      <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
+                        <path id="Path_88" data-name="Path 88" class="cls-1"
+                              d="M815.9-108.2v6.4h-6.4a.792.792,0,0,0-.8.8h0a.792.792,0,0,0,.8.8h6.4v6.4a.792.792,0,0,0,.8.8h0a.792.792,0,0,0,.8-.8v-14.4a.792.792,0,0,0-.8-.8h0A.792.792,0,0,0,815.9-108.2Z"
+                              transform="translate(-808.7 109)"/>
+                        <path id="Path_89" data-name="Path 89" class="cls-1"
+                              d="M844.98-84.9H840.5a.792.792,0,0,1-.8-.8h0a.792.792,0,0,1,.8-.8h4.48a.792.792,0,0,1,.8.8h0A.813.813,0,0,1,844.98-84.9Z"
+                              transform="translate(-829.78 93.7)"/>
+                      </g>
+                    </g>
+                  </svg>
+                </button>
+                <input #projectLinks type="text" class="form-control-plaintext" id="projectLinks" placeholder="https://"
+                       (keyup.enter)="addProjectLink(projectLinks.value); projectLinks.value = '';">
+              </div>
+            </div>
+
+            <div class="col-md-12" *ngIf="!isActiveAddLink">
+              <button class="project-links-btn btn-block" (click)="isActiveAddLink = !isActiveAddLink">+ Add Link
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="comment">Comment Block</label>
+          <textarea class="form-control" id="comment" rows="3" formControlName="comment"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-12 text-center">
+          <button class="btn_submit" type="submit" class="btn" (click)="onSubmitAddAirdrop()">Submit</button>
+        </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>
