@@ -77,7 +77,7 @@ svg.icon {
   }
 }
 
-/* css tables */
+/* CSS tables */
 .table {
   margin-bottom: 0;
 
@@ -98,6 +98,8 @@ svg.icon {
   border: 1px solid $app-border-color;
   border-radius: 4px;
 }
+
+/* /CSS tables */
 
 /* CSS Forms */
 .form-group {
@@ -127,6 +129,11 @@ svg.icon {
 
     input {
       padding-right: 45px;
+    }
+
+    .btn-input.left + input {
+      padding-right: 5px;
+      padding-left: 50px;
     }
 
     .btn-input {

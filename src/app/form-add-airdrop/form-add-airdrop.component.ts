@@ -9,6 +9,15 @@ import { BsModalRef } from 'ngx-bootstrap';
 export class FormAddAirdropComponent implements OnInit {
 
   addedRequirements = [];
+  addedHTG = [];
+  addedProjectLinks = [];
+
+  startDate = new Date();
+  bsConfig = {
+    containerClass: 'theme-default',
+    dateInputFormat: 'DD.MM.YYYY',
+    showWeekNumbers: false
+  };
 
   @Input() modalRef: BsModalRef;
 
@@ -18,13 +27,33 @@ export class FormAddAirdropComponent implements OnInit {
   }
 
   addRequirement(value) {
+    value = value.trim();
     if (value) {
       this.addedRequirements.push(value);
     }
   }
-
   removeAddedRequirement(index) {
     this.addedRequirements.splice(index, 1);
+  }
+
+  addHTG(value) {
+    value = value.trim();
+    if (value) {
+      this.addedHTG.push(value);
+    }
+  }
+  removeAddedHTG(index) {
+    this.addedHTG.splice(index, 1);
+  }
+
+  addProjectLink(value) {
+    value = value.trim();
+    if (value) {
+      this.addedProjectLinks.push(value);
+    }
+  }
+  removeAddedProjectLink(index) {
+    this.addedProjectLinks.splice(index, 1);
   }
 
 }

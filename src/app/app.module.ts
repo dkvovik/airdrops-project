@@ -16,7 +16,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { FilterComponent } from './filter/filter.component';
 import { AirdropService } from './services/airdrop.service';
 import { FindAirdropComponent } from './find-airdrop/find-airdrop.component';
-import { ModalModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, ModalModule } from 'ngx-bootstrap';
 import { FormAddAirdropComponent } from './form-add-airdrop/form-add-airdrop.component';
 
 
@@ -40,7 +40,8 @@ import { FormAddAirdropComponent } from './form-add-airdrop/form-add-airdrop.com
     MatTabsModule,
     BrowserAnimationsModule,
     RangeSliderModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   providers: [AirdropService],
   bootstrap: [AppComponent]

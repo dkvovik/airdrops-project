@@ -25,13 +25,30 @@
   }
 }
 
-.htg-index {
-  width: 42px;
-  height: 42px;
-  background-color: $app-form-color;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
+.htg-item,
+.project-links-item {
+  margin-bottom: 10px;
+
+  &_added {
+    input {
+      background-color: $app-form-color;
+    }
+  }
+
+  .htg-index {
+    width: 42px;
+    height: 42px;
+    background-color: $app-form-color;
+    color: $app-form-color-header;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &_white {
+      background-color: #fff;
+      border: 1px solid $app-form-color;
+    }
+  }
 }
