@@ -220,7 +220,7 @@
       <tbody>
         <tr *ngFor="let airdrop of airdrops">
           <td>
-            <img src="data:image/jpeg;base64,{{airdrop.image}}" height="44px" width="44px"/>
+            <img class="token-logo" src="{{airdrop.image}}"/>
             {{airdrop.tokenName}}
           </td>
           <td>{{airdrop.tokenValue | currency}}</td>

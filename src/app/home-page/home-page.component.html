@@ -1083,7 +1083,11 @@
 
   <div class="row">
     <div class="col-md-12 submit-airdrop-wrapper main-border">
-      <button class="btn">Submit New Airdrop</button>
+      <button class="btn" (click)="openModal(template)">Submit New Airdrop</button>
     </div>
   </div>
 </section>
+
+<ng-template #template>
+  <app-form-add-airdrop [modalRef]="modalRef"></app-form-add-airdrop>
+</ng-template>

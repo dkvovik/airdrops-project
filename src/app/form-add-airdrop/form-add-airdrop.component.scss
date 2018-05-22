@@ -1,0 +1,37 @@
+@import '~variables.scss';
+
+.form-group {
+
+  .requirements-items-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+  }
+
+  .requirements-item {
+    display: flex;
+    align-items: center;
+    padding-left: 13px;
+    padding-right: 46px;
+    border-radius: .375rem;
+    height: 42px;
+    margin-bottom: 10px;
+    margin-left: 1%;
+  }
+
+  .requirements-input {
+    width: 33%;
+    margin-left: 10px;
+  }
+}
+
+.htg-index {
+  width: 42px;
+  height: 42px;
+  background-color: $app-form-color;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
