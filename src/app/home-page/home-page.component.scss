@@ -1,11 +1,11 @@
+.finded-airdrops-wrapper {
+ justify-content: space-between;
+}
 .finded-airdrops {
+  padding: 0;
 
-  &:nth-child(3n + 1) {
-    padding-left: 0;
-  }
-
-  &:nth-child(3n) {
-    padding-right: 0;
+  @media (min-width: 768px) {
+    max-width: 32.733333%;
   }
 
   .title {
@@ -93,8 +93,8 @@
 .submit-airdrop-wrapper {
   background-image: url(/assets/bg-submit-wrapper.jpg);
   background-repeat: no-repeat;
-  padding-top: 55px;
-  padding-bottom: 55px;
+  padding-top: 45px;
+  padding-bottom: 45px;
   background-size: cover;
   margin-top: 10px;
   text-align: center;

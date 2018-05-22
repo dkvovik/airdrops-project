@@ -51,4 +51,12 @@
       border: 1px solid $app-form-color;
     }
   }
+
+  .project-links-btn {
+    cursor: pointer;
+    border: 1px dashed $app-form-color;
+    border-radius: 5px;
+    height: 42px;
+    color: #AEAEAE;
+  }
 }

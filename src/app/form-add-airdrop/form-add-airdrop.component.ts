@@ -12,10 +12,12 @@ export class FormAddAirdropComponent implements OnInit {
   addedHTG = [];
   addedProjectLinks = [];
 
+  isActiveAddLink = false;
+
   startDate = new Date();
   bsConfig = {
     containerClass: 'theme-default',
-    dateInputFormat: 'DD.MM.YYYY',
+    dateInputFormat: 'DD MMMM YYYY',
     showWeekNumbers: false
   };
 
@@ -51,6 +53,7 @@ export class FormAddAirdropComponent implements OnInit {
     if (value) {
       this.addedProjectLinks.push(value);
     }
+    this.isActiveAddLink = false;
   }
   removeAddedProjectLink(index) {
     this.addedProjectLinks.splice(index, 1);
