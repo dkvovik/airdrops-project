@@ -23,61 +23,70 @@
           <input type="file" id="image" (change)="onFileChange($event)">
         </div>
         <div class="col-md-3">
-          <label for="tokenName">Token Name</label>
-          <input type="text" class="form-control-plaintext" id="tokenName" formControlName="tokenName">
+          <div class="title">
+            <label for="tokenName">Token Name</label>
+            <div class="invalid-feedback"
+                 *ngIf="formAddAirdrop.get('tokenName').invalid && formAddAirdrop.get('tokenName').touched &&
+                 formAddAirdrop.get('tokenName')['errors']['required']">
+              Required</div>
+          </div>
+          <input type="text" class="form-control" id="tokenName" formControlName="tokenName"
+                 [ngClass]="{'is-invalid': formAddAirdrop.get('tokenName').invalid && formAddAirdrop.get('tokenName').touched}">
         </div>
         <div class="col-md-3">
-          <label for="projectName">Project Name</label>
-          <input type="text" class="form-control-plaintext" id="projectName" formControlName="projectName">
+          <div class="title">
+            <label for="projectName">Project Name</label>
+            <div class="invalid-feedback"
+                 *ngIf="formAddAirdrop.get('projectName').invalid && formAddAirdrop.get('projectName').touched &&
+                 formAddAirdrop.get('projectName')['errors']['required']">
+              Required</div>
+          </div>
+          <input type="text" class="form-control" id="projectName" formControlName="projectName"
+                 [ngClass]="{'is-invalid': formAddAirdrop.get('projectName').invalid && formAddAirdrop.get('projectName').touched}">
         </div>
       </div>
 
       <div class="form-group row">
         <div class="col-md-6">
-          <label for="email">Email</label>
-          <input type="text" class="form-control-plaintext" id="email" formControlName="email">
+          <div class="title">
+            <label for="email">Email</label>
+            <div class="invalid-feedback"
+                 *ngIf="formAddAirdrop.get('email').invalid && formAddAirdrop.get('email').touched &&
+                 formAddAirdrop.get('email')['errors']['email']">
+              Invalid Email</div>
+          </div>
+          <input type="text" class="form-control" id="email" formControlName="email"
+                 [ngClass]="{'is-invalid': formAddAirdrop.get('email').invalid && formAddAirdrop.get('email').touched}">
         </div>
         <div class="col-md-6">
-          <label for="whitepaperLink">Whitepaper link </label>
-          <input type="text" class="form-control-plaintext" id="whitepaperLink" formControlName="whitepaperLink">
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-md-6">
-          <label for="assetID">Asset ID</label>
-          <input type="text" class="form-control-plaintext" id="assetID" formControlName="assetID">
-        </div>
-        <div class="col-md-6">
-          <label for="platform">Platform</label>
-          <input type="text" class="form-control-plaintext" id="platform" formControlName="platform">
+          <div class="title">
+            <label for="whitepaperLink">Whitepaper link </label>
+          </div>
+          <input type="text" class="form-control" id="whitepaperLink" formControlName="whitepaperLink">
         </div>
       </div>
 
       <div class="form-group row">
         <div class="col-md-6">
-          <label for="requirements">Requirements</label>
+          <div class="title">
+            <label for="assetID">Asset ID</label>
+          </div>
+          <input type="text" class="form-control" id="assetID" formControlName="assetID">
+        </div>
+        <div class="col-md-6">
+          <div class="title">
+            <label for="platform">Platform</label>
+          </div>
+          <input type="text" class="form-control" id="platform" formControlName="platform">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-6">
+          <div class="title">
+            <label for="requirements">Requirements</label>
+          </div>
           <div class="requirements-items-wrapper">
-            <div class="requirements-input">
-              <div class="container-input">
-                <button class="btn-input right"
-                        (click)="addRequirement(addRequirementInput.value); addRequirementInput.value = ''">
-                  <svg class="icon right" viewBox="0 0 17.536 17.536">
-                    <g id="Plus" transform="translate(-805.387 112.314)">
-                      <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
-                        <path id="Path_88" data-name="Path 88" class="cls-1"
-                              d="M815.9-108.2v6.4h-6.4a.792.792,0,0,0-.8.8h0a.792.792,0,0,0,.8.8h6.4v6.4a.792.792,0,0,0,.8.8h0a.792.792,0,0,0,.8-.8v-14.4a.792.792,0,0,0-.8-.8h0A.792.792,0,0,0,815.9-108.2Z"
-                              transform="translate(-808.7 109)"/>
-                        <path id="Path_89" data-name="Path 89" class="cls-1"
-                              d="M844.98-84.9H840.5a.792.792,0,0,1-.8-.8h0a.792.792,0,0,1,.8-.8h4.48a.792.792,0,0,1,.8.8h0A.813.813,0,0,1,844.98-84.9Z"
-                              transform="translate(-829.78 93.7)"/>
-                      </g>
-                    </g>
-                  </svg>
-                </button>
-                <input #addRequirementInput type="text" class="form-control-plaintext" id="requirements">
-              </div>
-            </div>
             <div class="requirements-item bg-ligth-grey container-input"
                  *ngFor="let addedRequirement of addedRequirements; let idx = index">
               {{addedRequirement}}
@@ -96,11 +105,33 @@
                 </svg>
               </button>
             </div>
+            <div class="requirements-input">
+              <div class="container-input">
+                <button class="btn-input right"
+                        (click)="addRequirement(addRequirementInput.value); addRequirementInput.value = ''">
+                  <svg class="icon right" viewBox="0 0 17.536 17.536">
+                    <g id="Plus" transform="translate(-805.387 112.314)">
+                      <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
+                        <path id="Path_88" data-name="Path 88" class="cls-1"
+                              d="M815.9-108.2v6.4h-6.4a.792.792,0,0,0-.8.8h0a.792.792,0,0,0,.8.8h6.4v6.4a.792.792,0,0,0,.8.8h0a.792.792,0,0,0,.8-.8v-14.4a.792.792,0,0,0-.8-.8h0A.792.792,0,0,0,815.9-108.2Z"
+                              transform="translate(-808.7 109)"/>
+                        <path id="Path_89" data-name="Path 89" class="cls-1"
+                              d="M844.98-84.9H840.5a.792.792,0,0,1-.8-.8h0a.792.792,0,0,1,.8-.8h4.48a.792.792,0,0,1,.8.8h0A.813.813,0,0,1,844.98-84.9Z"
+                              transform="translate(-829.78 93.7)"/>
+                      </g>
+                    </g>
+                  </svg>
+                </button>
+                <input #addRequirementInput type="text" class="form-control" id="requirements">
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-md-6">
-          <label for="website">Website</label>
-          <input type="text" class="form-control-plaintext" id="website" placeholder="https://"
+          <div class="title">
+            <label for="website">Website</label>
+          </div>
+          <input type="text" class="form-control" id="website" placeholder="https://"
                  formControlName="website">
         </div>
       </div>
@@ -109,7 +140,13 @@
     <div class="modal-body-item modal-body_subheader">
       <div class="form-group row">
         <div class="col-md-3">
-          <label for="startDate">Start date</label>
+          <div class="title">
+            <label for="startDate">Start date</label>
+            <div class="invalid-feedback"
+                 *ngIf="formAddAirdrop.get('startDate').invalid && formAddAirdrop.get('startDate').touched &&
+                 formAddAirdrop.get('startDate')['errors']['required']">
+              Required</div>
+          </div>
           <div class="container-input">
             <button class="btn-input left" (click)="dpStartDate.toggle()">
               <svg class="icon" viewBox="0 0 17.536 17.536">
@@ -125,13 +162,16 @@
                 </g>
               </svg>
             </button>
-            <input type="text" class="form-control-plaintext" id="startDate" disabled formControlName="startDate"
+            <input type="text" class="form-control" id="startDate" formControlName="startDate"
                    #dpStartDate="bsDatepicker" bsDatepicker [bsConfig]="bsConfig"
-                   [bsValue]="startDate" value="{{startDate | date:'d MMMM y'}}">
+                   [bsValue]="startDate" value="{{startDate | date:'d MMMM y'}}"
+                   [ngClass]="{'is-invalid': formAddAirdrop.get('startDate').invalid && formAddAirdrop.get('startDate').touched}">
           </div>
         </div>
         <div class="col-md-3">
-          <label for="endDate">End date</label>
+          <div class="title">
+            <label for="endDate">End date</label>
+          </div>
           <div class="container-input">
             <button class="btn-input left" (click)="dpEndTime.toggle();">
               <svg class="icon" viewBox="0 0 17.536 17.536">
@@ -147,41 +187,53 @@
                 </g>
               </svg>
             </button>
-            <input type="text" class="form-control-plaintext" id="endDate" disabled formControlName="endDate"
+            <input type="text" class="form-control" id="endDate" formControlName="endDate"
                    #dpEndTime="bsDatepicker" bsDatepicker [bsConfig]="bsConfig">
           </div>
         </div>
         <div class="col-md-6">
-          <label for="economyToken">Economy of the token</label>
-          <input type="text" class="form-control-plaintext" id="economyToken" formControlName="economyToken">
+          <div class="title">
+            <label for="economyToken">Economy of the token</label>
+          </div>
+          <input type="text" class="form-control" id="economyToken" formControlName="economyToken">
         </div>
       </div>
       <div class="form-group row">
         <div class="col-md-6">
-          <label for="totalValue">Total value</label>
-          <input type="text" class="form-control-plaintext" id="totalValue" formControlName="totalValue">
+          <div class="title">
+            <label for="totalValue">Total value</label>
+          </div>
+          <input type="text" class="form-control" id="totalValue" formControlName="totalValue">
         </div>
         <div class="col-md-6">
-          <label for="tokensPerClaim">Tokens per Claim</label>
-          <input type="text" class="form-control-plaintext" id="tokensPerClaim" formControlName="tokensPerClaim">
+          <div class="title">
+            <label for="tokensPerClaim">Tokens per Claim</label>
+          </div>
+          <input type="text" class="form-control" id="tokensPerClaim" formControlName="tokensPerClaim">
         </div>
       </div>
       <div class="form-group row">
         <div class="col-md-6">
-          <label for="estimatedValue">Estimated value</label>
-          <input type="text" class="form-control-plaintext" id="estimatedValue" formControlName="estimatedValue">
+          <div class="title">
+            <label for="estimatedValue">Estimated value</label>
+          </div>
+          <input type="text" class="form-control" id="estimatedValue" formControlName="estimatedValue">
         </div>
       </div>
     </div>
 
     <div class="modal-body-item modal-body_middle">
       <div class="form-group">
-        <label for="description">Description</label>
+        <div class="title">
+          <label for="description">Description</label>
+        </div>
         <textarea class="form-control" id="description" rows="4" formControlName="description"></textarea>
       </div>
 
       <div class="form-group">
-        <label for="howToGetToken">How to get a token</label>
+        <div class="title">
+          <label for="howToGetToken">How to get a token</label>
+        </div>
         <div class="row htg-item htg-item_added" *ngFor="let htg of addedHTG; let idx = index;">
           <div class="col-md-1">
             <div class="htg-index">
@@ -204,7 +256,7 @@
                   </g>
                 </svg>
               </button>
-              <input type="text" class="form-control-plaintext" disabled value="{{htg}}">
+              <input type="text" class="form-control" disabled value="{{htg}}">
             </div>
           </div>
         </div>
@@ -231,7 +283,7 @@
                   </g>
                 </svg>
               </button>
-              <input #addHTGIinput type="text" class="form-control-plaintext" id="howToGetToken">
+              <input #addHTGIinput type="text" class="form-control" id="howToGetToken">
             </div>
           </div>
         </div>
@@ -241,7 +293,9 @@
     <div class="modal-body-item modal-body_footer">
       <div class="form-group row">
         <div class="col-md-6">
-          <label for="projectLinks">Project Links</label>
+          <div class="title">
+            <label for="projectLinks">Project Links</label>
+          </div>
           <div class="row project-links-item"
                *ngFor="let projectLink of addedProjectLinks; let idx = index;">
             <div class="col-md-2">
@@ -265,7 +319,7 @@
                     </g>
                   </svg>
                 </button>
-                <input type="text" class="form-control-plaintext" disabled value="{{projectLink}}">
+                <input type="text" class="form-control" disabled value="{{projectLink}}">
               </div>
             </div>
           </div>
@@ -287,7 +341,7 @@
                     </g>
                   </svg>
                 </button>
-                <input #projectLinks type="text" class="form-control-plaintext" id="projectLinks" placeholder="https://"
+                <input #projectLinks type="text" class="form-control" id="projectLinks" placeholder="https://"
                        (keyup.enter)="addProjectLink(projectLinks.value); projectLinks.value = '';">
               </div>
             </div>
@@ -300,7 +354,9 @@
         </div>
 
         <div class="col-md-6">
-          <label for="comment">Comment Block</label>
+          <div class="title">
+            <label for="comment">Comment Block</label>
+          </div>
           <textarea class="form-control" id="comment" rows="3" formControlName="comment"></textarea>
         </div>
       </div>

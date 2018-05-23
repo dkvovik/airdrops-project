@@ -56,7 +56,7 @@
           text-align: right;
         }
         .stat-icon {
-          margin-top: 3px;
+          margin-top: 1px;
         }
       }
     }
@@ -102,5 +102,7 @@
   .btn {
     width: 276px;
     max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
   }
 }

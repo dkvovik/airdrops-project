@@ -22,8 +22,7 @@ h2.title {
   color: #fff;
   background-color: $app-link-color-active;
   border: #1751EC;
-  padding-top: 17px;
-  padding-bottom: 17px;
+  padding: 17px 100px;
 }
 
 ::placeholder {
@@ -110,8 +109,14 @@ svg.icon {
     min-height: 42px;
     color: $app-form-color-text;
     font-size:  0.8824rem;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
+  .title {
+    display: flex;
+    justify-content: space-between;
+  }
   label {
     color: #4E5C6E;
     font-size: 15px;
@@ -140,39 +145,56 @@ svg.icon {
     .btn-input {
       cursor: pointer;
       position: absolute;
-      top: 0;
+      top: 1px;
       background-color: $app-form-color;
-      height: 42px;
-      width: 46px;
+      height: 40px;
+      width: 45px;
       border: none;
 
       &.right {
-        right: 0;
-        border-top-right-radius: .375rem;
-        border-bottom-right-radius: .375rem;
+        right: 1px;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
       }
 
       &.left {
-        left: 0;
-        border-top-left-radius: .375rem;
-        border-bottom-left-radius: .375rem;
+        left: 1px;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
       }
 
       svg {
         height: 16px;
-        margin-right: 3px;
+        margin-right: 4px;
       }
     }
   }
 
-  .form-control-plaintext {
-    padding-left: .375rem;
+  .form-control {
 
+    &:focus {
+      border-color: darken($app-form-color, 7);
+      box-shadow: none;
+    }
   }
 }
 
 .bg-ligth-grey {
   background-color: #E2E2E2;
+}
+
+.invalid-feedback {
+  display: flex;
+  width: auto;
+  margin-top: 0;
+  color: #FF7070;
+}
+
+.custom-select.is-invalid,
+.form-control.is-invalid,
+.was-validated .custom-select:invalid,
+.was-validated .form-control:invalid {
+  border-color: #FF7070;
 }
 
 /* /CSS Forms */
