@@ -25,6 +25,7 @@ export class FormAddAirdropComponent implements OnInit {
   };
 
   formAddAirdrop: FormGroup;
+  formInvalidaAfterSubmit = false;
   image = '';
 
   @Input() modalRef: BsModalRef;
@@ -60,13 +61,19 @@ export class FormAddAirdropComponent implements OnInit {
   onSubmitAddAirdrop() {
     console.log('this.formAddAirdrop', this.formAddAirdrop);
 
-    const data: Airdrop = {...this.formAddAirdrop.value};
-    data.requirements = this.addedRequirements;
-    data.howToGetToken = this.addedHTG;
-    data.projectLinks = this.addedProjectLinks;
-    data.socialNetworks = this.addedSocialNetworks;
+    if (this.formAddAirdrop.invalid) {
+      this.formInvalidaAfterSubmit = true;
+    } else {
+      const data: Airdrop = {...this.formAddAirdrop.value};
+      data.requirements = this.addedRequirements;
+      data.howToGetToken = this.addedHTG;
+      data.projectLinks = this.addedProjectLinks;
+      data.socialNetworks = this.addedSocialNetworks;
 
-    console.log('data', data);
+      console.log('data', data);
+    }
+
+
   }
 
   onFileChange(event) {
@@ -88,12 +95,16 @@ export class FormAddAirdropComponent implements OnInit {
   }
 
   addRequirement(value) {
+    console.log('value', value);
+    console.log('this.addedRequirements', this.addedRequirements);
     value = value.trim();
     if (value) {
       this.addedRequirements.push(value);
     }
+    console.log('this.addedRequirements', this.addedRequirements);
   }
   removeAddedRequirement(index) {
+    console.log('this.removeAddedRequirement: index', index);
     this.addedRequirements.splice(index, 1);
   }
 

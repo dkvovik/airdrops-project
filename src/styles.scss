@@ -102,6 +102,7 @@ svg.icon {
 
 /* CSS Forms */
 .form-group {
+  color: $app-form-color-text;
 
   input, optgroup, select, textarea {
     border: 1px solid $app-border-color;
@@ -170,6 +171,17 @@ svg.icon {
       svg {
         height: 16px;
         margin-right: 4px;
+
+        &.icon_plus {
+          margin-top: 8px;
+          margin-right: 0;
+        }
+
+        &.icon_delete {
+          height: 18px;
+          margin-left: 11px;
+          margin-top: 9px;
+        }
       }
     }
   }
