@@ -360,6 +360,9 @@
       <div class="form-group row">
         <div class="col-12 text-center">
           <button class="btn_submit" type="submit" class="btn" (click)="onSubmitAddAirdrop()">Submit</button>
+          <div class="title" style="justify-content: center; margin-top: 10px;">
+            <div class="invalid-feedback" *ngIf="formInvalidaAfterSubmit">Сorrect all errors before sending data.</div>
+          </div>
         </div>
       </div>
     </div>

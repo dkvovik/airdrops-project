@@ -22,4 +22,14 @@ export class AirdropService {
       });
   }
 
+  addAirdrop(data): Observable<ResponseServer> {
+    return this.http.post(`${this.basicUrl}/airdrop/add`, data)
+      .map( (response: any) => {
+        if (response.success === false) {
+          throw Observable.throw(response);
+        }
+        return response;
+      });
+  }
+
 }

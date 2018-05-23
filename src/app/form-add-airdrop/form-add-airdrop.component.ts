@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Airdrop } from '../shared/models/airdrop';
+import { AirdropService } from '../services/airdrop.service';
 
 @Component({
   selector: 'app-form-add-airdrop',
@@ -30,7 +31,8 @@ export class FormAddAirdropComponent implements OnInit {
 
   @Input() modalRef: BsModalRef;
 
-  constructor(private cd: ChangeDetectorRef) {
+  constructor(private cd: ChangeDetectorRef,
+              private airdropService: AirdropService) {
   }
 
   ngOnInit() {
@@ -69,8 +71,13 @@ export class FormAddAirdropComponent implements OnInit {
       data.howToGetToken = this.addedHTG;
       data.projectLinks = this.addedProjectLinks;
       data.socialNetworks = this.addedSocialNetworks;
-
       console.log('data', data);
+
+      this.airdropService.addAirdrop(data).subscribe(
+        responce => console.log(responce),
+        error => console.log(error)
+      );
+
     }
 
 
@@ -95,16 +102,12 @@ export class FormAddAirdropComponent implements OnInit {
   }
 
   addRequirement(value) {
-    console.log('value', value);
-    console.log('this.addedRequirements', this.addedRequirements);
     value = value.trim();
     if (value) {
       this.addedRequirements.push(value);
     }
-    console.log('this.addedRequirements', this.addedRequirements);
   }
   removeAddedRequirement(index) {
-    console.log('this.removeAddedRequirement: index', index);
     this.addedRequirements.splice(index, 1);
   }
 
