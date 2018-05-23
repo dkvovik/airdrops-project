@@ -76,6 +76,33 @@ svg.icon {
   }
 }
 
+.token-logo {
+  width: 44px;
+  height: 44px;
+  margin-right: 10px;
+}
+
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: none;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: rgba(212,217,222,1);
+  background: -moz-linear-gradient(left, rgba(212,217,222,1) 0%, rgba(212,217,222,1) 55%, rgba(237, 240, 244,1) 57%, rgba(237, 240, 244,1) 98%, rgba(237, 240, 244,1) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(212,217,222,1)), color-stop(55%, rgba(212,217,222,1)), color-stop(57%, rgba(237, 240, 244,1)), color-stop(98%, rgba(237, 240, 244,1)), color-stop(100%, rgba(237, 240, 244,1)));
+  background: -webkit-linear-gradient(left, rgba(212,217,222,1) 0%, rgba(212,217,222,1) 55%, rgba(237, 240, 244,1) 57%, rgba(237, 240, 244,1) 98%, rgba(237, 240, 244,1) 100%);
+  background: -o-linear-gradient(left, rgba(212,217,222,1) 0%, rgba(212,217,222,1) 55%, rgba(237, 240, 244,1) 57%, rgba(237, 240, 244,1) 98%, rgba(237, 240, 244,1) 100%);
+  background: -ms-linear-gradient(left, rgba(212,217,222,1) 0%, rgba(212,217,222,1) 55%, rgba(237, 240, 244,1) 57%, rgba(237, 240, 244,1) 98%, rgba(237, 240, 244,1) 100%);
+  background: linear-gradient(to right, rgba(212,217,222,1) 0%, rgba(212,217,222,1) 55%, rgba(237, 240, 244,1) 57%, rgba(237, 240, 244,1) 98%, rgba(237, 240, 244,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d9de', endColorstr='#edf0f4', GradientType=1 );
+
+}
+
 /* CSS tables */
 .table {
   margin-bottom: 0;
