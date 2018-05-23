@@ -62,3 +62,54 @@
 .btn_submit {
   margin-top: 15px;
 }
+
+.upload-token-name {
+  display: flex;
+
+  .token-wrapper {
+    flex-grow: 1;
+  }
+}
+.uploadedImageContainer {
+  position: relative;
+  height: 68px;
+  width: 68px;
+  border-radius: 50%;
+  background-color: $app-form-color;
+  margin-right: 16px;
+
+  &:hover {
+    svg {
+      fill: $app-link-color-hover
+    }
+  }
+
+  .uploadedImage {
+    position: absolute;
+    max-width: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 68px;
+    width: 68px;
+  }
+
+  svg.icon {
+    height: 22px;
+    position: absolute;
+    fill: $app-form-color-header;
+    top: 31%;
+    left: 37%;
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 68px;
+    width: 68px;
+    border: none;
+    border-radius: 50%;
+    font-size: 0;
+    padding: 0;
+  }
+}

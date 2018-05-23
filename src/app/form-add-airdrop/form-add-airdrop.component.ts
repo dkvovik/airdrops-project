@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Airdrop } from '../shared/models/airdrop';
@@ -25,10 +25,11 @@ export class FormAddAirdropComponent implements OnInit {
   };
 
   formAddAirdrop: FormGroup;
+  image = '';
 
   @Input() modalRef: BsModalRef;
 
-  constructor() {
+  constructor(private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -40,7 +41,7 @@ export class FormAddAirdropComponent implements OnInit {
       image: new FormControl(null, [Validators.required]),
       tokenName: new FormControl(null, [Validators.required]),
       projectName: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.email]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       whitepaperLink: new FormControl(null, ),
       assetID: new FormControl(null, ),
       platform: new FormControl(null, ),
@@ -72,14 +73,17 @@ export class FormAddAirdropComponent implements OnInit {
     const reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
+      const file = event.target.files[0];
       reader.readAsDataURL(file);
 
       reader.onload = () => {
         this.formAddAirdrop.patchValue({
           image: reader.result
         });
+        this.image = reader.result;
       };
+
+      this.cd.markForCheck();
     }
   }
 

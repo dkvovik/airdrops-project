@@ -123,6 +123,10 @@ svg.icon {
     margin-bottom: 10px;
   }
 
+  svg.icon {
+    fill: $app-form-color-header;
+  }
+
   .container-input {
     cursor: pointer;
     position: relative;
