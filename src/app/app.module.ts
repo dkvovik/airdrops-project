@@ -12,12 +12,13 @@ import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { DetailAirdropComponent, HomePageComponent } from './home-page/home-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
 import { FilterComponent } from './filter/filter.component';
 import { AirdropService } from './services/airdrop.service';
-import { FindAirdropComponent } from './find-airdrop/find-airdrop.component';
+import { DetailAirdropComponent, FindedAirdropComponent } from './finded-airdrop/finded-airdrop.component';
 import { BsDatepickerModule, ModalModule } from 'ngx-bootstrap';
 import { FormAddAirdropComponent } from './form-add-airdrop/form-add-airdrop.component';
+import { Globals } from './shared/globals';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { FormAddAirdropComponent } from './form-add-airdrop/form-add-airdrop.com
     FooterComponent,
     HomePageComponent,
     FilterComponent,
-    FindAirdropComponent,
+    FindedAirdropComponent,
     FormAddAirdropComponent,
     DetailAirdropComponent
   ],
@@ -47,7 +48,7 @@ import { FormAddAirdropComponent } from './form-add-airdrop/form-add-airdrop.com
     BsDatepickerModule.forRoot(),
     ReactiveFormsModule
   ],
-  providers: [AirdropService],
+  providers: [Globals, AirdropService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

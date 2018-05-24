@@ -2,7 +2,16 @@
   <app-filter></app-filter>
 
   <div class="row finded-airdrops-wrapper">
-    <div class="col-md-4 finded-airdrops">
+    <div class="col-md-4 finded-airdrops-item">
+      <app-finded-airdrops [airdrops]="upcominngAirdrop" title="Upcoming"></app-finded-airdrops>
+    </div>
+    <div class="col-md-4 finded-airdrops-item">
+      <app-finded-airdrops [airdrops]="activeAirdrop" title="Active"></app-finded-airdrops>
+    </div>
+    <div class="col-md-4 finded-airdrops-item">
+      <app-finded-airdrops [airdrops]="pastAirdrop" title="Past"></app-finded-airdrops>
+    </div>
+    <!--<div class="col-md-4 finded-airdrops">
       <section class="bg-white main-border">
         <h2 class="title">Upcoming</h2>
         <div class="all-finded-airdrop">
@@ -350,7 +359,7 @@
           <a href="#">Find Past Airdrops &#8594;</a>
         </div>
       </section>
-    </div>
+    </div>-->
   </div>
 
   <div class="row">

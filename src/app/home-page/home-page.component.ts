@@ -2,8 +2,8 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { AirdropService } from '../services/airdrop.service';
 import { Airdrop } from '../shared/models/airdrop';
+import { Globals } from '../shared/globals';
 
-const visitedAirdrop = JSON.parse(localStorage.getItem('visitedAirdrop')) || [];
 
 @Component({
   selector: 'app-home-page',
@@ -24,7 +24,8 @@ export class HomePageComponent implements OnInit {
   yesterday = this.date.getDate() - 1;
 
   constructor(private modalService: BsModalService,
-              private airdropService: AirdropService) {
+              private airdropService: AirdropService,
+              private globals: Globals) {
   }
 
   ngOnInit() {
@@ -35,16 +36,12 @@ export class HomePageComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  openModalWithComponent(airdrop) {
-    const initialState = {...airdrop};
-    this.modalRef = this.modalService.show(DetailAirdropComponent, {initialState});
-  }
-
   getAirdrops() {
     this.airdropService.getAirdrops().subscribe(
       (d: any) => {
         this.isTodayOrYesterday(d);
         this.isVisitedAirdrop(d);
+        this.sortByStatus(d);
         this.airdrops = d;
       },
       (error) => console.log('Error getAirdrops', error)
@@ -64,33 +61,30 @@ export class HomePageComponent implements OnInit {
 
   isVisitedAirdrop(airdrops) {
     airdrops.forEach((a) => {
-      console.log('visitedAirdrop', visitedAirdrop);
-      if (visitedAirdrop.indexOf(a.tokenName) !== -1) {
+      if (this.globals.visitedAirdrop.indexOf(a.tokenName) !== -1) {
         a['isVisited'] = true;
       } else {
         a['isVisited'] = false;
       }
     });
   }
-}
 
-@Component({
-  selector: 'app-detail-airdrop',
-  template: `
-    {{tokenName}}
-  `
-})
-export class DetailAirdropComponent implements OnInit {
-
-  tokenName: string;
-
-  constructor(public bsModalRef: BsModalRef) {
-  }
-
-  ngOnInit() {
-    if (visitedAirdrop.indexOf(this.tokenName) === -1) {
-      visitedAirdrop.push(this.tokenName);
-    }
-    localStorage.setItem('visitedAirdrop', JSON.stringify(visitedAirdrop));
+  sortByStatus(airdrops) {
+    airdrops.forEach((a) => {
+      switch (a.status) {
+        case('Upcoming'): {
+          this.upcominngAirdrop.push(a);
+          break;
+        }
+        case('Active'): {
+          this.activeAirdrop.push(a);
+          break;
+        }
+        case('Past'): {
+          this.pastAirdrop.push(a);
+          break;
+        }
+      }
+    });
   }
 }
