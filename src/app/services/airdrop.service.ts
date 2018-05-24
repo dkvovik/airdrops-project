@@ -32,4 +32,14 @@ export class AirdropService {
       });
   }
 
+  getAirdropById(id): Observable<ResponseServer> {
+    return this.http.get(`${this.basicUrl}/airdrop/getById?id=${id}`)
+      .map( (response: any) => {
+        if (response.success === false) {
+          throw Observable.throw(response);
+        }
+        return response.data;
+      });
+  }
+
 }

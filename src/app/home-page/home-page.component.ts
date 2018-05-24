@@ -3,6 +3,8 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { AirdropService } from '../services/airdrop.service';
 import { Airdrop } from '../shared/models/airdrop';
 
+const visitedAirdrop = JSON.parse(localStorage.getItem('visitedAirdrop')) || [];
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -33,18 +35,24 @@ export class HomePageComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  openModalWithComponent(airdrop) {
+    const initialState = {...airdrop};
+    this.modalRef = this.modalService.show(DetailAirdropComponent, {initialState});
+  }
+
   getAirdrops() {
     this.airdropService.getAirdrops().subscribe(
       (d: any) => {
+        this.isTodayOrYesterday(d);
+        this.isVisitedAirdrop(d);
         this.airdrops = d;
-        this.isTodayOrYesterday(this.airdrops);
       },
-      (error)  => console.log('Error getAirdrops' , error)
-      );
+      (error) => console.log('Error getAirdrops', error)
+    );
   }
 
   isTodayOrYesterday(airdrops) {
-    airdrops.forEach( (a) => {
+    airdrops.forEach((a) => {
       const startDate = new Date(a.startDate).getDate();
       if (startDate === this.today) {
         a['today'] = true;
@@ -54,4 +62,35 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  isVisitedAirdrop(airdrops) {
+    airdrops.forEach((a) => {
+      console.log('visitedAirdrop', visitedAirdrop);
+      if (visitedAirdrop.indexOf(a.tokenName) !== -1) {
+        a['isVisited'] = true;
+      } else {
+        a['isVisited'] = false;
+      }
+    });
+  }
+}
+
+@Component({
+  selector: 'app-detail-airdrop',
+  template: `
+    {{tokenName}}
+  `
+})
+export class DetailAirdropComponent implements OnInit {
+
+  tokenName: string;
+
+  constructor(public bsModalRef: BsModalRef) {
+  }
+
+  ngOnInit() {
+    if (visitedAirdrop.indexOf(this.tokenName) === -1) {
+      visitedAirdrop.push(this.tokenName);
+    }
+    localStorage.setItem('visitedAirdrop', JSON.stringify(visitedAirdrop));
+  }
 }

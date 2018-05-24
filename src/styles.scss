@@ -65,6 +65,7 @@ a {
 
 svg.icon {
   fill: $app-link-color;
+  height: 16px;
 
   &.active {
     fill: $app-link-color-active;
@@ -74,6 +75,12 @@ svg.icon {
     cursor: pointer;
     fill: $app-link-color-hover;
   }
+
+  &.icon_eyes {
+    fill: $app-link-color-active;
+    height: 10px;
+    margin-left: 9px;
+  }
 }
 
 .token-logo {
@@ -82,15 +89,13 @@ svg.icon {
   margin-right: 10px;
 }
 
-
+/* CSS scrollbar */
 body::-webkit-scrollbar {
   width: 10px;
 }
-
 body::-webkit-scrollbar-track {
   -webkit-box-shadow: none;
 }
-
 body::-webkit-scrollbar-thumb {
   background: rgba(212,217,222,1);
   background: -moz-linear-gradient(left, rgba(212,217,222,1) 0%, rgba(212,217,222,1) 55%, rgba(237, 240, 244,1) 57%, rgba(237, 240, 244,1) 98%, rgba(237, 240, 244,1) 100%);
@@ -102,6 +107,8 @@ body::-webkit-scrollbar-thumb {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d9de', endColorstr='#edf0f4', GradientType=1 );
 
 }
+
+/* /CSS scrollbar */
 
 /* CSS tables */
 .table {
@@ -208,6 +215,11 @@ body::-webkit-scrollbar-thumb {
           height: 18px;
           margin-left: 11px;
           margin-top: 9px;
+        }
+
+        &.icon_date {
+          margin-top: 8px;
+          margin-right: 0px;
         }
       }
     }
