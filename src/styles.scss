@@ -69,6 +69,15 @@ svg.icon {
 
   &.active {
     fill: $app-link-color-active;
+
+    &.disabled:hover {
+      fill: $app-link-color-active;
+    }
+  }
+
+  &.disabled:hover {
+    fill: $app-link-color;
+    cursor: default;
   }
 
   &:hover {
@@ -88,6 +97,22 @@ svg.icon {
   height: 44px;
   margin-right: 10px;
 }
+
+/* CSS Popover */
+.popover {
+  z-index: 9999;
+  background-color: #1F5AF6;
+
+  .popover-content {
+    color: #fff;
+  }
+
+  .popover-arrow.arrow::after {
+    border-top-color: #1F5AF6;
+  }
+}
+
+/* /CSS Popover */
 
 /* CSS scrollbar */
 body::-webkit-scrollbar {

@@ -8,6 +8,7 @@ export class Airdrop {
   estimatedValue?: string;
   howToGetToken?: string[];
   image?;
+  platform?: string;
   projectLinks?: string[];
   projectName?: string;
   rating?: number;
@@ -17,6 +18,7 @@ export class Airdrop {
   status?: string;
   tokenName?: string;
   tokenValue?: number;
+  tokensPerClaim?: number;
   totalValue?: string;
   website?: string;
   whitePaperLink?: string;
