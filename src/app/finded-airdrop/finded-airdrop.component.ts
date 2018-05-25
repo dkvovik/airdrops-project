@@ -159,11 +159,17 @@ export class FindedAirdropComponent implements OnInit {
       </div>
       <div class="modal-body__footer">
         <div class="project-links-wrapper">
-          
+          <div class="project-links-header">
+            <div class="title">PROJECT LINKS</div>
+            <div class="project-links"></div>
+          </div>
+          <div class="project-links-footer">{{commentBlock}}</div>
         </div>
       </div>
     </div>
-    <div class="modal-footer"></div>
+    <div class="modal-footer">
+      <button class="btn">Claim Airdrop</button>
+    </div>
   `,
   styles: [`
     .requirement-item {
@@ -339,6 +345,28 @@ export class FindedAirdropComponent implements OnInit {
     .htg-index_white {
       background-color: #fff;
       border: 1px solid #E2E2E2;
+    }
+
+    .project-links-wrapper {
+      background-color: #E2E2E2;
+    }
+    .project-links-header {
+      border-bottom: 1px solid #EDEDED;
+      padding-top: 23px;
+      padding-bottom: 18px;
+      display: flex;
+      justify-content: center;
+    }
+    .project-links-header .title {
+      color: #4E5C6E;
+      font-size: 0.8824rem;
+    }
+
+    .modal-footer {
+      border-top: none;
+      justify-content: center;
+      padding: 40px;
+      padding-bottom: 40px;
     }
 
     .badge_grey {
