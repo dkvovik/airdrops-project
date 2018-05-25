@@ -16,7 +16,8 @@ export class FindedAirdropComponent implements OnInit {
   @Input() title: string;
   @Input() airdrops: Airdrop[];
 
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService,
+              private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
   }
@@ -27,7 +28,29 @@ export class FindedAirdropComponent implements OnInit {
     this.modalRef = this.modalService.show(DetailAirdropComponent, {initialState});
   }
 
+  parseIconLink(link) {
+    link = link.split(/([a-zA-Z0-9-_]+\.\w+)[\/]/)[0];
+    console.log('link', link);
+
+    let iconLink = '';
+
+    switch (link) {
+      case 'twitter':
+        iconLink =  `<svg viewBox="0 0 20.162 16.507" class="icon soc-net">
+                  <g id="twitter" transform="translate(0 -0.94)">
+                    <path id="XMLID_827_" class="cls-1" d="M19.7,30a7.643,7.643,0,0,1-.975.355,4.311,4.311,0,0,0,.878-1.543.325.325,0,0,0-.476-.379,7.674,7.674,0,0,1-2.268.9A4.33,4.33,0,0,0,9.5,32.425a4.415,4.415,0,0,0,.035.559,11.081,11.081,0,0,1-7.606-4.035.325.325,0,0,0-.533.042,4.334,4.334,0,0,0,.444,4.982,3.668,3.668,0,0,1-.579-.259.325.325,0,0,0-.483.277c0,.019,0,.038,0,.058A4.344,4.344,0,0,0,2.9,37.771c-.11-.011-.22-.027-.329-.048a.325.325,0,0,0-.371.419,4.327,4.327,0,0,0,3.171,2.9,7.657,7.657,0,0,1-4.093,1.168,7.835,7.835,0,0,1-.917-.054.325.325,0,0,0-.214.6A11.672,11.672,0,0,0,6.459,44.6a11.229,11.229,0,0,0,8.7-3.821,12.112,12.112,0,0,0,3.015-7.894c0-.119,0-.239-.005-.358a8.414,8.414,0,0,0,1.936-2.051A.325.325,0,0,0,19.7,30Z" transform="translate(0.002 -27.157)"/>
+                  </g>
+                </svg>`;
+        break;
+    }
+
+    return this.sanitizer.bypassSecurityTrustHtml(iconLink);
+  }
+
 }
+
+
+
 
 @Component({
   selector: 'app-detail-airdrop',
