@@ -53,7 +53,6 @@ export class FindedAirdropComponent implements OnInit {
           <path id="Path_967" data-name="Path 967" class="cls-1" d="M328.663,165.529v-1.865a.456.456,0,0,0-.456-.456h-1.569a.456.456,0,0,0-.457.456v1.865h-1.865a.456.456,0,0,0-.456.456v1.569a.456.456,0,0,0,.456.456h1.865v1.865a.456.456,0,0,0,.457.456h1.569a.456.456,0,0,0,.456-.456v-1.865h1.865a.456.456,0,0,0,.456-.456v-1.569a.456.456,0,0,0-.456-.456Z" transform="translate(-306.691 -158.93)"/>
         </svg>`;
         break;
-
     }
 
     return this.sanitizer.bypassSecurityTrustHtml(iconLink);
@@ -104,7 +103,10 @@ export class FindedAirdropComponent implements OnInit {
     </div>
     <div class="modal-subheader-detail">
       <div class="subheader-detail-item">
-        <div class="subheader-detail-asset"><span class="badge_grey">Asset ID</span>{{assetId}}</div>
+        <div class="subheader-detail-asset"><span class="badge_grey">Asset ID</span>
+          <input type="text" class="input-no-border" readonly value="{{assetId}}" #assetID>
+          <button class="btn-link" [ngxClipboard]="assetID">Copy</button>
+        </div>
         <span class="badge_grey">Platform</span>{{platform}}
       </div>
       <div class="subheader-detail-item">
@@ -268,6 +270,13 @@ export class FindedAirdropComponent implements OnInit {
 
     .subheader-detail-asset {
       margin-right: 20px;
+    }
+
+    .subheader-detail-asset input {
+      min-width: 340px;
+    }
+    .subheader-detail-asset .btn-link {
+      color: #1F5AF6;
     }
 
     .modal-body__header,

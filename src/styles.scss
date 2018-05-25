@@ -24,6 +24,10 @@ h2.title {
   border: #1751EC;
   padding: 17px 100px;
 }
+.btn-link {
+  border: none;
+  cursor: pointer;
+}
 
 ::placeholder {
   color: #AEAEAE;
@@ -266,6 +270,12 @@ body::-webkit-scrollbar-thumb {
       box-shadow: none;
     }
   }
+}
+
+input.input-no-border {
+  border: none;
+  cursor: default;
+  background-color: transparent;
 }
 
 .bg-ligth-grey {

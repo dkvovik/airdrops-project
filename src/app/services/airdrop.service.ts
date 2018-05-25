@@ -12,7 +12,7 @@ export class AirdropService {
 
   fakeAirdrops = [
     {
-      assetId: 'fnjeiwqpnuifvq-4htv89-24',
+      assetId: 'hjfdsafhkjqkhfjkwenkqjevuh97381fhf1ff8f12',
       commentBlock: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis incidunt laudantium molestiae sapiente vitae voluptas. A corporis error ipsam nulla numquam repellendus reprehenderit velit.',
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis incidunt laudantium molestiae sapiente vitae voluptas.',
       economyOfToken: 'economyOfq23m ffToken',
