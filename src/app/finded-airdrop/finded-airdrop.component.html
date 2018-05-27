@@ -2,13 +2,14 @@
   <section class="bg-white main-border">
     <h2 class="title">{{title}}</h2>
     <div class="all-finded-airdrop">
-      <div class="finded-airdrop-wrapper" *ngFor="let airdrop of airdrops">
+      <div class="finded-airdrop-wrapper" *ngFor="let airdrop of airdrops"
+           (click)="currentAirdrop = airdrop; openModal(detailInfo); airdrop['isVisited'] = true;">
         <div class="finded-airdrop">
           <div class="finded-airdrop__img">
             <img src="{{airdrop.image}}" class="token-logo">
           </div>
           <div class="finded-airdrop__info">
-            <div class="info-title" (click)="currentAirdrop = airdrop; openModal(detailInfo); airdrop['isVisited'] = true;">
+            <div class="info-title">
               {{airdrop.tokenName}} <span *ngIf="airdrop.isVisited">
                  <svg class="icon icon_eyes" viewBox="0 0 13.75 9.375">
                   <g id="baseline-remove_red_eye-24px" transform="translate(-0.625 -2.813)">
@@ -19,7 +20,7 @@
             </div>
             <div class="info-social-icon">
               <a href="{{projectLink}}" *ngFor="let projectLink of airdrop.projectLinks;"
-                 [innerHtml]="parseIconProjectLink(projectLink)">
+                 [innerHtml]="globals.parseIconProjectLink(projectLink, 'soc-net')">
               </a>
             </div>
           </div>

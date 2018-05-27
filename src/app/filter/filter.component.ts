@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AirdropService } from '../services/airdrop.service';
 import { Airdrop } from '../shared/models/airdrop';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { Globals } from '../shared/globals';
 
 @Component({
   selector: 'app-filter',
@@ -31,7 +32,8 @@ export class FilterComponent implements OnInit {
 
 
   constructor(private airdropService: AirdropService,
-              private modalService: BsModalService) { }
+              private modalService: BsModalService,
+              private globals: Globals) { }
 
   ngOnInit() {
     this.initFilterValue();

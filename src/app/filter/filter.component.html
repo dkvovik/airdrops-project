@@ -4,7 +4,7 @@
       <div class="col-md-3">
         <h2 class="title">Requirements</h2>
         <div class="button-filter-wrapper">
-          <label for="email" class="button-filter-label">
+          <label for="email" [popover]="'Email'" triggers="mouseenter:mouseleave" class="button-filter-label">
             <input type="checkbox" name="email" id="email" (click)="toggleRequirements('Email')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 20.147 14.576">
@@ -20,7 +20,7 @@
           </svg>
             </span>
           </label>
-          <label for="twitter" class="button-filter-label">
+          <label for="twitter" [popover]="'Twitter'" triggers="mouseenter:mouseleave" class="button-filter-label">
             <input type="checkbox" name="twitter" id="twitter" (click)="toggleRequirements('Twitter')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 20.162 16.507">
@@ -32,7 +32,7 @@
               </svg>
             </span>
           </label>
-          <label for="telegram" class="button-filter-label">
+          <label for="telegram" [popover]="'Telegram'" triggers="mouseenter:mouseleave" class="button-filter-label">
             <input type="checkbox" name="telegram" id="telegram">
             <span class="button-filter">
               <svg id="telegram" class="icon" viewBox="0 0 18.845 16.408">
@@ -42,7 +42,7 @@
 </svg>
             </span>
           </label>
-          <label for="facebook" class="button-filter-label">
+          <label for="facebook" [popover]="'Facebook'" triggers="mouseenter:mouseleave" class="button-filter-label">
             <input type="checkbox" name="facebook" id="facebook">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 16.408 16.408">
@@ -54,50 +54,9 @@
 </svg>
             </span>
           </label>
-          <label for="support" class="button-filter-label">
-            <input type="checkbox" name="support" id="support">
-            <span class="button-filter">
-              <svg class="icon" viewBox="0 0 19.776 16.048">
-  <g id="support" class="cls-1">
-    <g id="Group_235" data-name="Group 235" transform="translate(0 0)">
-      <g id="Group_234" data-name="Group 234" transform="translate(0 0)">
-        <path id="Path_960" data-name="Path 960" class="cls-2"
-              d="M87.447,41.206H73.878a1.471,1.471,0,0,0-1.466,1.466V51.1a1.471,1.471,0,0,0,1.466,1.466h9.354L85.348,54.7a.453.453,0,0,0,.326.145.467.467,0,0,0,.47-.47V52.568h1.3A1.471,1.471,0,0,0,88.913,51.1V42.672A1.471,1.471,0,0,0,87.447,41.206ZM75.958,48.461A1.357,1.357,0,1,1,77.315,47.1,1.367,1.367,0,0,1,75.958,48.461Zm4.758,0A1.357,1.357,0,1,1,82.074,47.1,1.367,1.367,0,0,1,80.717,48.461Zm4.74,0A1.357,1.357,0,1,1,86.814,47.1,1.367,1.367,0,0,1,85.457,48.461Z"
-              transform="translate(-69.137 -41.206)"/>
-        <path id="Path_961" data-name="Path 961" class="cls-2"
-              d="M2.443,200.083v-2.877H.959a.965.965,0,0,0-.959.959V203.7a.951.951,0,0,0,.959,1h.85v1.194a.317.317,0,0,0,.308.308.3.3,0,0,0,.217-.09l1.393-1.393H9.879a.965.965,0,0,0,.959-.959V202.38h-6.1A2.3,2.3,0,0,1,2.443,200.083Z"
-              transform="translate(0 -190.15)"/>
-      </g>
-    </g>
-  </g>
-</svg>
-            </span>
-          </label>
-          <label for="4f00" class="button-filter-label">
-            <input type="checkbox" name="4f00" id="4f00">
-            <span class="button-filter">
-              <svg id="_4f00" class="icon" viewBox="0 0 21.993 15.234">
-  <g id="Group_238" data-name="Group 238" transform="translate(0 0)">
-    <path id="Subtraction_14" data-name="Subtraction 14" class="cls-1"
-          d="M5.649,15.234a7.489,7.489,0,0,1-4.375-1.4A5.046,5.046,0,0,1,0,12.511,23.733,23.733,0,0,1,2.725,1.917,9.157,9.157,0,0,1,7.91,0h.06l.2.2a10.819,10.819,0,0,0-4.841,2.32A.327.327,0,0,1,3.374,2.5c.124-.059.5-.24,1.066-.481A13.49,13.49,0,0,1,8.676.908h.3C9.6.852,10.325.792,11.065.792a10.846,10.846,0,0,1,1.648.116,16.341,16.341,0,0,1,5.649,1.715A12.275,12.275,0,0,0,13.72.3l.3-.3h.06a9.157,9.157,0,0,1,5.185,1.917,23.716,23.716,0,0,1,2.723,10.594.011.011,0,0,0-.007,0c-.026,0-.092.07-.2.184a7.621,7.621,0,0,1-5.641,2.441l-.011-.012c-.172-.2-.768-.9-1.2-1.5a6.024,6.024,0,0,0,3.33-2.119,16.015,16.015,0,0,1-1.671.893l-.043.021c-.14.068-.274.132-.4.2a13.871,13.871,0,0,1-2.725.807,14.018,14.018,0,0,1-2.334.191,17.676,17.676,0,0,1-2.509-.191,12.591,12.591,0,0,1-2.723-.807c-.383-.192-.827-.371-1.412-.6h0a.134.134,0,0,1-.1-.051.132.132,0,0,0-.1-.051h-.1a5.287,5.287,0,0,0-.5-.3A6.056,6.056,0,0,0,6.86,13.722c-.57.664-1.146,1.426-1.21,1.511h0Zm8.678-8.575a1.972,1.972,0,0,0-1.918,2.018,1.919,1.919,0,1,0,3.834,0A1.972,1.972,0,0,0,14.327,6.658Zm-6.86,0A1.972,1.972,0,0,0,5.549,8.677a1.972,1.972,0,0,0,1.918,2.018A1.971,1.971,0,0,0,9.383,8.677,1.972,1.972,0,0,0,7.466,6.658Z"
-          transform="translate(0 0)"/>
-  </g>
-</svg>
-            </span>
-          </label>
-          <label for="medium" class="button-filter-label">
-            <input type="checkbox" name="medium" id="medium">
-            <span class="button-filter">
-              <svg class="icon" viewBox="0 0 19.793 16.745">
-  <path id="medium" class="cls-1"
-        d="M6.594,141.126v12.956a.786.786,0,0,1-.138.469.464.464,0,0,1-.4.193.806.806,0,0,1-.365-.088L.552,152.083a.939.939,0,0,1-.392-.37A.973.973,0,0,1,0,151.2V138.607a.629.629,0,0,1,.11-.376.369.369,0,0,1,.32-.155,1.273,1.273,0,0,1,.486.166l5.644,2.828A.091.091,0,0,1,6.594,141.126Zm.707,1.116,5.9,9.565-5.9-2.938Zm12.492.2v11.642a.642.642,0,0,1-.155.447.537.537,0,0,1-.42.171,1.043,1.043,0,0,1-.519-.144l-4.871-2.43Zm-.033-1.325q0,.033-2.833,4.634t-3.319,5.385l-4.308-7,3.579-5.821a.626.626,0,0,1,.574-.309.633.633,0,0,1,.287.066l5.976,2.982A.071.071,0,0,1,19.76,141.115Z"
-        transform="translate(0 -138)"/>
-</svg>
-            </span>
-          </label>
         </div>
         <div class="button-filter-wrapper">
-          <label for="github" class="button-filter-label">
+          <label for="github" [popover]="'Github'" triggers="mouseenter:mouseleave" class="button-filter-label">
             <input type="checkbox" name="github" id="github">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 18.019 17.6">
@@ -105,42 +64,7 @@
 </svg>
             </span>
           </label>
-          <label for="blogger" class="button-filter-label">
-            <input type="checkbox" name="blogger" id="blogger">
-            <span class="button-filter">
-              <svg class="icon" viewBox="0 0 15.763 15.763">
-  <g id="blogger_3_" data-name="blogger (3)" class="cls-1">
-    <path id="Subtraction_13" data-name="Subtraction 13" class="cls-2" d="M14.784,15.763H.979A.98.98,0,0,1,0,14.784V.978A.98.98,0,0,1,.979,0H14.784a.98.98,0,0,1,.979.978V14.784A.98.98,0,0,1,14.784,15.763ZM5.9,2.989A2.8,2.8,0,0,0,2.989,5.924V9.838a2.839,2.839,0,0,0,2.936,2.935h3.94a2.826,2.826,0,0,0,2.909-2.935V8.86c0-1.525-.5-2.066-1.9-2.066V5.435a2.335,2.335,0,0,0-.883-1.773,2.675,2.675,0,0,0-1.617-.672Z" transform="translate(0 0)"/>
-    <g id="Group_236" data-name="Group 236" transform="translate(5.436 5.436)">
-      <path id="Path_964" data-name="Path 964" class="cls-2" d="M179.4,177.911H177.23a.679.679,0,1,1,0-1.359H179.4a.679.679,0,0,1,0,1.359" transform="translate(-176.551 -176.552)"/>
-      <path id="Path_965" data-name="Path 965" class="cls-2" d="M180.764,292.669h-3.533a.679.679,0,0,1,0-1.359h3.533a.679.679,0,0,1,0,1.359" transform="translate(-176.552 -287.777)"/>
-    </g>
-  </g>
-</svg>
-            </span>
-          </label>
-          <label for="google-plus" class="button-filter-label">
-            <input type="checkbox" name="google-plus" id="google-plus">
-            <span class="button-filter">
-              <svg id="google-plus" class="icon" viewBox="0 0 24.294 15.544">
-  <path id="Path_966" data-name="Path 966" class="cls-1" d="M8.524,91.895h3.8a4.825,4.825,0,1,1-1.31-5.174.523.523,0,0,0,.711,0l1.394-1.312a.521.521,0,0,0,0-.758,7.743,7.743,0,0,0-5.189-2.128,7.772,7.772,0,1,0,7.6,8.208c.006-.051.01-1.784.01-1.784H8.524A.521.521,0,0,0,8,89.466v1.908A.521.521,0,0,0,8.524,91.895Z" transform="translate(0 -82.519)"/>
-  <path id="Path_967" data-name="Path 967" class="cls-1" d="M328.663,165.529v-1.865a.456.456,0,0,0-.456-.456h-1.569a.456.456,0,0,0-.457.456v1.865h-1.865a.456.456,0,0,0-.456.456v1.569a.456.456,0,0,0,.456.456h1.865v1.865a.456.456,0,0,0,.457.456h1.569a.456.456,0,0,0,.456-.456v-1.865h1.865a.456.456,0,0,0,.456-.456v-1.569a.456.456,0,0,0-.456-.456Z" transform="translate(-306.691 -158.93)"/>
-</svg>
-            </span>
-          </label>
-          <label for="slack" class="button-filter-label">
-            <input type="checkbox" name="slack" id="slack">
-            <span class="button-filter">
-              <svg class="icon" viewBox="0 0 18.184 18.184">
-  <g id="slack" class="cls-1">
-    <g id="Group_237" data-name="Group 237" transform="translate(0 0)">
-      <path id="Path_968" data-name="Path 968" class="cls-2" d="M18.1,9.758a1.619,1.619,0,0,0-2.041-1.04l-1.632.531c-.361-1.114-.747-2.3-1.108-3.41l1.632-.531a1.62,1.62,0,0,0-1-3.081l-1.632.531-.531-1.632a1.619,1.619,0,1,0-3.08,1L9.242,3.76,5.832,4.868c-.322-.992-.53-1.632-.53-1.632a1.62,1.62,0,0,0-3.081,1l.531,1.633-1.684.548a1.62,1.62,0,0,0,1,3.08l1.684-.548,1.108,3.41-1.684.548a1.62,1.62,0,0,0,1,3.08l1.685-.548.548,1.684a1.62,1.62,0,0,0,3.08-1l-.547-1.684,3.41-1.108.548,1.684a1.62,1.62,0,0,0,3.08-1l-.548-1.684,1.632-.531A1.62,1.62,0,0,0,18.1,9.758Zm-10.163,1.6c-.363-1.114-.747-2.3-1.108-3.41l3.41-1.108,1.108,3.41Z" transform="translate(0 -0.007)"/>
-    </g>
-  </g>
-</svg>
-            </span>
-          </label>
-          <label for="youtube" class="button-filter-label">
+          <label for="youtube" [popover]="'Youtube'" triggers="mouseenter:mouseleave" class="button-filter-label">
             <input type="checkbox" name="youtube" id="youtube">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 20.891 14.783">
@@ -148,15 +72,28 @@
 </svg>
             </span>
           </label>
-          <label for="instagram" class="button-filter-label">
-            <input type="checkbox" name="instagram" id="instagram">
+          <label for="KYC" [popover]="'KYC'" triggers="mouseenter:mouseleave" class="button-filter-label">
+            <input type="checkbox" name="KYC" id="KYC">
             <span class="button-filter">
-              <svg class="icon" viewBox="0 0 17.596 17.596">
-  <g id="_029-instagram" data-name="029-instagram" class="cls-1">
-    <path id="Path_314" data-name="Path 314" class="cls-2" d="M12.354,0H5.242A5.248,5.248,0,0,0,0,5.242v7.112A5.248,5.248,0,0,0,5.242,17.6h7.112A5.248,5.248,0,0,0,17.6,12.354V5.242A5.248,5.248,0,0,0,12.354,0Zm3.472,12.354a3.472,3.472,0,0,1-3.472,3.472H5.242A3.472,3.472,0,0,1,1.77,12.354V5.242A3.472,3.472,0,0,1,5.242,1.77h7.112a3.472,3.472,0,0,1,3.472,3.472v7.112Z"/>
-    <path id="Path_315" data-name="Path 315" class="cls-2" d="M137.551,133a4.551,4.551,0,1,0,4.551,4.551A4.556,4.556,0,0,0,137.551,133Zm0,7.332a2.781,2.781,0,1,1,2.781-2.781A2.781,2.781,0,0,1,137.551,140.332Z" transform="translate(-128.753 -128.753)"/>
-    <ellipse id="Ellipse_18" data-name="Ellipse 18" class="cls-2" cx="1.09" cy="1.09" rx="1.09" ry="1.09" transform="translate(12.267 3.191)"/>
-  </g>
+              <svg class="icon" viewBox="0 0 19.776 16.048">
+                <g id="support" class="cls-1">
+                  <g id="Group_235" data-name="Group 235" transform="translate(0 0)">
+                    <g id="Group_234" data-name="Group 234" transform="translate(0 0)">
+                      <path id="Path_960" data-name="Path 960" class="cls-2" d="M87.447,41.206H73.878a1.471,1.471,0,0,0-1.466,1.466V51.1a1.471,1.471,0,0,0,1.466,1.466h9.354L85.348,54.7a.453.453,0,0,0,.326.145.467.467,0,0,0,.47-.47V52.568h1.3A1.471,1.471,0,0,0,88.913,51.1V42.672A1.471,1.471,0,0,0,87.447,41.206ZM75.958,48.461A1.357,1.357,0,1,1,77.315,47.1,1.367,1.367,0,0,1,75.958,48.461Zm4.758,0A1.357,1.357,0,1,1,82.074,47.1,1.367,1.367,0,0,1,80.717,48.461Zm4.74,0A1.357,1.357,0,1,1,86.814,47.1,1.367,1.367,0,0,1,85.457,48.461Z" transform="translate(-69.137 -41.206)"/>
+                      <path id="Path_961" data-name="Path 961" class="cls-2" d="M2.443,200.083v-2.877H.959a.965.965,0,0,0-.959.959V203.7a.951.951,0,0,0,.959,1h.85v1.194a.317.317,0,0,0,.308.308.3.3,0,0,0,.217-.09l1.393-1.393H9.879a.965.965,0,0,0,.959-.959V202.38h-6.1A2.3,2.3,0,0,1,2.443,200.083Z" transform="translate(0 -190.15)"/>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </span>
+          </label>
+          <label for="medium" [popover]="'Medium'" triggers="mouseenter:mouseleave" class="button-filter-label">
+            <input type="checkbox" name="medium" id="medium">
+            <span class="button-filter">
+              <svg class="icon" viewBox="0 0 19.793 16.745">
+  <path id="medium" class="cls-1"
+        d="M6.594,141.126v12.956a.786.786,0,0,1-.138.469.464.464,0,0,1-.4.193.806.806,0,0,1-.365-.088L.552,152.083a.939.939,0,0,1-.392-.37A.973.973,0,0,1,0,151.2V138.607a.629.629,0,0,1,.11-.376.369.369,0,0,1,.32-.155,1.273,1.273,0,0,1,.486.166l5.644,2.828A.091.091,0,0,1,6.594,141.126Zm.707,1.116,5.9,9.565-5.9-2.938Zm12.492.2v11.642a.642.642,0,0,1-.155.447.537.537,0,0,1-.42.171,1.043,1.043,0,0,1-.519-.144l-4.871-2.43Zm-.033-1.325q0,.033-2.833,4.634t-3.319,5.385l-4.308-7,3.579-5.821a.626.626,0,0,1,.574-.309.633.633,0,0,1,.287.066l5.976,2.982A.071.071,0,0,1,19.76,141.115Z"
+        transform="translate(0 -138)"/>
 </svg>
             </span>
           </label>
@@ -246,7 +183,13 @@
               </g>
             </svg>{{airdrop.rating}}
           </td>
-          <td>{{airdrop.tokenName}}</td>
+          <td>
+            <div class="info-social-icon">
+              <a href="{{projectLink}}" *ngFor="let projectLink of airdrop.projectLinks;"
+                 [innerHtml]="globals.parseIconProjectLink(projectLink, 'medium', 'active')">
+              </a>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

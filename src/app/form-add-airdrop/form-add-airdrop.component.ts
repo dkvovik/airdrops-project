@@ -29,7 +29,7 @@ export class FormAddAirdropComponent implements OnInit {
   image = '';
 
   autocompleteRequirements = ['Email', 'Twitter', 'Telegram', 'Reddit', 'Facebook', 'Bitcointalk', 'Medium', 'Youtube',
-    'Steemit', 'Github', 'KYM'];
+    'Steemit', 'Github', 'KYM', 'Google-Plus'];
 
   @Input() modalRef: BsModalRef;
 

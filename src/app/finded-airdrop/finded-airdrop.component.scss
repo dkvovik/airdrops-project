@@ -9,6 +9,12 @@
     margin-bottom: 0;
   }
 
+  .finded-airdrop-wrapper {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   .finded-airdrop-wrapper:nth-child(even) {
     background-color: #FCFCFC;
   }

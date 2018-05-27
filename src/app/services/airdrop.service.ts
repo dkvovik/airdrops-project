@@ -47,7 +47,7 @@ export class AirdropService {
       howToGetToken: ['fbhealwlwe', 'cveijnrwnr', 'eijnrwji', 'eijnrwji'],
       image: 'http://www.economicsgazette.com/wp-content/uploads/DGB.jpg',
       platform: 'HP',
-      projectLinks: ['https://twitter.com/webstandards_ru', 'https://www.facebook.com/webstandardsru', 'https://plus.google.com/+Web-standardsRu/posts'],
+      projectLinks: ['https://www.facebook.com/webstandardsru', 'https://plus.google.com/+Web-standardsRu/posts', 'https://twitter.com/webstandards_ru'],
       projectName: 'ProJECT',
       rating: 22,
       requirements: ['Telegram', 'Email'],
