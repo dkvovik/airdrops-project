@@ -9,28 +9,37 @@ import { Airdrop } from '../shared/models/airdrop';
 })
 export class FilterComponent implements OnInit {
 
-  airdrops: Airdrop[] = [];
+  airdrops: Airdrop[];
 
   minTokenValue = 0;
-  maxTokenValue = 100;
+  maxTokenValue = 0;
   stepTokenValue = 1;
-  twoWayRangeTokenValue = [10, 30];
+  twoWayRangeTokenValue: number[];
+
 
   minRating = 0;
-  maxRating = 100;
+  maxRating = 0;
   stepRating = 1;
-  twoWayRangeRating = [0, 100];
+  twoWayRangeRating: number[];
+
+  requirements = [];
 
 
   constructor(private airdropService: AirdropService) { }
 
   ngOnInit() {
-    this.getAirdrops();
-    setTimeout(() => {
-      console.log('this.airdrops', this.airdrops);
-    }, 5000);
+    this.initFilterValue();
   }
 
+  initFilterValue() {
+    this.minTokenValue = this.airdropService.getMinTokenValue();
+    this.maxTokenValue = this.airdropService.getMaxTokenValue();
+    this.twoWayRangeTokenValue = [this.minTokenValue, this.maxTokenValue];
+
+    this.minRating = this.airdropService.getMinRating();
+    this.maxRating = this.airdropService.getMaxRating();
+    this.twoWayRangeRating = [this.minRating, this.maxRating];
+  }
 
   changed() {
     this.twoWayRangeTokenValue = [...this.twoWayRangeTokenValue];
@@ -41,16 +50,13 @@ export class FilterComponent implements OnInit {
   }
 
   clearFormFilter() {
-    /******/
+    this.twoWayRangeTokenValue = [this.minTokenValue, this.maxTokenValue];
+    this.twoWayRangeRating = [this.minRating, this.maxRating];
   }
 
 
-  getAirdrops() {
-    this.airdropService.getAirdrops().subscribe(
-      (d: any) => this.airdrops = d,
-      (error)  => {
-        console.log('Error ' , error);
-      });
+  getAirdrops(requirements, tokenValue, rating) {
+    this.airdrops = this.airdropService.getFilteredAirdrops(this.requirements, tokenValue, rating);
   }
 
 }

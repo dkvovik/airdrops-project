@@ -29,7 +29,7 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAirdrops();
+    this.getAirdropsSource();
   }
 
   openModal(template: TemplateRef<any>) {
@@ -46,6 +46,11 @@ export class HomePageComponent implements OnInit {
       },
       (error) => console.log('Error getAirdrops', error)
     );
+  }
+
+  getAirdropsSource() {
+    this.airdrops  = this.airdropService.getAirdropsSource();
+    this.sortByStatus(this.airdrops);
   }
 
   isTodayOrYesterday(airdrops) {

@@ -2,7 +2,7 @@
   <div class="col-12 filter main-border">
     <div class="row">
       <div class="col-md-3">
-        <h2 class="title">Social Network</h2>
+        <h2 class="title">Requirements</h2>
         <div class="button-filter-wrapper">
           <label for="twitter" class="button-filter-label">
             <input type="checkbox" name="twitter" id="twitter">
@@ -200,12 +200,13 @@
       </div>
       <div class="col-md-5 submit-wrapper">
         <div class="btn btn-clear" (click)="clearFormFilter()">clear</div>
-        <button class="btn bt-submit-filter btn-block">Apply Filter</button>
+        <button class="btn bt-submit-filter btn-block"
+                (click)="getAirdrops([],twoWayRangeTokenValue, twoWayRangeRating)">Apply Filter</button>
       </div>
     </div>
   </div>
   <div class="w-100"></div>
-  <div class="col-12 table-wrapper main-border">
+  <div class="col-12 table-wrapper main-border" *ngIf="airdrops">
     <table class="table table-striped">
       <thead>
         <tr>
@@ -221,7 +222,13 @@
         <tr *ngFor="let airdrop of airdrops">
           <td>
             <img class="token-logo" src="{{airdrop.image}}"/>
-            {{airdrop.tokenName}}
+            {{airdrop.tokenName}} <span *ngIf="airdrop.isVisited">
+                 <svg class="icon icon_eyes" viewBox="0 0 13.75 9.375">
+                  <g id="baseline-remove_red_eye-24px" transform="translate(-0.625 -2.813)">
+                    <path id="Path_991" data-name="Path 991" class="cls-1" d="M7.875,4.5A7.392,7.392,0,0,0,1,9.188a7.385,7.385,0,0,0,13.75,0A7.392,7.392,0,0,0,7.875,4.5Zm0,7.813A3.125,3.125,0,1,1,11,9.188,3.126,3.126,0,0,1,7.875,12.313Zm0-5A1.875,1.875,0,1,0,9.75,9.188,1.872,1.872,0,0,0,7.875,7.313Z" transform="translate(-0.375 -1.688)"/>
+                  </g>
+                </svg>
+                </span>
           </td>
           <td>{{airdrop.tokenValue | currency}}</td>
           <td>{{airdrop.startDate | date:'d MMMM y'}}</td>
