@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AirdropService } from '../services/airdrop.service';
 import { Airdrop } from '../shared/models/airdrop';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-filter',
@@ -24,8 +25,13 @@ export class FilterComponent implements OnInit {
 
   requirements = [];
 
+  modalRef: BsModalRef;
 
-  constructor(private airdropService: AirdropService) { }
+  currentAirdrop: Airdrop;
+
+
+  constructor(private airdropService: AirdropService,
+              private modalService: BsModalService) { }
 
   ngOnInit() {
     this.initFilterValue();
@@ -54,9 +60,20 @@ export class FilterComponent implements OnInit {
     this.twoWayRangeRating = [this.minRating, this.maxRating];
   }
 
-
   getAirdrops(requirements, tokenValue, rating) {
     this.airdrops = this.airdropService.getFilteredAirdrops(this.requirements, tokenValue, rating);
+  }
+
+  toggleRequirements(value) {
+    if (this.requirements.indexOf(value) === -1) {
+      this.requirements.push(value);
+    } else {
+      this.requirements.splice(this.requirements.indexOf(value), 1);
+    }
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
 }

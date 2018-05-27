@@ -8,7 +8,7 @@
             <img src="{{airdrop.image}}" class="token-logo">
           </div>
           <div class="finded-airdrop__info">
-            <div class="info-title" (click)="openModalWithComponent(airdrop); airdrop['isVisited'] = true;">
+            <div class="info-title" (click)="currentAirdrop = airdrop; openModal(detailInfo); airdrop['isVisited'] = true;">
               {{airdrop.tokenName}} <span *ngIf="airdrop.isVisited">
                  <svg class="icon icon_eyes" viewBox="0 0 13.75 9.375">
                   <g id="baseline-remove_red_eye-24px" transform="translate(-0.625 -2.813)">
@@ -82,3 +82,8 @@
     </div>
   </section>
 </div>
+
+
+<ng-template #detailInfo>
+  <app-detail-info [modalRef]="modalRef" [airdrop]="currentAirdrop"></app-detail-info>
+</ng-template>

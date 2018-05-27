@@ -50,7 +50,7 @@ export class AirdropService {
       projectLinks: ['https://twitter.com/webstandards_ru', 'https://www.facebook.com/webstandardsru', 'https://plus.google.com/+Web-standardsRu/posts'],
       projectName: 'ProJECT',
       rating: 22,
-      requirements: ['Twitter', 'Email'],
+      requirements: ['Telegram', 'Email'],
       startDate: 'Friday, 1-May-18 11:40:02 UTC',
       status: 'Past',
       tokenName: 'TELCoin',

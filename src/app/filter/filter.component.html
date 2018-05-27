@@ -4,8 +4,24 @@
       <div class="col-md-3">
         <h2 class="title">Requirements</h2>
         <div class="button-filter-wrapper">
+          <label for="email" class="button-filter-label">
+            <input type="checkbox" name="email" id="email" (click)="toggleRequirements('Email')">
+            <span class="button-filter">
+              <svg class="icon" viewBox="0 0 20.147 14.576">
+            <g id="message-envelope" class="cls-1" transform="translate(0 -1)">
+              <g id="Group_129" data-name="Group 129" transform="translate(0 1)">
+                <path id="Path_202" data-name="Path 202" class="cls-2"
+                      d="M0,60.58v.728l10.074,7.787,10.074-7.787V60.58Z" transform="translate(0 -60.58)"/>
+                <path id="Path_203" data-name="Path 203" class="cls-2"
+                      d="M10.074,103.221,4.14,98.59,0,95.39v12.341H20.147V95.39l-4.14,3.2Z"
+                      transform="translate(0 -93.155)"/>
+              </g>
+            </g>
+          </svg>
+            </span>
+          </label>
           <label for="twitter" class="button-filter-label">
-            <input type="checkbox" name="twitter" id="twitter">
+            <input type="checkbox" name="twitter" id="twitter" (click)="toggleRequirements('Twitter')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 20.162 16.507">
                 <g id="twitter" transform="translate(0 -0.94)">
@@ -36,22 +52,6 @@
           transform="translate(0 0)"/>
   </g>
 </svg>
-            </span>
-          </label>
-          <label for="message" class="button-filter-label">
-            <input type="checkbox" name="message" id="message">
-            <span class="button-filter">
-              <svg class="icon" viewBox="0 0 20.147 14.576">
-            <g id="message-envelope" class="cls-1" transform="translate(0 -1)">
-              <g id="Group_129" data-name="Group 129" transform="translate(0 1)">
-                <path id="Path_202" data-name="Path 202" class="cls-2"
-                      d="M0,60.58v.728l10.074,7.787,10.074-7.787V60.58Z" transform="translate(0 -60.58)"/>
-                <path id="Path_203" data-name="Path 203" class="cls-2"
-                      d="M10.074,103.221,4.14,98.59,0,95.39v12.341H20.147V95.39l-4.14,3.2Z"
-                      transform="translate(0 -93.155)"/>
-              </g>
-            </g>
-          </svg>
             </span>
           </label>
           <label for="support" class="button-filter-label">
@@ -207,7 +207,7 @@
   </div>
   <div class="w-100"></div>
   <div class="col-12 table-wrapper main-border" *ngIf="airdrops">
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th>TOKEN</th>
@@ -219,7 +219,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let airdrop of airdrops">
+        <tr *ngFor="let airdrop of airdrops"
+            (click)="currentAirdrop = airdrop; openModal(detailInfo); airdrop['isVisited'] = true;">
           <td>
             <img class="token-logo" src="{{airdrop.image}}"/>
             {{airdrop.tokenName}} <span *ngIf="airdrop.isVisited">
@@ -251,3 +252,7 @@
     </table>
   </div>
 </div>
+
+<ng-template #detailInfo>
+  <app-detail-info [modalRef]="modalRef" [airdrop]="currentAirdrop"></app-detail-info>
+</ng-template>

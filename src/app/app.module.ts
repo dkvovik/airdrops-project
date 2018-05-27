@@ -15,12 +15,13 @@ import { FooterComponent } from './footer/footer.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { FilterComponent } from './filter/filter.component';
 import { AirdropService } from './services/airdrop.service';
-import { DetailAirdropComponent, FindedAirdropComponent } from './finded-airdrop/finded-airdrop.component';
+import { FindedAirdropComponent } from './finded-airdrop/finded-airdrop.component';
 import { BsDatepickerModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
 import { FormAddAirdropComponent } from './form-add-airdrop/form-add-airdrop.component';
 import { Globals } from './shared/globals';
 import { ClipboardModule } from 'ngx-clipboard';
 import { TagInputModule } from 'ngx-chips';
+import { DetailInfoComponent } from './detail-info/detail-info.component';
 
 
 @NgModule({
@@ -32,10 +33,9 @@ import { TagInputModule } from 'ngx-chips';
     FilterComponent,
     FindedAirdropComponent,
     FormAddAirdropComponent,
-    DetailAirdropComponent
+    DetailInfoComponent
   ],
   entryComponents: [
-    DetailAirdropComponent
   ],
   imports: [
     BrowserModule,

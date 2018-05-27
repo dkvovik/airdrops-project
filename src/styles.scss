@@ -173,6 +173,9 @@ body::-webkit-scrollbar-thumb {
   &.table-striped tbody tr:nth-of-type(odd) {
     background-color: #FCFCFC;
   }
+  &.table-striped tbody tr:hover {
+    background-color: #ECECEC;
+  }
 }
 
 .main-border {

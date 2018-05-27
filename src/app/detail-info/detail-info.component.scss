@@ -1,0 +1,226 @@
+.requirement-item {
+  position: relative;
+  margin-right: 14px;
+}
+svg.icon-req {
+  fill: #1F5AF6;
+}
+svg.icon-rating {
+  height: 18px;
+  margin-top: 2px;
+}
+.modal-header-detail {
+  background-color: #FCFCFC;
+  height: auto;
+  padding-top: 36px;
+  padding-left: 56px;
+  padding-right: 56px;
+}
+.modal-header button.close {
+  align-self: flex-start;
+}
+.detail-airdrop {
+  display: flex;
+  align-items: center;
+}
+img.token-logo {
+  width: 68px;
+  height: 68px;
+  margin-right: 23px;
+}
+.info-title {
+  color: #4E5C6E;
+  font-weight: 500;
+  font-size: 1.294rem;
+}
+.detail-airdrop .project-name {
+  color: #AEAEAE;
+  font-size: 0.9412rem;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.modal-subheader-detail {
+  background-color: #FCFCFC;
+  padding: 0px 56px 23px 56px;
+  border-bottom: 1px solid #E2E2E2;
+}
+
+.subheader-detail-item:first-child {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.subheader-detail-asset {
+  margin-right: 20px;
+}
+
+.subheader-detail-asset input {
+  min-width: 340px;
+}
+.subheader-detail-asset .btn-link {
+  color: #1F5AF6;
+}
+
+.modal-body__header,
+.modal-body__middle,
+.modal-body__footer {
+  padding-left: 56px;
+  padding-right: 56px;
+}
+
+.modal-body__header {
+  border-bottom: 1px solid #E2E2E2;
+  padding-top: 28px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+}
+
+.rating-button-wrapper {
+  display: flex;
+}
+.rating-button-wrapper .rating {
+  border-left: 1px solid #fff;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-right: 1px solid #fff;
+}
+.rating-button-wrapper .rating-button {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.rating-button-wrapper .rating,
+.rating-button-wrapper .rating-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #EDEDED;
+}
+.rating-button .rating-plus,
+.rating-button .rating-minus {
+  cursor: pointer;
+  border: none;
+  color: #BCC0C6;
+  flex-grow: 1;
+}
+.rating-button .rating-plus:hover,
+.rating-button .rating-minus:hover {
+  color: #4E5C6E;
+  text-decoration: none;
+}
+.rating-button .rating-plus {
+  border-bottom: 1px solid #fff;
+}
+
+.date-wrapper .date-start,
+.token-wrapper .token-value {
+  margin-bottom: 13px;
+}
+
+.estimated-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.estimated-wrapper .estimated-title,
+.estimated-wrapper .estimated-value {
+  flex-basis: 50%;
+  background-color: #ECECEC;
+}
+.estimated-wrapper .estimated-title {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 1px solid #fff;
+  padding: 3px 12px;
+  color: #4E5C6E;
+  font-size: 0.7059rem;
+}
+.estimated-wrapper .estimated-value {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 3px 12px;
+}
+
+.modal-body__middle {
+  padding-top: 23px;
+  padding-bottom: 28px;
+  display: flex;
+}
+
+.modal-body__middle .about-wrapper {
+  flex-basis: 55%;
+  padding-right: 40px;
+}
+
+.modal-body__middle {
+  font-size: 0.8824rem;
+}
+.modal-body__middle .about-title,
+.modal-body__middle .htg-title {
+  color: #4E5C6E;
+  margin-bottom: 12px;
+}
+
+.modal-body__middle .htg-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.htg-index {
+  width: 42px;
+  height: 42px;
+  background-color: #E2E2E2;
+  color: #4E5C6E;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+}
+.htg-index_white {
+  background-color: #fff;
+  border: 1px solid #E2E2E2;
+}
+
+.project-links-wrapper {
+  background-color: #EAEAEA;
+}
+.project-links-header {
+  border-bottom: 1px solid #E2E2E2;
+  padding-top: 23px;
+  padding-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.project-links-footer,
+.project-links-footer {
+  padding: 13px 15px;
+}
+.project-links-header .title {
+  color: #4E5C6E;
+  font-size: 0.8824rem;
+  margin-bottom: 15px;
+}
+
+.modal-footer {
+  border-top: none;
+  justify-content: center;
+  padding: 40px;
+  padding-bottom: 40px;
+}
+
+.badge_grey {
+  background-color: #ECECEC;
+  border-radius: 5px;
+  margin-bottom: 7px;
+  text-align: center;
+  color: #4E5C6E;
+  padding: 3px 12px;
+  margin-right: 20px;
+  font-size: 0.7059rem;
+}
