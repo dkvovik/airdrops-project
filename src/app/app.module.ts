@@ -20,6 +20,7 @@ import { BsDatepickerModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
 import { FormAddAirdropComponent } from './form-add-airdrop/form-add-airdrop.component';
 import { Globals } from './shared/globals';
 import { ClipboardModule } from 'ngx-clipboard';
+import { TagInputModule } from 'ngx-chips';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     BsDatepickerModule.forRoot(),
     ReactiveFormsModule,
     PopoverModule.forRoot(),
-    ClipboardModule
+    ClipboardModule,
+    TagInputModule
   ],
   providers: [Globals, AirdropService],
   bootstrap: [AppComponent]

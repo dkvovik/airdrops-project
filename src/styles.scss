@@ -29,9 +29,19 @@ h2.title {
   cursor: pointer;
 }
 
-::placeholder {
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #AEAEAE;
-  opacity: 1;
+  font-size: 0.8824rem;
+  opacity: 0.6;
+  font-weight: 400;
+  font-family: 'Roboto';
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #AEAEAE;
+  font-size: 0.8824rem;
+  opacity: 0.6;
+  font-weight: 400;
+  font-family: 'Roboto';
 }
 
 button:focus {
@@ -184,6 +194,10 @@ body::-webkit-scrollbar-thumb {
     font-size:  0.8824rem;
     padding-left: 15px;
     padding-right: 15px;
+
+    &::placeholder {
+      color: #AEAEAE;
+    }
   }
 
   .title {

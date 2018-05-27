@@ -416,8 +416,7 @@ export class FindedAirdropComponent implements OnInit {
     }
     .project-links-footer,
     .project-links-footer {
-      padding-left: 15px;
-      padding-bottom: 15px;
+      padding: 13px 15px;
     }
     .project-links-header .title {
       color: #4E5C6E;

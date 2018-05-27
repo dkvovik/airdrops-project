@@ -11,7 +11,6 @@ import { AirdropService } from '../services/airdrop.service';
 })
 export class FormAddAirdropComponent implements OnInit {
 
-  addedRequirements = [];
   addedHTG = [];
   addedProjectLinks = [];
   addedSocialNetworks = [];
@@ -28,6 +27,9 @@ export class FormAddAirdropComponent implements OnInit {
   formAddAirdrop: FormGroup;
   formInvalidaAfterSubmit = false;
   image = '';
+
+  autocompleteRequirements = ['Email', 'Twitter', 'Telegram', 'Reddit', 'Facebook', 'Bitcointalk', 'Medium', 'Youtube',
+    'Steemit', 'Github', 'KYM'];
 
   @Input() modalRef: BsModalRef;
 
@@ -57,6 +59,7 @@ export class FormAddAirdropComponent implements OnInit {
       estimatedValue: new FormControl(null, ),
       description: new FormControl(null, ),
       comment: new FormControl(null, ),
+      requirements: new FormControl([])
     });
   }
 
@@ -67,7 +70,6 @@ export class FormAddAirdropComponent implements OnInit {
       this.formInvalidaAfterSubmit = true;
     } else {
       const data: Airdrop = {...this.formAddAirdrop.value};
-      data.requirements = this.addedRequirements;
       data.howToGetToken = this.addedHTG;
       data.projectLinks = this.addedProjectLinks;
       data.socialNetworks = this.addedSocialNetworks;
@@ -99,16 +101,6 @@ export class FormAddAirdropComponent implements OnInit {
 
       this.cd.markForCheck();
     }
-  }
-
-  addRequirement(value) {
-    value = value.trim();
-    if (value) {
-      this.addedRequirements.push(value);
-    }
-  }
-  removeAddedRequirement(index) {
-    this.addedRequirements.splice(index, 1);
   }
 
   addHTG(value) {

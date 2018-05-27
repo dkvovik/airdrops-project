@@ -94,38 +94,16 @@
             <label for="requirements">Requirements</label>
           </div>
           <div class="requirements-items-wrapper">
-            <div class="requirements-item bg-ligth-grey container-input"
-                 *ngFor="let addedRequirement of addedRequirements; let idx = index">
-              {{addedRequirement}}
-              <div class="btn-input right" (click)="removeAddedRequirement(idx)">
-                <svg class="icon icon_delete" viewBox="0 0 17.536 17.536">
-                  <g id="Plus" transform="translate(-805.387 112.314)">
-                    <g id="Group_73" data-name="Group 73" transform="translate(816.7 -112.314) rotate(45)">
-                      <path id="Path_88" data-name="Path 88" class="cls-1"
-                            d="M815.9-108.2v6.4h-6.4a.792.792,0,0,0-.8.8h0a.792.792,0,0,0,.8.8h6.4v6.4a.792.792,0,0,0,.8.8h0a.792.792,0,0,0,.8-.8v-14.4a.792.792,0,0,0-.8-.8h0A.792.792,0,0,0,815.9-108.2Z"
-                            transform="translate(-808.7 109)"/>
-                      <path id="Path_89" data-name="Path 89" class="cls-1"
-                            d="M844.98-84.9H840.5a.792.792,0,0,1-.8-.8h0a.792.792,0,0,1,.8-.8h4.48a.792.792,0,0,1,.8.8h0A.813.813,0,0,1,844.98-84.9Z"
-                            transform="translate(-829.78 93.7)"/>
-                    </g>
-                  </g>
-                </svg>
-              </div>
-            </div>
-            <div class="requirements-input">
-              <div class="container-input">
-                <button class="btn-input right"
-                        (click)="addRequirement(addRequirementInput.value); addRequirementInput.value = ''">
-                  <svg class="icon right icon_plus" viewBox="0 0 16.984 16.952">
-                    <g id="Close" transform="translate(-566.817 729.509) rotate(-45)">
-                      <path id="Path_86" data-name="Path 86" class="cls-1" d="M942.034-75.666a.633.633,0,0,1-.916,0l-3.3-3.3-.472-.471a.633.633,0,0,1,0-.917h0a.633.633,0,0,1,.917,0l.471.471,3.3,3.3A.682.682,0,0,1,942.034-75.666Z" transform="translate(-19.56 -21.561)"/>
-                      <path id="Path_87" data-name="Path 87" class="cls-1" d="M922.474-106.854a.633.633,0,0,0-.917,0l-4.871,4.871-4.871-4.871a.632.632,0,0,0-.471-.183.63.63,0,0,0-.471.183.633.633,0,0,0,0,.917l4.844,4.9-4.871,4.871a.633.633,0,0,0,0,.917.633.633,0,0,0,.917,0l10.685-10.684a.631.631,0,0,0,.183-.471A.66.66,0,0,0,922.474-106.854Z" transform="translate(0 -2)"/>
-                    </g>
-                  </svg>
-                </button>
-                <input #addRequirementInput type="text" class="form-control" id="requirements">
-              </div>
-            </div>
+            <tag-input [onlyFromAutocomplete]="true" [modelAsStrings]="true"
+                       [placeholder]="'+ Add requirement'" [secondaryPlaceholder]="'+ Add requirement'"
+                       id="requirements" formControlName="requirements">
+              <tag-input-dropdown [showDropdownIfEmpty]="true"
+                                  [dynamicUpdate]="true"
+                                  [zIndex] = "1100"
+                                  [appendToBody]="false"
+                                  [autocompleteItems]="autocompleteRequirements">
+              </tag-input-dropdown>
+            </tag-input>
           </div>
         </div>
         <div class="col-md-6">
