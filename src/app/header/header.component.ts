@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() {
+  modalRef: BsModalRef;
+
+  constructor(private modalService: BsModalService) {
   }
 
   ngOnInit() {
@@ -24,5 +27,9 @@ export class HeaderComponent implements OnInit {
       label: 'Submit Airdrop', link: '#',
     }
   ];
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
 
 }
