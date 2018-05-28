@@ -29,7 +29,7 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAirdropsSource();
+    this.getAirdrops();
   }
 
   openModal(template: TemplateRef<any>) {

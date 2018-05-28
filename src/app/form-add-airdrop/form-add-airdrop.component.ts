@@ -86,7 +86,7 @@ export class FormAddAirdropComponent implements OnInit {
       console.log('data', data);
 
       this.airdropService.addAirdrop(data).subscribe(
-        responce => console.log(responce),
+        response => console.log(response),
         error => console.log(error)
       );
 
@@ -96,6 +96,17 @@ export class FormAddAirdropComponent implements OnInit {
   }
 
   onFileChange(event) {
+
+    const image = new FormData(event.target.files[0]);
+
+    this.airdropService.fileUpload(image).subscribe(
+      data => {
+        console.log('data', data);
+        this.image = data;
+      },
+      error => console.log('error', error)
+    );
+
     const reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
@@ -111,6 +122,8 @@ export class FormAddAirdropComponent implements OnInit {
 
       this.cd.markForCheck();
     }
+
+
   }
 
   addHTG(value) {

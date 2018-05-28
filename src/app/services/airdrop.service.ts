@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ResponseServer } from '../shared/models/responce';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Airdrop } from '../shared/models/airdrop';
 import { Globals } from '../shared/globals';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data'})
+};
 
 @Injectable()
 export class AirdropService {
@@ -92,18 +96,18 @@ export class AirdropService {
   getAirdrops(): any {
     return this.http.get(`${this.basicUrl}/airdrops`)
       .map( (response: any) => {
+        console.log('response', response);
         if (response.success === false) {
           throw Observable.throw(response);
         }
-        /*return this.airdrops = response.data;*/
-        return this.airdrops;
+        return this.airdrops = response.data;
       });
   }
 
   addAirdrop(data): Observable<ResponseServer> {
     return this.http.post(`${this.basicUrl}/airdrop/add`, data)
       .map( (response: any) => {
-        if (response.success === false) {
+        if (!response.success) {
           throw Observable.throw(response);
         }
         return response;
@@ -113,7 +117,7 @@ export class AirdropService {
   getAirdropById(id): Observable<ResponseServer> {
     return this.http.get(`${this.basicUrl}/airdrop/getById?id=${id}`)
       .map( (response: any) => {
-        if (response.success === false) {
+        if (!response.success) {
           throw Observable.throw(response);
         }
         return response.data;
@@ -124,6 +128,16 @@ export class AirdropService {
     this.getAirdrops();
     this.isVisitedAirdrop(this.airdrops);
     return this.airdrops;
+  }
+
+  fileUpload(data): any {
+    return this.http.post(`${this.basicUrl}/file/add`, data, httpOptions)
+      .map( (response: any) => {
+        if (!response.success) {
+          throw Observable.throw(response);
+        }
+        return response.data;
+    });
   }
 
   isVisitedAirdrop(airdrops) {
@@ -192,5 +206,4 @@ export class AirdropService {
     const airdropWithMaxRating = this.airdrops.reduce((prev, cur) => cur.rating > prev.rating ? cur : prev , {rating: -Infinity});
     return airdropWithMaxRating.rating;
   }
-
 }
