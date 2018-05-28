@@ -59,6 +59,30 @@ export class AirdropService {
       totalValue: '773217',
       website: 'https://www.yandex.ru',
       whitePaperLink: 'whitePaperLink'
+    },
+    {
+      assetId: '1448safhkjqkhfjkwenkqjevuh9rew1fhf1ff8000',
+      commentBlock: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis incidunt laudantium molestiae sapiente vitae voluptas.',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis incidunt laudantium molestiae sapiente vitae voluptas.',
+      economyOfToken: 'ffToken',
+      email: 'test@mail.ru',
+      endDate: '23-June-18 11:40:02 UTC',
+      estimatedValue: 'estimatedValue',
+      howToGetToken: ['fbhealwlwe', 'cveijnrwnr', 'eijnrwji', 'eijnrwji'],
+      image: 'http://www.economicsgazette.com/wp-content/uploads/DGB.jpg',
+      platform: 'HP',
+      projectLinks: ['https://plus.google.com/+Web-standardsRu/posts', 'https://twitter.com/webstandards_ru'],
+      projectName: 'ProJECT',
+      rating: 10,
+      requirements: ['Telegram', 'Email'],
+      startDate: '3-June-18 11:40:02 UTC',
+      status: 'Upcoming',
+      tokenName: 'TELCoin',
+      tokenValue: 12,
+      tokensPerClaim: 342,
+      totalValue: '773217',
+      website: 'https://www.yandex.ru',
+      whitePaperLink: 'whitePaperLink'
     }
   ];
 
