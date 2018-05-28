@@ -70,11 +70,11 @@ button:focus {
 
 
 .container {
-  @media (min-width: 1200px) {
-    max-width: 1286px;
-  }
   @media (min-width: 992px) {
     max-width: 1060px;
+  }
+  @media (min-width: 1200px) {
+    max-width: 1286px;
   }
 }
 
