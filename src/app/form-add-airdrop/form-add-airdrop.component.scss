@@ -23,7 +23,6 @@
   }
 }
 
-
 .htg-item,
 .project-links-item {
   margin-bottom: 10px;
@@ -57,6 +56,12 @@
     height: 42px;
     color: #AEAEAE;
   }
+}
+
+.htg-input .form-control {
+  background-color: $app-form-color;
+  cursor: text;
+  height: 42px;
 }
 
 .btn_submit {
@@ -191,5 +196,36 @@
       margin-top: -2px !important;
     }
   }
-
 }
+
+/* CSS Popover */
+:host /deep/ popover-container {
+  &.popover {
+    z-index: 9999;
+    background-color: $app-form-color;
+
+    .popover-content {
+      color: $app-form-color-text;
+      display: flex;
+      align-items: center;
+    }
+
+    .popover-arrow.arrow::after {
+      border-top-color: $app-form-color;
+    }
+  }
+
+  input.form-control {
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #4E5C6E;
+  }
+
+  .text-popover {
+    color: #4E5C6E;
+    margin-right: 10px;
+    font-size: 18px;
+  }
+}
+
+/* /CSS Popover */

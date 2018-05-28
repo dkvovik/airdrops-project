@@ -33,6 +33,10 @@ export class FormAddAirdropComponent implements OnInit {
 
   @Input() modalRef: BsModalRef;
 
+  isOpenPopover = [];
+  selectedText: string;
+  currentIdHTG: any;
+
   constructor(private cd: ChangeDetectorRef,
               private airdropService: AirdropService) {
   }
@@ -68,6 +72,12 @@ export class FormAddAirdropComponent implements OnInit {
 
     if (this.formAddAirdrop.invalid) {
       this.formInvalidaAfterSubmit = true;
+      /* test */
+      const data: Airdrop = {...this.formAddAirdrop.value};
+      data.howToGetToken = this.addedHTG;
+      data.projectLinks = this.addedProjectLinks;
+      data.socialNetworks = this.addedSocialNetworks;
+      console.log('data', data);
     } else {
       const data: Airdrop = {...this.formAddAirdrop.value};
       data.howToGetToken = this.addedHTG;
@@ -117,11 +127,40 @@ export class FormAddAirdropComponent implements OnInit {
     value = value.trim();
     if (value) {
       this.addedProjectLinks.push(value);
+      this.isOpenPopover.push('closed');
     }
     this.isActiveAddLink = false;
   }
   removeAddedProjectLink(index) {
     this.addedProjectLinks.splice(index, 1);
+    this.isOpenPopover.splice(index, 1);
   }
 
+
+  selectedTextFunc() {
+    this.selectedText = window.getSelection().toString();
+    if (this.selectedText) {
+      this.isOpenPopover[this.currentIdHTG] = true;
+    } else {
+      this.isOpenPopover[this.currentIdHTG] = false;
+    }
+  }
+
+  stringToUrl(url) {
+    if (!url) {
+      this.isOpenPopover[this.currentIdHTG] = false;
+      return false;
+    }
+
+    const startIndex = this.addedHTG[this.currentIdHTG].indexOf(this.selectedText);
+
+    const beforeString = this.addedHTG[this.currentIdHTG].substring(0, startIndex);
+    const afterString = this.addedHTG[this.currentIdHTG].substring(beforeString.length + this.selectedText.length);
+    const stringToUrl = `${beforeString}<a href="${url}">${this.selectedText}</a>${afterString}`;
+
+    this.addedHTG[this.currentIdHTG] = stringToUrl;
+    this.isOpenPopover[this.currentIdHTG] = false;
+  }
 }
+
+
