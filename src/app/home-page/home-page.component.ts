@@ -40,9 +40,9 @@ export class HomePageComponent implements OnInit {
     this.airdropService.getAirdrops().subscribe(
       (d: any) => {
         this.isTodayOrYesterday(d);
-        this.isVisitedAirdrop(d);
         this.sortByStatus(d);
         this.airdrops = d;
+        console.log('this.airdrops', this.airdrops);
       },
       (error) => console.log('Error getAirdrops', error)
     );

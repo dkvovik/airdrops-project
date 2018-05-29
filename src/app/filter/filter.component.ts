@@ -60,6 +60,8 @@ export class FilterComponent implements OnInit {
   clearFormFilter() {
     this.twoWayRangeTokenValue = [this.minTokenValue, this.maxTokenValue];
     this.twoWayRangeRating = [this.minRating, this.maxRating];
+
+    let checkboxes = document.querySelectorAll('.button-filter-wrapper input');
   }
 
   getAirdrops(requirements, tokenValue, rating) {

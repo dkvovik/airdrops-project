@@ -13,7 +13,6 @@ export class FormAddAirdropComponent implements OnInit {
 
   addedHTG = [];
   addedProjectLinks = [];
-  addedSocialNetworks = [];
 
   isActiveAddLink = false;
 
@@ -27,6 +26,7 @@ export class FormAddAirdropComponent implements OnInit {
   formAddAirdrop: FormGroup;
   formInvalidaAfterSubmit = false;
   image = '';
+  imageReader = '';
 
   autocompleteRequirements = ['Email', 'Twitter', 'Telegram', 'Reddit', 'Facebook', 'Bitcointalk', 'Medium', 'Youtube',
     'Steemit', 'Github', 'KYM', 'Google-Plus'];
@@ -47,83 +47,64 @@ export class FormAddAirdropComponent implements OnInit {
 
   initFormAddAirdrop() {
     this.formAddAirdrop = new FormGroup({
-      image: new FormControl(null, [Validators.required]),
+      image: new FormControl(null ),
       tokenName: new FormControl(null, [Validators.required]),
       projectName: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      whitepaperLink: new FormControl(null, ),
-      assetID: new FormControl(null, ),
+      whitePaperLink: new FormControl(null, ),
+      assetId: new FormControl(null, ),
       platform: new FormControl(null, ),
       website: new FormControl(null, ),
       startDate: new FormControl(this.startDate, [Validators.required]),
       endDate: new FormControl(null),
-      economyToken: new FormControl(null, ),
+      economyOfToken: new FormControl(null, ),
       totalValue: new FormControl(null, ),
       tokensPerClaim: new FormControl(null, ),
       estimatedValue: new FormControl(null, ),
       description: new FormControl(null, ),
-      comment: new FormControl(null, ),
-      requirements: new FormControl([])
+      commentBlock: new FormControl(null, ),
+      requirements: new FormControl([]),
+      howToGetToken: new FormControl([]),
+      projectLinks: new FormControl([]),
     });
   }
 
   onSubmitAddAirdrop() {
-    console.log('this.formAddAirdrop', this.formAddAirdrop);
-
     if (this.formAddAirdrop.invalid) {
       this.formInvalidaAfterSubmit = true;
-      /* test */
-      const data: Airdrop = {...this.formAddAirdrop.value};
-      data.howToGetToken = this.addedHTG;
-      data.projectLinks = this.addedProjectLinks;
-      data.socialNetworks = this.addedSocialNetworks;
-      console.log('data', data);
     } else {
-      const data: Airdrop = {...this.formAddAirdrop.value};
-      data.howToGetToken = this.addedHTG;
-      data.projectLinks = this.addedProjectLinks;
-      data.socialNetworks = this.addedSocialNetworks;
-      console.log('data', data);
+      const formModel = this.prepareSave();
 
-      this.airdropService.addAirdrop(data).subscribe(
+      this.airdropService.addAirdrop(formModel).subscribe(
         response => console.log(response),
         error => console.log(error)
       );
-
     }
-
-
   }
 
   onFileChange(event) {
-
-    const image = new FormData(event.target.files[0]);
-
-    this.airdropService.fileUpload(image).subscribe(
-      data => {
-        console.log('data', data);
-        this.image = data;
-      },
-      error => console.log('error', error)
-    );
-
     const reader = new FileReader();
-
     if (event.target.files && event.target.files.length) {
       const file = event.target.files[0];
-      reader.readAsDataURL(file);
+      this.formAddAirdrop.get('image').setValue(file);
 
       reader.onload = () => {
-        this.formAddAirdrop.patchValue({
-          image: reader.result
-        });
-        this.image = reader.result;
+        this.imageReader = reader.result;
       };
-
+      reader.readAsDataURL(file);
       this.cd.markForCheck();
     }
+  }
 
+  prepareSave() {
+    this.formAddAirdrop.get('howToGetToken').setValue(this.addedHTG);
+    this.formAddAirdrop.get('projectLinks').setValue(this.addedProjectLinks);
 
+    let input = new FormData();
+    for (const field in this.formAddAirdrop.controls) {
+      input.append(field, this.formAddAirdrop.get(field).value);
+    }
+    return input;
   }
 
   addHTG(value) {
@@ -148,7 +129,6 @@ export class FormAddAirdropComponent implements OnInit {
     this.addedProjectLinks.splice(index, 1);
     this.isOpenPopover.splice(index, 1);
   }
-
 
   selectedTextFunc() {
     this.selectedText = window.getSelection().toString();
