@@ -42,7 +42,6 @@ export class HomePageComponent implements OnInit {
         this.airdrops = d;
         this.isTodayOrYesterday(this.airdrops);
         this.sortByStatus(this.airdrops);
-        console.log('this.airdrops', this.airdrops);
       },
       (error) => console.log('Error getAirdrops', error)
     );
@@ -81,5 +80,12 @@ export class HomePageComponent implements OnInit {
         }
       }
     });
+  }
+
+  addAirdrop() {
+    this.upcomingAirdrop = [];
+    this.activeAirdrop = [];
+    this.pastAirdrop = [];
+    this.getAirdrops();
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AirdropService } from '../services/airdrop.service';
@@ -31,6 +31,8 @@ export class FormAddAirdropComponent implements OnInit {
     'Steemit', 'Github', 'KYM', 'Google-Plus'];
 
   @Input() modalRef: BsModalRef;
+
+  @Output() addAirdrop: EventEmitter<any> = new EventEmitter();
 
   isOpenPopover = [];
   selectedText: string;
@@ -75,7 +77,7 @@ export class FormAddAirdropComponent implements OnInit {
       const formModel = this.prepareSave();
       this.airdropService.addAirdrop(formModel).subscribe(
         response => {
-          console.log(response);
+          this.addAirdrop.emit();
           this.modalRef.hide();
         },
         error => console.log(error)

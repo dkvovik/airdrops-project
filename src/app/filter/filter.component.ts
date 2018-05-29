@@ -95,6 +95,7 @@ export class FilterComponent implements OnInit {
   }
 
   filterAirdrops(searchRequirements = [], tokenValue, rating) {
+    this.getAirdrops();
     let filteredAirdrops = this.sourceAirdrops;
 
     const minToken = tokenValue[0];
