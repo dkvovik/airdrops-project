@@ -23,7 +23,6 @@ export class AirdropService {
   getAirdrops(): any {
     return this.http.get(`${this.basicUrl}/airdrops`)
       .map( (response: any) => {
-        console.log('response', response);
         if (response.success === false) {
           throw Observable.throw(response);
         }
@@ -40,7 +39,8 @@ export class AirdropService {
         if (!response.success) {
           throw Observable.throw(response);
         }
-        return response;
+        this.airdrops.push(response.data);
+        return response.data;
       });
   }
 
@@ -79,38 +79,4 @@ export class AirdropService {
     });
   }
 
-  getFilteredAirdrops(searchRequirements = null, tokenValue, rating) {
-    let filteredAirdrops = this.airdrops;
-
-    const minToken = tokenValue[0];
-    const maxToken = tokenValue[1];
-    filteredAirdrops = filteredAirdrops.filter( (a) => a.tokenValue >= minToken && a.tokenValue <= maxToken);
-
-    if (filteredAirdrops) {
-      const minRating = rating[0];
-      const maxRating = rating[1];
-      filteredAirdrops = filteredAirdrops.filter( (a) => a.rating >= minRating && a.rating <= maxRating);
-    }
-
-    let filteredAirdropsAfterRequirements = [];
-
-    if (!searchRequirements) {
-      return filteredAirdrops;
-    } else {
-      if (filteredAirdrops) {
-        filteredAirdrops.forEach( (a) => {
-          let flag = true;
-          for (let i = 0; i < searchRequirements.length; i++) {
-            if (a.requirements.indexOf(searchRequirements[i]) === -1) {
-              flag = false;
-            }
-          }
-          if (flag) {
-            filteredAirdropsAfterRequirements.push(a);
-          }
-        });
-      }
-      return filteredAirdropsAfterRequirements;
-    }
-  }
 }

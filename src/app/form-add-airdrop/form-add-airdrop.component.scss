@@ -61,7 +61,7 @@
 .htg-input .form-control {
   background-color: $app-form-color;
   cursor: text;
-  height: 42px;
+  min-height: 42px;
 }
 
 .btn_submit {

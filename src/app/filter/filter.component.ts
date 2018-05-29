@@ -71,12 +71,15 @@ export class FilterComponent implements OnInit {
   clearFormFilter() {
     this.twoWayRangeTokenValue = [this.minTokenValue, this.maxTokenValue];
     this.twoWayRangeRating = [this.minRating, this.maxRating];
-
-    let checkboxes = document.querySelectorAll('.button-filter-wrapper input');
+    this.requirements = [];
+    const checkboxes = <NodeListOf<HTMLInputElement>> document.querySelectorAll('.button-filter-wrapper input');
+    for (let i = 0; i < checkboxes.length; ++i) {
+      checkboxes[i].checked = false;
+    }
   }
 
   getFilteredAirdrops(requirements, tokenValue, rating) {
-    this.airdrops = this.airdropService.getFilteredAirdrops(this.requirements, tokenValue, rating);
+    this.airdrops = this.filterAirdrops(this.requirements, tokenValue, rating);
   }
 
   toggleRequirements(value) {
@@ -89,6 +92,42 @@ export class FilterComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+
+  filterAirdrops(searchRequirements = [], tokenValue, rating) {
+    let filteredAirdrops = this.sourceAirdrops;
+
+    const minToken = tokenValue[0];
+    const maxToken = tokenValue[1];
+    filteredAirdrops = filteredAirdrops.filter( (a) => a.tokenValue >= minToken && a.tokenValue <= maxToken);
+
+    if (filteredAirdrops) {
+      const minRating = rating[0];
+      const maxRating = rating[1];
+      filteredAirdrops = filteredAirdrops.filter( (a) => a.rating >= minRating && a.rating <= maxRating);
+    }
+
+    let filteredAirdropsAfterRequirements = [];
+
+    if (searchRequirements.length === 0) {
+      return filteredAirdrops;
+    } else {
+      if (filteredAirdrops) {
+        filteredAirdrops.forEach( (a) => {
+          let flag = true;
+          for (let i = 0; i < searchRequirements.length; i++) {
+            if (a.requirements.indexOf(searchRequirements[i]) === -1) {
+              flag = false;
+              break;
+            }
+          }
+          if (flag) {
+            filteredAirdropsAfterRequirements.push(a);
+          }
+        });
+      }
+      return filteredAirdropsAfterRequirements;
+    }
   }
 
   getMinTokenValue() {

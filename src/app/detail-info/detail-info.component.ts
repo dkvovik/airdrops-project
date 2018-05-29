@@ -17,6 +17,7 @@ export class DetailInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('airdrop', this.airdrop);
     if (this.globals.visitedAirdrop.indexOf(this.airdrop.tokenName) === -1) {
       this.globals.visitedAirdrop.push(this.airdrop.tokenName);
     }

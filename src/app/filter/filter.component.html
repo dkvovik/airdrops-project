@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12 filter main-border">
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-3">
         <h2 class="title">Requirements</h2>
         <div class="button-filter-wrapper">
           <label for="email" [popover]="'Email'" triggers="mouseenter:mouseleave" class="button-filter-label">
@@ -26,14 +26,14 @@
               <svg class="icon" viewBox="0 0 20.162 16.507">
                 <g id="twitter" transform="translate(0 -0.94)">
                  <path id="XMLID_827_" class="cls-1"
-                    d="M19.7,30a7.643,7.643,0,0,1-.975.355,4.311,4.311,0,0,0,.878-1.543.325.325,0,0,0-.476-.379,7.674,7.674,0,0,1-2.268.9A4.33,4.33,0,0,0,9.5,32.425a4.415,4.415,0,0,0,.035.559,11.081,11.081,0,0,1-7.606-4.035.325.325,0,0,0-.533.042,4.334,4.334,0,0,0,.444,4.982,3.668,3.668,0,0,1-.579-.259.325.325,0,0,0-.483.277c0,.019,0,.038,0,.058A4.344,4.344,0,0,0,2.9,37.771c-.11-.011-.22-.027-.329-.048a.325.325,0,0,0-.371.419,4.327,4.327,0,0,0,3.171,2.9,7.657,7.657,0,0,1-4.093,1.168,7.835,7.835,0,0,1-.917-.054.325.325,0,0,0-.214.6A11.672,11.672,0,0,0,6.459,44.6a11.229,11.229,0,0,0,8.7-3.821,12.112,12.112,0,0,0,3.015-7.894c0-.119,0-.239-.005-.358a8.414,8.414,0,0,0,1.936-2.051A.325.325,0,0,0,19.7,30Z"
-                    transform="translate(0.002 -27.157)"/>
+                       d="M19.7,30a7.643,7.643,0,0,1-.975.355,4.311,4.311,0,0,0,.878-1.543.325.325,0,0,0-.476-.379,7.674,7.674,0,0,1-2.268.9A4.33,4.33,0,0,0,9.5,32.425a4.415,4.415,0,0,0,.035.559,11.081,11.081,0,0,1-7.606-4.035.325.325,0,0,0-.533.042,4.334,4.334,0,0,0,.444,4.982,3.668,3.668,0,0,1-.579-.259.325.325,0,0,0-.483.277c0,.019,0,.038,0,.058A4.344,4.344,0,0,0,2.9,37.771c-.11-.011-.22-.027-.329-.048a.325.325,0,0,0-.371.419,4.327,4.327,0,0,0,3.171,2.9,7.657,7.657,0,0,1-4.093,1.168,7.835,7.835,0,0,1-.917-.054.325.325,0,0,0-.214.6A11.672,11.672,0,0,0,6.459,44.6a11.229,11.229,0,0,0,8.7-3.821,12.112,12.112,0,0,0,3.015-7.894c0-.119,0-.239-.005-.358a8.414,8.414,0,0,0,1.936-2.051A.325.325,0,0,0,19.7,30Z"
+                       transform="translate(0.002 -27.157)"/>
                 </g>
               </svg>
             </span>
           </label>
           <label for="telegram" [popover]="'Telegram'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="telegram" id="telegram">
+            <input type="checkbox" name="telegram" id="telegram" (click)="toggleRequirements('Telegram')">
             <span class="button-filter">
               <svg id="telegram" class="icon" viewBox="0 0 18.845 16.408">
   <path id="XMLID_497_" class="cls-1"
@@ -43,7 +43,7 @@
             </span>
           </label>
           <label for="facebook" [popover]="'Facebook'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="facebook" id="facebook">
+            <input type="checkbox" name="facebook" id="facebook" (click)="toggleRequirements('Facebook')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 16.408 16.408">
                 <g id="facebook-logo" class="cls-1">
@@ -57,30 +57,37 @@
         </div>
         <div class="button-filter-wrapper">
           <label for="github" [popover]="'Github'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="github" id="github">
+            <input type="checkbox" name="github" id="github" (click)="toggleRequirements('Github')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 18.019 17.6">
-  <path id="Path_342" data-name="Path 342" class="cls-1" d="M16.812,4.489a8.953,8.953,0,0,0-3.277-3.277A8.775,8.775,0,0,0,9.009,0,8.821,8.821,0,0,0,4.484,1.207,8.953,8.953,0,0,0,1.207,4.484,8.821,8.821,0,0,0,0,9.009a8.757,8.757,0,0,0,1.721,5.3,8.826,8.826,0,0,0,4.438,3.257.517.517,0,0,0,.467-.082.452.452,0,0,0,.154-.349c0-.026,0-.236-.005-.632s-.005-.745-.005-1.043L6.5,15.5a3.387,3.387,0,0,1-.652.041,5.117,5.117,0,0,1-.817-.082,1.864,1.864,0,0,1-.786-.349,1.482,1.482,0,0,1-.514-.719l-.118-.272a2.742,2.742,0,0,0-.37-.6,1.419,1.419,0,0,0-.509-.447l-.082-.057a.99.99,0,0,1-.154-.139.752.752,0,0,1-.108-.164c-.026-.057-.005-.1.057-.134a.746.746,0,0,1,.339-.051l.236.036a1.679,1.679,0,0,1,.58.283,1.862,1.862,0,0,1,.57.611,2.08,2.08,0,0,0,.652.735,1.362,1.362,0,0,0,.77.252,3.56,3.56,0,0,0,.668-.057,2.459,2.459,0,0,0,.529-.175,1.905,1.905,0,0,1,.575-1.207,8.062,8.062,0,0,1-1.2-.211,4.8,4.8,0,0,1-1.1-.457,3.155,3.155,0,0,1-.945-.786A3.738,3.738,0,0,1,3.5,10.324a5.891,5.891,0,0,1-.241-1.762,3.44,3.44,0,0,1,.925-2.419A3.163,3.163,0,0,1,4.263,3.75a1.636,1.636,0,0,1,1.007.159,7.258,7.258,0,0,1,.981.452c.205.123.375.231.5.318A8.264,8.264,0,0,1,9,4.376a8.468,8.468,0,0,1,2.255.3l.447-.283a6.217,6.217,0,0,1,1.079-.519,1.541,1.541,0,0,1,.95-.128,3.1,3.1,0,0,1,.092,2.394,3.422,3.422,0,0,1,.925,2.419,5.975,5.975,0,0,1-.241,1.767,3.641,3.641,0,0,1-.622,1.233,3.309,3.309,0,0,1-.95.781,4.712,4.712,0,0,1-1.1.457,8.062,8.062,0,0,1-1.2.211,2.1,2.1,0,0,1,.611,1.664v2.476a.466.466,0,0,0,.149.349.506.506,0,0,0,.462.082A8.831,8.831,0,0,0,16.3,14.326a8.757,8.757,0,0,0,1.721-5.3,8.809,8.809,0,0,0-1.207-4.541Zm0,0"/>
+  <path id="Path_342" data-name="Path 342" class="cls-1"
+        d="M16.812,4.489a8.953,8.953,0,0,0-3.277-3.277A8.775,8.775,0,0,0,9.009,0,8.821,8.821,0,0,0,4.484,1.207,8.953,8.953,0,0,0,1.207,4.484,8.821,8.821,0,0,0,0,9.009a8.757,8.757,0,0,0,1.721,5.3,8.826,8.826,0,0,0,4.438,3.257.517.517,0,0,0,.467-.082.452.452,0,0,0,.154-.349c0-.026,0-.236-.005-.632s-.005-.745-.005-1.043L6.5,15.5a3.387,3.387,0,0,1-.652.041,5.117,5.117,0,0,1-.817-.082,1.864,1.864,0,0,1-.786-.349,1.482,1.482,0,0,1-.514-.719l-.118-.272a2.742,2.742,0,0,0-.37-.6,1.419,1.419,0,0,0-.509-.447l-.082-.057a.99.99,0,0,1-.154-.139.752.752,0,0,1-.108-.164c-.026-.057-.005-.1.057-.134a.746.746,0,0,1,.339-.051l.236.036a1.679,1.679,0,0,1,.58.283,1.862,1.862,0,0,1,.57.611,2.08,2.08,0,0,0,.652.735,1.362,1.362,0,0,0,.77.252,3.56,3.56,0,0,0,.668-.057,2.459,2.459,0,0,0,.529-.175,1.905,1.905,0,0,1,.575-1.207,8.062,8.062,0,0,1-1.2-.211,4.8,4.8,0,0,1-1.1-.457,3.155,3.155,0,0,1-.945-.786A3.738,3.738,0,0,1,3.5,10.324a5.891,5.891,0,0,1-.241-1.762,3.44,3.44,0,0,1,.925-2.419A3.163,3.163,0,0,1,4.263,3.75a1.636,1.636,0,0,1,1.007.159,7.258,7.258,0,0,1,.981.452c.205.123.375.231.5.318A8.264,8.264,0,0,1,9,4.376a8.468,8.468,0,0,1,2.255.3l.447-.283a6.217,6.217,0,0,1,1.079-.519,1.541,1.541,0,0,1,.95-.128,3.1,3.1,0,0,1,.092,2.394,3.422,3.422,0,0,1,.925,2.419,5.975,5.975,0,0,1-.241,1.767,3.641,3.641,0,0,1-.622,1.233,3.309,3.309,0,0,1-.95.781,4.712,4.712,0,0,1-1.1.457,8.062,8.062,0,0,1-1.2.211,2.1,2.1,0,0,1,.611,1.664v2.476a.466.466,0,0,0,.149.349.506.506,0,0,0,.462.082A8.831,8.831,0,0,0,16.3,14.326a8.757,8.757,0,0,0,1.721-5.3,8.809,8.809,0,0,0-1.207-4.541Zm0,0"/>
 </svg>
             </span>
           </label>
           <label for="youtube" [popover]="'Youtube'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="youtube" id="youtube">
+            <input type="checkbox" name="youtube" id="youtube" (click)="toggleRequirements('Youtube')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 20.891 14.783">
-  <path id="_001-youtube" data-name="001-youtube" class="cls-1" d="M16.553,67.393H4.339A4.339,4.339,0,0,0,0,71.732v6.106a4.339,4.339,0,0,0,4.339,4.339H16.553a4.339,4.339,0,0,0,4.339-4.339V71.732A4.339,4.339,0,0,0,16.553,67.393Zm-2.934,7.689L7.905,77.806a.229.229,0,0,1-.328-.207V71.98a.229.229,0,0,1,.333-.2l5.713,2.895A.229.229,0,0,1,13.618,75.082Z" transform="translate(0 -67.393)"/>
+  <path id="_001-youtube" data-name="001-youtube" class="cls-1"
+        d="M16.553,67.393H4.339A4.339,4.339,0,0,0,0,71.732v6.106a4.339,4.339,0,0,0,4.339,4.339H16.553a4.339,4.339,0,0,0,4.339-4.339V71.732A4.339,4.339,0,0,0,16.553,67.393Zm-2.934,7.689L7.905,77.806a.229.229,0,0,1-.328-.207V71.98a.229.229,0,0,1,.333-.2l5.713,2.895A.229.229,0,0,1,13.618,75.082Z"
+        transform="translate(0 -67.393)"/>
 </svg>
             </span>
           </label>
           <label for="KYC" [popover]="'KYC'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="KYC" id="KYC">
+            <input type="checkbox" name="KYC" id="KYC" (click)="toggleRequirements('KYC')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 19.776 16.048">
                 <g id="support" class="cls-1">
                   <g id="Group_235" data-name="Group 235" transform="translate(0 0)">
                     <g id="Group_234" data-name="Group 234" transform="translate(0 0)">
-                      <path id="Path_960" data-name="Path 960" class="cls-2" d="M87.447,41.206H73.878a1.471,1.471,0,0,0-1.466,1.466V51.1a1.471,1.471,0,0,0,1.466,1.466h9.354L85.348,54.7a.453.453,0,0,0,.326.145.467.467,0,0,0,.47-.47V52.568h1.3A1.471,1.471,0,0,0,88.913,51.1V42.672A1.471,1.471,0,0,0,87.447,41.206ZM75.958,48.461A1.357,1.357,0,1,1,77.315,47.1,1.367,1.367,0,0,1,75.958,48.461Zm4.758,0A1.357,1.357,0,1,1,82.074,47.1,1.367,1.367,0,0,1,80.717,48.461Zm4.74,0A1.357,1.357,0,1,1,86.814,47.1,1.367,1.367,0,0,1,85.457,48.461Z" transform="translate(-69.137 -41.206)"/>
-                      <path id="Path_961" data-name="Path 961" class="cls-2" d="M2.443,200.083v-2.877H.959a.965.965,0,0,0-.959.959V203.7a.951.951,0,0,0,.959,1h.85v1.194a.317.317,0,0,0,.308.308.3.3,0,0,0,.217-.09l1.393-1.393H9.879a.965.965,0,0,0,.959-.959V202.38h-6.1A2.3,2.3,0,0,1,2.443,200.083Z" transform="translate(0 -190.15)"/>
+                      <path id="Path_960" data-name="Path 960" class="cls-2"
+                            d="M87.447,41.206H73.878a1.471,1.471,0,0,0-1.466,1.466V51.1a1.471,1.471,0,0,0,1.466,1.466h9.354L85.348,54.7a.453.453,0,0,0,.326.145.467.467,0,0,0,.47-.47V52.568h1.3A1.471,1.471,0,0,0,88.913,51.1V42.672A1.471,1.471,0,0,0,87.447,41.206ZM75.958,48.461A1.357,1.357,0,1,1,77.315,47.1,1.367,1.367,0,0,1,75.958,48.461Zm4.758,0A1.357,1.357,0,1,1,82.074,47.1,1.367,1.367,0,0,1,80.717,48.461Zm4.74,0A1.357,1.357,0,1,1,86.814,47.1,1.367,1.367,0,0,1,85.457,48.461Z"
+                            transform="translate(-69.137 -41.206)"/>
+                      <path id="Path_961" data-name="Path 961" class="cls-2"
+                            d="M2.443,200.083v-2.877H.959a.965.965,0,0,0-.959.959V203.7a.951.951,0,0,0,.959,1h.85v1.194a.317.317,0,0,0,.308.308.3.3,0,0,0,.217-.09l1.393-1.393H9.879a.965.965,0,0,0,.959-.959V202.38h-6.1A2.3,2.3,0,0,1,2.443,200.083Z"
+                            transform="translate(0 -190.15)"/>
                     </g>
                   </g>
                 </g>
@@ -88,7 +95,7 @@
             </span>
           </label>
           <label for="medium" [popover]="'Medium'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="medium" id="medium">
+            <input type="checkbox" name="medium" id="medium" (click)="toggleRequirements('Medium')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 19.793 16.745">
   <path id="medium" class="cls-1"
@@ -99,46 +106,52 @@
           </label>
         </div>
       </div>
-      <div class="col-md-3 range__token-value">
-        <h2 class="title">Token Value</h2>
-        <div class="range-slider">
-          <range-slider [min]="minTokenValue" [max]="maxTokenValue" [toolTips]="[false,false]" [step]="stepTokenValue"
-                        [(ngModel)]="twoWayRangeTokenValue" (ngModelChange)="changed()"></range-slider>
-          <div class="form-group">
+      <div class="col-md-5">
+        <div class="row">
+          <div class="col-md-6 range__token-value">
+            <h2 class="title">Token Value</h2>
+            <div class="range-slider">
+              <range-slider [min]="minTokenValue" [max]="maxTokenValue" [toolTips]="[false,false]"
+                            [step]="stepTokenValue"
+                            [(ngModel)]="twoWayRangeTokenValue" (ngModelChange)="changed()"></range-slider>
+              <div class="form-group">
             <span class="range-input">
               <input type="number" [(ngModel)]="twoWayRangeTokenValue[0]" (ngModelChange)="changed()">
               <svg class="dollar" viewBox="0 0 10 20">
                 <text data-name="$" class="dollar" transform="translate(0 16)"><tspan x="0" y="0">$</tspan></text>
               </svg>
             </span>
-            <span class="range-input ">
+                <span class="range-input ">
               <input type="number" [(ngModel)]="twoWayRangeTokenValue[1]" (ngModelChange)="changed()">
               <svg class="dollar" viewBox="0 0 10 20">
                 <text data-name="$" class="dollar" transform="translate(0 16)"><tspan x="0" y="0">$</tspan></text>
               </svg>
             </span>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="col-md-3 range__rating">
-        <h2 class="title">Rating</h2>
-        <div class="range-slider">
-          <range-slider [min]="minRating" [max]="maxRating" [toolTips]="[false,false]" [step]="stepRating"
-                        [(ngModel)]="twoWayRangeRating" (ngModelChange)="changedRating()"></range-slider>
-          <div class="form-group">
+          <div class="col-md-6 range__rating">
+            <h2 class="title">Rating</h2>
+            <div class="range-slider">
+              <range-slider [min]="minRating" [max]="maxRating" [toolTips]="[false,false]" [step]="stepRating"
+                            [(ngModel)]="twoWayRangeRating" (ngModelChange)="changedRating()"></range-slider>
+              <div class="form-group">
             <span class="range-input">
               <input type="number" [(ngModel)]="twoWayRangeRating[0]" (ngModelChange)="changedRating()">
             </span>
-            <span class="range-input">
+                <span class="range-input">
               <input type="number" [(ngModel)]="twoWayRangeRating[1]" (ngModelChange)="changedRating()">
             </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="col-md-4 submit-wrapper">
         <div class="btn btn-clear" (click)="clearFormFilter()">clear</div>
         <button class="btn bt-submit-filter btn-block"
-                (click)="getFilteredAirdrops([],twoWayRangeTokenValue, twoWayRangeRating)">Apply Filter</button>
+                (click)="getFilteredAirdrops([],twoWayRangeTokenValue, twoWayRangeRating)">Apply Filter
+        </button>
       </div>
     </div>
   </div>
@@ -146,51 +159,57 @@
   <div class="col-12 table-wrapper main-border" *ngIf="airdrops">
     <table class="table table-striped table-hover">
       <thead>
-        <tr>
-          <th>TOKEN</th>
-          <th>VALUE</th>
-          <th>START</th>
-          <th>END</th>
-          <th>RATING</th>
-          <th>SOCIAL NETWORKS</th>
-        </tr>
+      <tr>
+        <th>TOKEN</th>
+        <th>VALUE</th>
+        <th>START</th>
+        <th>END</th>
+        <th>RATING</th>
+        <th>SOCIAL NETWORKS</th>
+      </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let airdrop of airdrops"
-            (click)="currentAirdrop = airdrop; openModal(detailInfo); airdrop['isVisited'] = true;">
-          <td>
-            <img class="token-logo" src="{{airdrop.image}}"/>
-            {{airdrop.tokenName}} <span *ngIf="airdrop.isVisited">
+      <tr *ngFor="let airdrop of airdrops"
+          (click)="currentAirdrop = airdrop; openModal(detailInfo); airdrop['isVisited'] = true;">
+        <td>
+          <img class="token-logo" src="{{airdrop.image}}"/>
+          {{airdrop.tokenName}} <span *ngIf="airdrop.isVisited">
                  <svg class="icon icon_eyes" viewBox="0 0 13.75 9.375">
                   <g id="baseline-remove_red_eye-24px" transform="translate(-0.625 -2.813)">
-                    <path id="Path_991" data-name="Path 991" class="cls-1" d="M7.875,4.5A7.392,7.392,0,0,0,1,9.188a7.385,7.385,0,0,0,13.75,0A7.392,7.392,0,0,0,7.875,4.5Zm0,7.813A3.125,3.125,0,1,1,11,9.188,3.126,3.126,0,0,1,7.875,12.313Zm0-5A1.875,1.875,0,1,0,9.75,9.188,1.872,1.872,0,0,0,7.875,7.313Z" transform="translate(-0.375 -1.688)"/>
+                    <path id="Path_991" data-name="Path 991" class="cls-1"
+                          d="M7.875,4.5A7.392,7.392,0,0,0,1,9.188a7.385,7.385,0,0,0,13.75,0A7.392,7.392,0,0,0,7.875,4.5Zm0,7.813A3.125,3.125,0,1,1,11,9.188,3.126,3.126,0,0,1,7.875,12.313Zm0-5A1.875,1.875,0,1,0,9.75,9.188,1.872,1.872,0,0,0,7.875,7.313Z"
+                          transform="translate(-0.375 -1.688)"/>
                   </g>
                 </svg>
                 </span>
-          </td>
-          <td>{{airdrop.tokenValue | currency}}</td>
-          <td>{{airdrop.startDate | date:'d MMMM y'}}</td>
-          <td>{{airdrop.endDate | date:'d MMMM y'}}</td>
-          <td>
-            <svg class="rating" viewBox="0 0 18 18">
-              <g id="Group_408" data-name="Group 408" transform="translate(-409 -163)">
-                <ellipse id="Ellipse_12" data-name="Ellipse 12" class="cls-1" cx="9" cy="9" rx="9" ry="9" transform="translate(409 163)"/>
-                <g id="fire" transform="translate(414.349 167.236)">
-                  <g id="Group_137" data-name="Group 137" transform="translate(0 0)">
-                    <path id="Path_204" data-name="Path 204" class="fire" fill="#fff" d="M49.314,2.847a2.448,2.448,0,0,0-.555-.474l-.018-.01a.374.374,0,0,0-.374.024c-.119.08-.282.189-.149,1.968,0,0,0,.009,0,.013a.559.559,0,0,1,0,.191l0,.016a.849.849,0,0,1-.712.641.814.814,0,0,1-.855-.369.988.988,0,0,1-.046-.894c.029-.058.057-.118.085-.178a3.716,3.716,0,0,1,.2-.393A2.86,2.86,0,0,0,46.628.156a.371.371,0,0,0-.573-.041c-.294.311-.58.637-.857.953-.333.379-.677.772-1.035,1.137a5.356,5.356,0,0,0-1.493,2.587,3.694,3.694,0,0,0,.3,2.241A4,4,0,0,0,46.307,9.26c.058,0,.116,0,.175,0A3.872,3.872,0,0,0,49.8,7.342,3.715,3.715,0,0,0,49.314,2.847Z" transform="translate(-42.613 0.001)"/>
-                  </g>
+        </td>
+        <td>{{airdrop.tokenValue | currency}}</td>
+        <td>{{airdrop.startDate | date:'d MMMM y'}}</td>
+        <td>{{airdrop.endDate | date:'d MMMM y'}}</td>
+        <td>
+          <svg class="rating" viewBox="0 0 18 18">
+            <g id="Group_408" data-name="Group 408" transform="translate(-409 -163)">
+              <ellipse id="Ellipse_12" data-name="Ellipse 12" class="cls-1" cx="9" cy="9" rx="9" ry="9"
+                       transform="translate(409 163)"/>
+              <g id="fire" transform="translate(414.349 167.236)">
+                <g id="Group_137" data-name="Group 137" transform="translate(0 0)">
+                  <path id="Path_204" data-name="Path 204" class="fire" fill="#fff"
+                        d="M49.314,2.847a2.448,2.448,0,0,0-.555-.474l-.018-.01a.374.374,0,0,0-.374.024c-.119.08-.282.189-.149,1.968,0,0,0,.009,0,.013a.559.559,0,0,1,0,.191l0,.016a.849.849,0,0,1-.712.641.814.814,0,0,1-.855-.369.988.988,0,0,1-.046-.894c.029-.058.057-.118.085-.178a3.716,3.716,0,0,1,.2-.393A2.86,2.86,0,0,0,46.628.156a.371.371,0,0,0-.573-.041c-.294.311-.58.637-.857.953-.333.379-.677.772-1.035,1.137a5.356,5.356,0,0,0-1.493,2.587,3.694,3.694,0,0,0,.3,2.241A4,4,0,0,0,46.307,9.26c.058,0,.116,0,.175,0A3.872,3.872,0,0,0,49.8,7.342,3.715,3.715,0,0,0,49.314,2.847Z"
+                        transform="translate(-42.613 0.001)"/>
                 </g>
               </g>
-            </svg>{{airdrop.rating}}
-          </td>
-          <td>
-            <div class="info-social-icon">
-              <a href="{{projectLink}}" *ngFor="let projectLink of airdrop.projectLinks;"
-                 [innerHtml]="globals.parseIconProjectLink(projectLink, 'medium', 'active')">
-              </a>
-            </div>
-          </td>
-        </tr>
+            </g>
+          </svg>
+          {{airdrop.rating}}
+        </td>
+        <td>
+          <div class="info-social-icon">
+            <a href="{{projectLink}}" *ngFor="let projectLink of airdrop.projectLinks;"
+               [innerHtml]="globals.parseIconProjectLink(projectLink, 'medium', 'active')">
+            </a>
+          </div>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>

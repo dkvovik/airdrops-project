@@ -46,7 +46,7 @@ export class FormAddAirdropComponent implements OnInit {
 
   initFormAddAirdrop() {
     this.formAddAirdrop = new FormGroup({
-      image: new FormControl(null ),
+      image: new FormControl(null, [Validators.required]),
       tokenName: new FormControl(null, [Validators.required]),
       projectName: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -55,7 +55,7 @@ export class FormAddAirdropComponent implements OnInit {
       platform: new FormControl(null, ),
       website: new FormControl(null, ),
       startDate: new FormControl(this.startDate, [Validators.required]),
-      endDate: new FormControl(null),
+      endDate: new FormControl(this.startDate, [Validators.required]),
       economyOfToken: new FormControl(null, ),
       totalValue: new FormControl(null, ),
       tokensPerClaim: new FormControl(null, ),
@@ -73,9 +73,11 @@ export class FormAddAirdropComponent implements OnInit {
       this.formInvalidaAfterSubmit = true;
     } else {
       const formModel = this.prepareSave();
-
       this.airdropService.addAirdrop(formModel).subscribe(
-        response => console.log(response),
+        response => {
+          console.log(response);
+          this.modalRef.hide();
+        },
         error => console.log(error)
       );
     }
@@ -98,7 +100,6 @@ export class FormAddAirdropComponent implements OnInit {
   prepareSave() {
     this.formAddAirdrop.get('howToGetToken').setValue(this.addedHTG);
     this.formAddAirdrop.get('projectLinks').setValue(this.addedProjectLinks);
-
     let input = new FormData();
     for (const field in this.formAddAirdrop.controls) {
       input.append(field, this.formAddAirdrop.get(field).value);

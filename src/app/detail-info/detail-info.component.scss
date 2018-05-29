@@ -53,13 +53,14 @@ img.token-logo {
 
 .subheader-detail-asset {
   margin-right: 20px;
-}
 
-.subheader-detail-asset input {
-  min-width: 360px;
-}
-.subheader-detail-asset .btn-link {
-  color: #1F5AF6;
+  input {
+    min-width: 375px;
+  }
+
+  .btn-link {
+    color: #1F5AF6;
+  }
 }
 
 .modal-body__header,
@@ -172,6 +173,7 @@ img.token-logo {
 
 .htg-index {
   width: 42px;
+  min-width: 42px;
   height: 42px;
   background-color: #E2E2E2;
   color: #4E5C6E;
