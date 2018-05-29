@@ -15,7 +15,7 @@ export class HomePageComponent implements OnInit {
   modalRef: BsModalRef;
 
   airdrops: Airdrop[] = [];
-  upcominngAirdrop: Airdrop[] = [];
+  upcomingAirdrop: Airdrop[] = [];
   activeAirdrop: Airdrop[] = [];
   pastAirdrop: Airdrop[] = [];
 
@@ -68,7 +68,7 @@ export class HomePageComponent implements OnInit {
     airdrops.forEach((a) => {
       switch (a.status) {
         case('Upcoming'): {
-          this.upcominngAirdrop.push(a);
+          this.upcomingAirdrop.push(a);
           break;
         }
         case('Active'): {

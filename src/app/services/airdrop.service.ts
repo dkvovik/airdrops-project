@@ -27,8 +27,7 @@ export class AirdropService {
         if (response.success === false) {
           throw Observable.throw(response);
         }
-        console.log(response);
-        this.airdrops = response.data;
+        this.airdrops = response.data.airdrops;
         this.isVisitedAirdrop(this.airdrops);
         this.isTodayOrYesterday(this.airdrops);
         return this.airdrops;
