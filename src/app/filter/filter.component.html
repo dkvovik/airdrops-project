@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12 filter main-border">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <h2 class="title">Requirements</h2>
         <div class="button-filter-wrapper">
           <label for="email" [popover]="'Email'" triggers="mouseenter:mouseleave" class="button-filter-label">
@@ -99,7 +99,7 @@
           </label>
         </div>
       </div>
-      <div class="col-md-2 range__token-value">
+      <div class="col-md-3 range__token-value">
         <h2 class="title">Token Value</h2>
         <div class="range-slider">
           <range-slider [min]="minTokenValue" [max]="maxTokenValue" [toolTips]="[false,false]" [step]="stepTokenValue"
@@ -120,7 +120,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-2 range__rating">
+      <div class="col-md-3 range__rating">
         <h2 class="title">Rating</h2>
         <div class="range-slider">
           <range-slider [min]="minRating" [max]="maxRating" [toolTips]="[false,false]" [step]="stepRating"
@@ -135,10 +135,10 @@
           </div>
         </div>
       </div>
-      <div class="col-md-5 submit-wrapper">
+      <div class="col-md-4 submit-wrapper">
         <div class="btn btn-clear" (click)="clearFormFilter()">clear</div>
         <button class="btn bt-submit-filter btn-block"
-                (click)="getAirdrops([],twoWayRangeTokenValue, twoWayRangeRating)">Apply Filter</button>
+                (click)="getFilteredAirdrops([],twoWayRangeTokenValue, twoWayRangeRating)">Apply Filter</button>
       </div>
     </div>
   </div>

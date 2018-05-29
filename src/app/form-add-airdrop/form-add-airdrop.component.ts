@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Airdrop } from '../shared/models/airdrop';
 import { AirdropService } from '../services/airdrop.service';
 
 @Component({

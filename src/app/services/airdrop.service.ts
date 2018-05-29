@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ResponseServer } from '../shared/models/responce';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Airdrop } from '../shared/models/airdrop';
 import { Globals } from '../shared/globals';
 
@@ -44,20 +44,18 @@ export class AirdropService {
       });
   }
 
-  getAirdropById(id): Observable<ResponseServer> {
-    return this.http.get(`${this.basicUrl}/airdrop/getById?id=${id}`)
-      .map( (response: any) => {
-        if (!response.success) {
-          throw Observable.throw(response);
-        }
-        return response.data;
-      });
-  }
-
   getAirdropsSource() {
     this.getAirdrops();
     this.isVisitedAirdrop(this.airdrops);
     return this.airdrops;
+  }
+
+  getSourceAirdrops() {
+    if (!this.airdrops) {
+      this.getAirdrops();
+    } else {
+      return this.airdrops;
+    }
   }
 
   isVisitedAirdrop(airdrops) {
@@ -114,27 +112,5 @@ export class AirdropService {
       }
       return filteredAirdropsAfterRequirements;
     }
-  }
-
-  getMinTokenValue() {
-    const airdropWithMinTokenValue = this.airdrops.reduce(
-      (prev, cur) => cur.tokenValue < prev.tokenValue ? cur : prev , {tokenValue: Infinity});
-    return airdropWithMinTokenValue.tokenValue;
-  }
-
-  getMaxTokenValue() {
-    const airdropWithMaxTokenValue = this.airdrops.reduce((prev, cur) => cur.tokenValue > prev.tokenValue ? cur : prev , {tokenValue: -Infinity});
-    return airdropWithMaxTokenValue.tokenValue;
-  }
-
-  getMinRating() {
-    const airdropWithMinRating = this.airdrops.reduce(
-      (prev, cur) => cur.rating < prev.rating ? cur : prev , {rating: Infinity});
-    return airdropWithMinRating.rating;
-  }
-
-  getMaxRating() {
-    const airdropWithMaxRating = this.airdrops.reduce((prev, cur) => cur.rating > prev.rating ? cur : prev , {rating: -Infinity});
-    return airdropWithMaxRating.rating;
   }
 }

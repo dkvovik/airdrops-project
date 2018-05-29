@@ -12,17 +12,18 @@ import { Globals } from '../shared/globals';
 export class FilterComponent implements OnInit {
 
   airdrops: Airdrop[];
+  sourceAirdrops: Airdrop[];
 
   minTokenValue = 0;
   maxTokenValue = 0;
   stepTokenValue = 1;
-  twoWayRangeTokenValue: number[];
+  twoWayRangeTokenValue = [0, 0];
 
 
   minRating = 0;
   maxRating = 0;
   stepRating = 1;
-  twoWayRangeRating: number[];
+  twoWayRangeRating = [0, 0];
 
   requirements = [];
 
@@ -36,17 +37,27 @@ export class FilterComponent implements OnInit {
               private globals: Globals) { }
 
   ngOnInit() {
-    this.initFilterValue();
+    this.getAirdrops();
   }
 
   initFilterValue() {
-    this.minTokenValue = this.airdropService.getMinTokenValue();
-    this.maxTokenValue = this.airdropService.getMaxTokenValue();
+    this.minTokenValue = this.getMinTokenValue();
+    this.maxTokenValue = this.getMaxTokenValue();
     this.twoWayRangeTokenValue = [this.minTokenValue, this.maxTokenValue];
 
-    this.minRating = this.airdropService.getMinRating();
-    this.maxRating = this.airdropService.getMaxRating();
+    this.minRating = this.getMinRating();
+    this.maxRating = this.getMaxRating();
     this.twoWayRangeRating = [this.minRating, this.maxRating];
+  }
+
+  getAirdrops() {
+    this.airdropService.getAirdrops().subscribe(
+      (d: any) => {
+        this.sourceAirdrops = d;
+        this.initFilterValue();
+      },
+      (error) => console.log('Error getAirdrops', error)
+    );
   }
 
   changed() {
@@ -64,7 +75,7 @@ export class FilterComponent implements OnInit {
     let checkboxes = document.querySelectorAll('.button-filter-wrapper input');
   }
 
-  getAirdrops(requirements, tokenValue, rating) {
+  getFilteredAirdrops(requirements, tokenValue, rating) {
     this.airdrops = this.airdropService.getFilteredAirdrops(this.requirements, tokenValue, rating);
   }
 
@@ -78,6 +89,49 @@ export class FilterComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+
+  getMinTokenValue() {
+    const airdropWithMinTokenValue = this.sourceAirdrops.reduce(
+      (prev, cur) => {
+        if (!cur.tokenValue) {
+          cur.tokenValue = 0;
+        }
+        return cur.tokenValue < prev.tokenValue ? cur : prev; }, {tokenValue: Infinity}
+      );
+    return airdropWithMinTokenValue.tokenValue;
+  }
+
+  getMaxTokenValue() {
+    const airdropWithMaxTokenValue = this.sourceAirdrops.reduce(
+      (prev, cur) => {
+        if (!cur.tokenValue) {
+          cur.tokenValue = 0;
+        }
+        return cur.tokenValue > prev.tokenValue ? cur : prev; }, {tokenValue: -Infinity}
+      );
+    return airdropWithMaxTokenValue.tokenValue;
+  }
+
+  getMinRating() {
+    const airdropWithMinRating = this.sourceAirdrops.reduce(
+      (prev, cur) => {
+        if (!cur.rating) {
+          cur.rating = 0;
+        }
+        return cur.rating < prev.rating ? cur : prev; }, {rating: Infinity}
+      );
+    return airdropWithMinRating.rating;
+  }
+
+  getMaxRating() {
+    const airdropWithMaxRating = this.sourceAirdrops.reduce(
+      (prev, cur) => {
+        if (!cur.rating) {
+          cur.rating = 0;
+        }
+        return  cur.rating > prev.rating ? cur : prev; }, {rating: -Infinity});
+    return airdropWithMaxRating.rating;
   }
 
 }
