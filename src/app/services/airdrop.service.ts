@@ -5,10 +5,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Airdrop } from '../shared/models/airdrop';
 import { Globals } from '../shared/globals';
 
-const httpOptions = {
-  // headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data'})
-};
-
 @Injectable()
 export class AirdropService {
 
@@ -16,6 +12,10 @@ export class AirdropService {
   /*basicUrl = 'http://10.1.1.155:3000';*/
   basicUrl = 'http://localhost:3000';
   airdrops: Airdrop[] = [];
+
+  date = new Date();
+  today = this.date.getDate();
+  yesterday = this.date.getDate() - 1;
 
   constructor(private http: HttpClient,
               private globals: Globals) { }
@@ -29,6 +29,7 @@ export class AirdropService {
         }
         this.airdrops = response.data;
         this.isVisitedAirdrop(this.airdrops);
+        this.isTodayOrYesterday(this.airdrops);
         return this.airdrops;
       });
   }
@@ -65,6 +66,17 @@ export class AirdropService {
         a['isVisited'] = true;
       } else {
         a['isVisited'] = false;
+      }
+    });
+  }
+
+  isTodayOrYesterday(airdrops) {
+    airdrops.forEach((a) => {
+      const startDate = new Date(a.startDate).getDate();
+      if (startDate === this.today) {
+        a['today'] = true;
+      } else if (startDate === this.yesterday) {
+        a['yesterday'] = true;
       }
     });
   }

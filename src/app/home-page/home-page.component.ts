@@ -39,9 +39,9 @@ export class HomePageComponent implements OnInit {
   getAirdrops() {
     this.airdropService.getAirdrops().subscribe(
       (d: any) => {
-        this.isTodayOrYesterday(d);
-        this.sortByStatus(d);
         this.airdrops = d;
+        this.isTodayOrYesterday(this.airdrops);
+        this.sortByStatus(this.airdrops);
         console.log('this.airdrops', this.airdrops);
       },
       (error) => console.log('Error getAirdrops', error)
@@ -60,16 +60,6 @@ export class HomePageComponent implements OnInit {
         a['today'] = true;
       } else if (startDate === this.yesterday) {
         a['yesterday'] = true;
-      }
-    });
-  }
-
-  isVisitedAirdrop(airdrops) {
-    airdrops.forEach((a) => {
-      if (this.globals.visitedAirdrop.indexOf(a.tokenName) !== -1) {
-        a['isVisited'] = true;
-      } else {
-        a['isVisited'] = false;
       }
     });
   }

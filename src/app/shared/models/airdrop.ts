@@ -22,4 +22,6 @@ export class Airdrop {
   totalValue?: string;
   website?: string;
   whitePaperLink?: string;
+  today?: boolean;
+  yesterday?: boolean;
 }
