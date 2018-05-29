@@ -26,9 +26,15 @@
   }
 }
 
+.requirements-wrapper {
+  display: flex;
+  flex-direction: column;
+}
 .button-filter-wrapper {
   display: flex;
   margin-bottom: 15px;
+  flex-wrap: wrap;
+  flex-grow: 1;
 
   &:last-child {
     margin-bottom: 0;

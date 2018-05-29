@@ -10,7 +10,8 @@ export class AirdropService {
 
   /*basicUrl = 'http://wilix.org:7878';*/
   /*basicUrl = 'http://10.1.1.155:3000';*/
-  basicUrl = 'http://localhost:3000';
+  basicUrl = 'http://10.1.1.12:3001';
+  /*basicUrl = 'http://localhost:3000';*/
   airdrops: Airdrop[] = [];
 
   date = new Date();
@@ -26,6 +27,7 @@ export class AirdropService {
         if (response.success === false) {
           throw Observable.throw(response);
         }
+        console.log(response);
         this.airdrops = response.data;
         this.isVisitedAirdrop(this.airdrops);
         this.isTodayOrYesterday(this.airdrops);

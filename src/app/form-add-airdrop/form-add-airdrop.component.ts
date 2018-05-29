@@ -102,7 +102,11 @@ export class FormAddAirdropComponent implements OnInit {
     this.formAddAirdrop.get('projectLinks').setValue(this.addedProjectLinks);
     let input = new FormData();
     for (const field in this.formAddAirdrop.controls) {
-      input.append(field, this.formAddAirdrop.get(field).value);
+      if (field === 'requirements' || field === 'projectLinks' || field === 'howToGetToken') {
+        input.append(field, JSON.stringify(this.formAddAirdrop.get(field).value));
+      } else {
+        input.append(field, this.formAddAirdrop.get(field).value);
+      }
     }
     return input;
   }
