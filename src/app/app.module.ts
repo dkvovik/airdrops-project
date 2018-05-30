@@ -23,6 +23,8 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { TagInputModule } from 'ngx-chips';
 import { DetailInfoComponent } from './detail-info/detail-info.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { FilterAdminComponent } from './filter-admin/filter-admin.component';
+import { FormEditAirdropComponent } from './form-edit-airdrop/form-edit-airdrop.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     FindedAirdropComponent,
     FormAddAirdropComponent,
     DetailInfoComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    FilterAdminComponent,
+    FormEditAirdropComponent
   ],
   entryComponents: [
   ],
