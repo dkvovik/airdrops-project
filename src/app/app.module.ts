@@ -22,6 +22,7 @@ import { Globals } from './shared/globals';
 import { ClipboardModule } from 'ngx-clipboard';
 import { TagInputModule } from 'ngx-chips';
 import { DetailInfoComponent } from './detail-info/detail-info.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { DetailInfoComponent } from './detail-info/detail-info.component';
     FilterComponent,
     FindedAirdropComponent,
     FormAddAirdropComponent,
-    DetailInfoComponent
+    DetailInfoComponent,
+    AdminPageComponent
   ],
   entryComponents: [
   ],

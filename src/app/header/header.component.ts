@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,23 +11,26 @@ export class HeaderComponent implements OnInit {
 
   modalRef: BsModalRef;
 
-  constructor(private modalService: BsModalService) {
+  activeLinkIndex = -1;
+
+  tabLinks = [
+    {
+      label: 'Home', link: '/', index: 0
+    },
+    {
+      label: 'Extras', link: '/admin', index: 1
+    }
+  ];
+
+  constructor(private modalService: BsModalService,
+              private router: Router) {
   }
 
   ngOnInit() {
+    this.router.events.subscribe((res) => {
+      this.activeLinkIndex = this.tabLinks.indexOf(this.tabLinks.find(tab => tab.link ===  this.router.url));
+    });
   }
-
-  tabLinks: { label: string, link: string }[] = [
-    {
-      label: 'Home', link: 'home',
-    },
-    {
-      label: 'Extras', link: '#',
-    },
-    {
-      label: 'Submit Airdrop', link: '#',
-    }
-  ];
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
