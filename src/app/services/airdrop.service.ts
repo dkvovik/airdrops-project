@@ -59,6 +59,26 @@ export class AirdropService {
     }
   }
 
+  ratingUp(id): any {
+    return this.http.get(`${this.basicUrl}/airdrop/ratingUp?id=${id}`)
+      .map( (response: any) => {
+        if (response.success === false) {
+          throw Observable.throw(response);
+        }
+        return response;
+      });
+  }
+
+  ratingDown(id): any {
+    return this.http.get(`${this.basicUrl}/airdrop/ratingDown?id=${id}`)
+      .map( (response: any) => {
+        if (response.success === false) {
+          throw Observable.throw(response);
+        }
+        return response;
+      });
+  }
+
   isVisitedAirdrop(airdrops) {
     airdrops.forEach((a) => {
       if (this.globals.visitedAirdrop.indexOf(a.tokenName) !== -1) {
@@ -69,13 +89,26 @@ export class AirdropService {
     });
   }
 
+  votedRatingUp(id) {
+    if (this.globals.voitedRatingUp.indexOf(id) !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   isTodayOrYesterday(airdrops) {
     airdrops.forEach((a) => {
       const startDate = new Date(a.startDate).getDate();
       if (startDate === this.today) {
         a['today'] = true;
+        a['yesterday'] = false;
       } else if (startDate === this.yesterday) {
         a['yesterday'] = true;
+        a['today'] = false;
+      } else {
+        a['today'] = false;
+        a['yesterday'] = false;
       }
     });
   }

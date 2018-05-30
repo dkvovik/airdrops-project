@@ -9,8 +9,8 @@ export class Globals {
 
   visitedAirdrop = JSON.parse(localStorage.getItem('visitedAirdrop')) || [];
 
-  voitedRatingPlus = JSON.parse(localStorage.getItem('voitedRatingPlus')) || [];
-  voitedRatingMinus = JSON.parse(localStorage.getItem('voitedRatingMinus')) || [];
+  voitedRatingUp = JSON.parse(localStorage.getItem('voitedRatingUp')) || [];
+  voitedRatingDown = JSON.parse(localStorage.getItem('voitedRatingDown')) || [];
 
   parseIconProjectLink(link, class1 = '', class2 = '') {
     let iconLink = '';

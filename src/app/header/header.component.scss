@@ -37,14 +37,13 @@
 
     &.mat-tab-label-active {
       color: $app-link-color-active;
+      background: transparent;
 
       svg.icon {
         fill: $app-link-color-active;
       }
     }
   }
-
-
 }
 
 :host /deep/ {

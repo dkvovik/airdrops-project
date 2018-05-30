@@ -69,8 +69,8 @@
         {{airdrop.rating}}
       </div>
       <div class="rating-button">
-        <button class="rating-plus btn-link">&uarr;</button>
-        <button class="rating-minus btn-link">&darr;</button>
+        <button class="rating-plus btn-link" (click)="ratingUp()">&uarr;</button>
+        <button class="rating-minus btn-link" (click)="ratingDown()">&darr;</button>
       </div>
     </div>
     <div class="date-wrapper">
