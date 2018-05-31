@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatTabsModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RangeSliderModule } from 'ngx-rangeslider-component';
 
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
@@ -25,6 +24,7 @@ import { DetailInfoComponent } from './detail-info/detail-info.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { FilterAdminComponent } from './filter-admin/filter-admin.component';
 import { FormEditAirdropComponent } from './form-edit-airdrop/form-edit-airdrop.component';
+import { NouisliderModule } from 'ng2-nouislider';
 
 
 @NgModule({
@@ -51,13 +51,13 @@ import { FormEditAirdropComponent } from './form-edit-airdrop/form-edit-airdrop.
     HttpClientModule,
     MatTabsModule,
     BrowserAnimationsModule,
-    RangeSliderModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ReactiveFormsModule,
     PopoverModule.forRoot(),
     ClipboardModule,
-    TagInputModule
+    TagInputModule,
+    NouisliderModule
   ],
   providers: [Globals, AirdropService],
   bootstrap: [AppComponent]

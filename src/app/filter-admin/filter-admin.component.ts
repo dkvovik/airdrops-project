@@ -14,6 +14,8 @@ export class FilterAdminComponent implements OnInit {
   airdrops: Airdrop[];
   sourceAirdrops: Airdrop[];
 
+  initFilterValues = false;
+
   minTokenValue = 0;
   maxTokenValue = 0;
   stepTokenValue = 1;
@@ -48,6 +50,7 @@ export class FilterAdminComponent implements OnInit {
     this.minRating = this.getMinRating();
     this.maxRating = this.getMaxRating();
     this.twoWayRangeRating = [this.minRating, this.maxRating];
+    this.initFilterValues = true;
   }
 
   getAirdrops() {

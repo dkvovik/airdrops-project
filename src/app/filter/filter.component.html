@@ -109,9 +109,9 @@
           <div class="col-md-6 range__token-value">
             <h2 class="title">Token Value</h2>
             <div class="range-slider">
-              <range-slider [min]="minTokenValue" [max]="maxTokenValue" [toolTips]="[false,false]"
-                            [step]="stepTokenValue"
-                            [(ngModel)]="twoWayRangeTokenValue" (ngModelChange)="changed()"></range-slider>
+              <nouislider *ngIf="initFilterValues"
+                          [connect]="true" [min]="minTokenValue" [max]="maxTokenValue" [step]="stepTokenValue"
+                          [(ngModel)]="twoWayRangeTokenValue" (ngModelChange)="changed()"></nouislider>
               <div class="form-group">
             <span class="range-input">
               <input type="number" [(ngModel)]="twoWayRangeTokenValue[0]" (ngModelChange)="changed()">
@@ -131,8 +131,9 @@
           <div class="col-md-6 range__rating">
             <h2 class="title">Rating</h2>
             <div class="range-slider">
-              <range-slider [min]="minRating" [max]="maxRating" [toolTips]="[false,false]" [step]="stepRating"
-                            [(ngModel)]="twoWayRangeRating" (ngModelChange)="changedRating()"></range-slider>
+              <nouislider *ngIf="initFilterValues"
+                          [connect]="true" [min]="minRating" [max]="maxRating" [step]="stepRating"
+                          [(ngModel)]="twoWayRangeRating" (ngModelChange)="changed()"></nouislider>
               <div class="form-group">
             <span class="range-input">
               <input type="number" [(ngModel)]="twoWayRangeRating[0]" (ngModelChange)="changedRating()">

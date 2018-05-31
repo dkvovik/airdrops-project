@@ -19,11 +19,12 @@ export class FilterComponent implements OnInit {
   stepTokenValue = 1;
   twoWayRangeTokenValue = [0, 0];
 
-
   minRating = 0;
   maxRating = 0;
   stepRating = 1;
   twoWayRangeRating = [0, 0];
+
+  initFilterValues = false;
 
   requirements = [];
 
@@ -48,6 +49,8 @@ export class FilterComponent implements OnInit {
     this.minRating = this.getMinRating();
     this.maxRating = this.getMaxRating();
     this.twoWayRangeRating = [this.minRating, this.maxRating];
+
+    this.initFilterValues = true;
   }
 
   getAirdrops() {
