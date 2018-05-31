@@ -137,4 +137,5 @@ export class Globals {
       return value;
     }
   }
+
 }

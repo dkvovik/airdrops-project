@@ -215,7 +215,8 @@
 </div>
 
 <ng-template #detailInfo>
-  <app-detail-info [modalRef]="modalRef" [airdrop]="currentAirdrop"></app-detail-info>
+  <app-detail-info [modalRef]="modalRef" [airdrop]="currentAirdrop"
+                   (votedRating)="refreshAirdrops()"></app-detail-info>
 </ng-template>
 
 <ng-template #formEditAirdrop>

@@ -57,7 +57,7 @@
   <div class="modal-body__header">
     <div class="rating-button-wrapper">
       <div class="rating">
-        <svg class="icon icon-rating disabled" viewBox="0 0 18 18">
+        <svg class="icon icon-rating disabled" [ngClass]="{active: isVoted()}" viewBox="0 0 18 18">
           <g id="Group_408" data-name="Group 408" transform="translate(-409 -163)">
             <ellipse id="Ellipse_12" data-name="Ellipse 12" class="cls-1" cx="9" cy="9" rx="9" ry="9" transform="translate(409 163)"/>
             <g id="fire" transform="translate(414.349 167.236)">
@@ -70,8 +70,8 @@
         {{airdrop.rating}}
       </div>
       <div class="rating-button">
-        <button class="rating-plus btn-link" (click)="ratingUp()">&uarr;</button>
-        <button class="rating-minus btn-link" (click)="ratingDown()">&darr;</button>
+        <button class="rating-plus btn-link" (click)="ratingUp()" [ngClass]="{disabled: isVoted()}">&uarr;</button>
+        <button class="rating-minus btn-link" (click)="ratingDown()" [ngClass]="{disabled: isVoted()}">&darr;</button>
       </div>
     </div>
     <div class="date-wrapper">

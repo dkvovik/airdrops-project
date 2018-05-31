@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap';
 import { Globals } from '../shared/globals';
 import { Airdrop } from '../shared/models/airdrop';
@@ -13,6 +13,8 @@ export class DetailInfoComponent implements OnInit {
 
   @Input() modalRef: BsModalRef;
   @Input() airdrop: Airdrop;
+
+  @Output() votedRating: EventEmitter<any> = new EventEmitter();
 
   constructor(private globals: Globals,
               private airdropService: AirdropService) {
@@ -34,6 +36,7 @@ export class DetailInfoComponent implements OnInit {
         this.airdrop.rating += 1;
         this.globals.voitedRatingUp.push(this.airdrop._id);
         localStorage.setItem('voitedRatingUp', JSON.stringify(this.globals.voitedRatingUp));
+        this.votedRating.emit();
       },
       error => console.log('ratingUp error', error)
     );
@@ -48,8 +51,15 @@ export class DetailInfoComponent implements OnInit {
         this.airdrop.rating -= 1;
         this.globals.voitedRatingDown.push(this.airdrop._id);
         localStorage.setItem('voitedRatingDown', JSON.stringify(this.globals.voitedRatingDown));
+        this.votedRating.emit();
       },
       error => console.log('ratingDown error', error)
     );
+  }
+
+  isVoted() {
+    if (this.globals.voitedRatingDown.indexOf(this.airdrop._id) !== -1 || this.globals.voitedRatingUp.indexOf(this.airdrop._id) !== -1) {
+      return true;
+    }
   }
 }
