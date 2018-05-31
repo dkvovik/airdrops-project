@@ -46,7 +46,6 @@ export class FormEditAirdropComponent implements OnInit {
 
   ngOnInit() {
     this.initFormAddAirdrop();
-    console.log(this.airdrop.image);
   }
 
   initFormAddAirdrop() {

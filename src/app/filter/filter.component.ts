@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { AirdropService } from '../services/airdrop.service';
 import { Airdrop } from '../shared/models/airdrop';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
@@ -11,7 +11,7 @@ import { Globals } from '../shared/globals';
 })
 export class FilterComponent implements OnInit {
 
-  airdrops: Airdrop[];
+  filteredAirdrops: Airdrop[];
   sourceAirdrops: Airdrop[];
 
   minTokenValue = 0;
@@ -32,6 +32,13 @@ export class FilterComponent implements OnInit {
 
   currentAirdrop: Airdrop;
 
+  showData = false;
+  @Input('showData') show;
+
+  isAdmin: false;
+  @Input('isAdmin') admin;
+
+
 
   constructor(private airdropService: AirdropService,
               private modalService: BsModalService,
@@ -39,6 +46,13 @@ export class FilterComponent implements OnInit {
 
   ngOnInit() {
     this.getAirdrops();
+    if (this.show) {
+      this.showData = this.show;
+      setTimeout( () => this.filteredAirdrops = this.sourceAirdrops, 500);
+    }
+    if (this.admin) {
+      this.isAdmin = this.admin;
+    }
   }
 
   initFilterValue() {
@@ -57,7 +71,9 @@ export class FilterComponent implements OnInit {
     this.airdropService.getAirdrops().subscribe(
       (d: any) => {
         this.sourceAirdrops = d;
-        this.initFilterValue();
+        if (!this.initFilterValues) {
+          this.initFilterValue();
+        }
       },
       (error) => console.log('Error getAirdrops', error)
     );
@@ -82,7 +98,7 @@ export class FilterComponent implements OnInit {
   }
 
   getFilteredAirdrops(requirements, tokenValue, rating) {
-    this.airdrops = this.filterAirdrops(this.requirements, tokenValue, rating);
+    this.filteredAirdrops = this.filterAirdrops(this.requirements, tokenValue, rating);
   }
 
   toggleRequirements(value) {
@@ -93,8 +109,12 @@ export class FilterComponent implements OnInit {
     }
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+  openModal(template: TemplateRef<any>, formEditAirdrop: TemplateRef<any>) {
+    if (this.isAdmin) {
+      this.modalRef = this.modalService.show(formEditAirdrop);
+    } else {
+      this.modalRef = this.modalService.show(template);
+    }
   }
 
   filterAirdrops(searchRequirements = [], tokenValue, rating) {

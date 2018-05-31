@@ -155,7 +155,7 @@
     </div>
   </div>
   <div class="w-100"></div>
-  <div class="col-12 table-wrapper main-border" *ngIf="airdrops">
+  <div class="col-12 table-wrapper main-border" *ngIf="showData || filteredAirdrops">
     <table class="table table-striped table-hover">
       <thead>
       <tr>
@@ -168,8 +168,8 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let airdrop of airdrops"
-          (click)="currentAirdrop = airdrop; openModal(detailInfo); airdrop['isVisited'] = true;">
+      <tr *ngFor="let airdrop of filteredAirdrops"
+          (click)="currentAirdrop = airdrop; openModal(detailInfo, formEditAirdrop); airdrop['isVisited'] = true;">
         <td>
           <img class="token-logo" src="{{airdrop.image}}"/>
           {{airdrop.tokenName}} <span *ngIf="airdrop.isVisited">
@@ -216,4 +216,8 @@
 
 <ng-template #detailInfo>
   <app-detail-info [modalRef]="modalRef" [airdrop]="currentAirdrop"></app-detail-info>
+</ng-template>
+
+<ng-template #formEditAirdrop>
+  <app-form-edit-airdrop [modalRef]="modalRef" [airdrop]="currentAirdrop"></app-form-edit-airdrop>
 </ng-template>
