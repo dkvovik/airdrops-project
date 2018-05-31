@@ -87,10 +87,4 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  addAirdrop() {
-    this.upcomingAirdrop = [];
-    this.activeAirdrop = [];
-    this.pastAirdrop = [];
-    this.getAirdrops();
-  }
 }

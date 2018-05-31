@@ -15,14 +15,14 @@ export class FilterComponent implements OnInit {
   sourceAirdrops: Airdrop[];
 
   minTokenValue = 0;
-  maxTokenValue = 0;
+  maxTokenValue = 1;
   stepTokenValue = 1;
-  twoWayRangeTokenValue = [0, 0];
+  twoWayRangeTokenValue = [0, 1];
 
   minRating = 0;
-  maxRating = 0;
+  maxRating = 1;
   stepRating = 1;
-  twoWayRangeRating = [0, 0];
+  twoWayRangeRating = [0, 1];
 
   initFilterValues = false;
 

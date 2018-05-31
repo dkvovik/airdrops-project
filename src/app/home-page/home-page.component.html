@@ -21,5 +21,19 @@
 </section>
 
 <ng-template #formAddAirdrop>
-  <app-form-add-airdrop [modalRef]="modalRef" (addAirdrop)="addAirdrop()"></app-form-add-airdrop>
+  <app-form-add-airdrop [modalRef]="modalRef" (addAirdrop)="openModal(successAdded)"></app-form-add-airdrop>
+</ng-template>
+
+<ng-template #successAdded>
+  <div class="modal-success">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Success</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Airdrop sent to moderation.
+    </div>
+  </div>
 </ng-template>
