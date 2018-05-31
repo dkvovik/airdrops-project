@@ -218,8 +218,3 @@
   <app-detail-info [modalRef]="modalRef" [airdrop]="currentAirdrop"
                    (votedRating)="refreshAirdrops()"></app-detail-info>
 </ng-template>
-
-<ng-template #formEditAirdrop>
-  <app-form-edit-airdrop [modalRef]="modalRef" [airdrop]="currentAirdrop"
-                         (editAirdrop)="refreshAirdrops()"></app-form-edit-airdrop>
-</ng-template>

@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
       label: 'Home', link: '/', index: 0
     },
     {
-      label: 'Extras', link: '/admin', index: 1
+      label: 'Extras', link: '/extras', index: 1
     }
   ];
 

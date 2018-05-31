@@ -21,8 +21,6 @@ import { Globals } from './shared/globals';
 import { ClipboardModule } from 'ngx-clipboard';
 import { TagInputModule } from 'ngx-chips';
 import { DetailInfoComponent } from './detail-info/detail-info.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
-import { FormEditAirdropComponent } from './form-edit-airdrop/form-edit-airdrop.component';
 import { NouisliderModule } from 'ng2-nouislider';
 
 
@@ -36,8 +34,6 @@ import { NouisliderModule } from 'ng2-nouislider';
     FindedAirdropComponent,
     FormAddAirdropComponent,
     DetailInfoComponent,
-    AdminPageComponent,
-    FormEditAirdropComponent
   ],
   entryComponents: [
   ],

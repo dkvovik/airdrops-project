@@ -22,7 +22,7 @@ export class AirdropService {
               private globals: Globals) { }
 
   getAirdrops(): any {
-    return this.http.get(`${this.basicUrl}/airdrops`)
+    return this.http.get(`${this.basicUrl}/airdrops-verified`)
       .map( (response: any) => {
         if (response.success === false) {
           throw Observable.throw(response);
