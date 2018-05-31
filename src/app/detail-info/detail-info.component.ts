@@ -31,8 +31,7 @@ export class DetailInfoComponent implements OnInit {
     }
     this.airdropService.ratingUp(this.airdrop._id).subscribe(
       result => {
-        console.log('result', result);
-
+        this.airdrop.rating += 1;
         this.globals.voitedRatingUp.push(this.airdrop._id);
         localStorage.setItem('voitedRatingUp', JSON.stringify(this.globals.voitedRatingUp));
       },
@@ -46,8 +45,7 @@ export class DetailInfoComponent implements OnInit {
     }
     this.airdropService.ratingDown(this.airdrop._id).subscribe(
       result => {
-        console.log('result', result);
-
+        this.airdrop.rating -= 1;
         this.globals.voitedRatingDown.push(this.airdrop._id);
         localStorage.setItem('voitedRatingDown', JSON.stringify(this.globals.voitedRatingDown));
       },

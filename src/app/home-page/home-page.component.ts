@@ -65,6 +65,11 @@ export class HomePageComponent implements OnInit {
 
   sortByStatus(airdrops) {
     airdrops.forEach((a) => {
+      /*console.log(a);
+      if (!a.verified) {
+        return false;
+      }*/
+
       switch (a.status) {
         case('Upcoming'): {
           this.upcomingAirdrop.push(a);

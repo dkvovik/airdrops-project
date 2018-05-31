@@ -45,6 +45,16 @@ export class AirdropService {
       });
   }
 
+  updateAirdrop(data): Observable<ResponseServer> {
+    return this.http.post(`${this.basicUrl}/airdrop/update`, data)
+      .map( (response: any) => {
+        if (!response.success) {
+          throw Observable.throw(response);
+        }
+        return response.data;
+      });
+  }
+
   getAirdropsSource() {
     this.getAirdrops();
     this.isVisitedAirdrop(this.airdrops);

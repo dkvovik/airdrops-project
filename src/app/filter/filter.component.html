@@ -149,13 +149,13 @@
       <div class="col-md-4 submit-wrapper">
         <div class="btn btn-clear" (click)="clearFormFilter()">clear</div>
         <button class="btn bt-submit-filter btn-block"
-                (click)="getFilteredAirdrops([],twoWayRangeTokenValue, twoWayRangeRating)">Apply Filter
+                (click)="getFilteredAirdrops()">Apply Filter
         </button>
       </div>
     </div>
   </div>
   <div class="w-100"></div>
-  <div class="col-12 table-wrapper main-border" *ngIf="showData || filteredAirdrops">
+  <div class="col-12 table-wrapper main-border" *ngIf="showData">
     <table class="table table-striped table-hover">
       <thead>
       <tr>
@@ -219,5 +219,6 @@
 </ng-template>
 
 <ng-template #formEditAirdrop>
-  <app-form-edit-airdrop [modalRef]="modalRef" [airdrop]="currentAirdrop"></app-form-edit-airdrop>
+  <app-form-edit-airdrop [modalRef]="modalRef" [airdrop]="currentAirdrop"
+                         (editAirdrop)="refreshAirdrops()"></app-form-edit-airdrop>
 </ng-template>

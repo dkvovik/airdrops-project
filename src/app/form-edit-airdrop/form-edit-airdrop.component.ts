@@ -36,6 +36,8 @@ export class FormEditAirdropComponent implements OnInit {
   @Input() modalRef: BsModalRef;
   @Input() airdrop: Airdrop;
 
+  @Output() editAirdrop: EventEmitter<any> = new EventEmitter();
+
   isOpenPopover = [];
   selectedText: string;
   currentIdHTG: any;
@@ -55,7 +57,7 @@ export class FormEditAirdropComponent implements OnInit {
     this.endDate = this.airdrop.endDate;
 
     this.formEditAirdrop = new FormGroup({
-      image: new FormControl(this.airdrop.image, [Validators.required]),
+      // image: new FormControl(this.airdrop.image, [Validators.required]),
       tokenName: new FormControl(this.airdrop.tokenName, [Validators.required]),
       projectName: new FormControl(this.airdrop.projectName, [Validators.required]),
       email: new FormControl(this.airdrop.email, [Validators.required, Validators.email]),
@@ -77,6 +79,7 @@ export class FormEditAirdropComponent implements OnInit {
       verified: new FormControl(this.airdrop.verified),
       howToGetToken: new FormControl(null),
       projectLinks: new FormControl(null),
+      id: new FormControl(this.airdrop._id)
     });
   }
 
@@ -85,8 +88,9 @@ export class FormEditAirdropComponent implements OnInit {
       this.formInvalidaAfterSubmit = true;
     } else {
       const formModel = this.prepareSave();
-      this.airdropService.addAirdrop(formModel).subscribe(
+      this.airdropService.updateAirdrop(formModel).subscribe(
         response => {
+          this.editAirdrop.emit();
           this.modalRef.hide();
         },
         error => console.log(error)

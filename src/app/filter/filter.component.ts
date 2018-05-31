@@ -32,6 +32,7 @@ export class FilterComponent implements OnInit {
 
   currentAirdrop: Airdrop;
 
+  isInit = false;
   showData = false;
   @Input('showData') show;
 
@@ -48,7 +49,6 @@ export class FilterComponent implements OnInit {
     this.getAirdrops();
     if (this.show) {
       this.showData = this.show;
-      setTimeout( () => this.filteredAirdrops = this.sourceAirdrops, 500);
     }
     if (this.admin) {
       this.isAdmin = this.admin;
@@ -73,6 +73,8 @@ export class FilterComponent implements OnInit {
         this.sourceAirdrops = d;
         if (!this.initFilterValues) {
           this.initFilterValue();
+          this.getFilteredAirdrops();
+          this.isInit = true;
         }
       },
       (error) => console.log('Error getAirdrops', error)
@@ -97,8 +99,11 @@ export class FilterComponent implements OnInit {
     }
   }
 
-  getFilteredAirdrops(requirements, tokenValue, rating) {
-    this.filteredAirdrops = this.filterAirdrops(this.requirements, tokenValue, rating);
+  getFilteredAirdrops() {
+    if (this.isInit) {
+      this.showData = true;
+    }
+    this.filteredAirdrops = this.filterAirdrops(this.requirements, this.twoWayRangeTokenValue, this.twoWayRangeRating);
   }
 
   toggleRequirements(value) {
@@ -118,7 +123,6 @@ export class FilterComponent implements OnInit {
   }
 
   filterAirdrops(searchRequirements = [], tokenValue, rating) {
-    this.getAirdrops();
     let filteredAirdrops = this.sourceAirdrops;
 
     const minToken = tokenValue[0];
@@ -195,6 +199,12 @@ export class FilterComponent implements OnInit {
         }
         return  cur.rating > prev.rating ? cur : prev; }, {rating: -Infinity});
     return airdropWithMaxRating.rating;
+  }
+
+  refreshAirdrops() {
+    this.initFilterValues = false;
+    this.sourceAirdrops = [];
+    this.getAirdrops();
   }
 
 }
