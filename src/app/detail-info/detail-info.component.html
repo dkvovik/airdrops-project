@@ -37,7 +37,8 @@
   <div class="subheader-detail-item">
     <div class="subheader-detail-asset" *ngIf="airdrop.platform.toLowerCase() == 'waves'"><span class="badge_grey">Asset ID</span>
       <input type="text" class="input-no-border" readonly value="{{airdrop.assetId}}" #assetID>
-      <button class="btn-link" [ngxClipboard]="assetID">Copy</button>
+      <button class="btn-link" [ngxClipboard]="assetID"
+              [popover]="'Copied'" triggers="mousedown:mouseleave">Copy</button>
     </div>
     <span class="badge_grey">Platform</span>{{airdrop.platform}}
   </div>
