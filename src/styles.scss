@@ -63,16 +63,12 @@ button:focus {
   outline: none;
 }
 
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1286px;
-  }
-}
-
-
 .container {
+  @media (min-width: 768px) {
+    max-width: 750px;
+  }
   @media (min-width: 992px) {
-    max-width: 1060px;
+    max-width: 1010px;
   }
   @media (min-width: 1200px) {
     max-width: 1286px;
