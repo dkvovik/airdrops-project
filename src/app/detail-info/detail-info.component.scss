@@ -1,6 +1,11 @@
 .requirement-item {
   position: relative;
-  margin-right: 14px;
+  padding-right: 7px;
+  padding-left: 7px;
+
+  &:first-child {
+    padding-left: 0;
+  }
 }
 svg.icon-req {
   fill: #1F5AF6;

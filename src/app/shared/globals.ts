@@ -125,6 +125,14 @@ export class Globals {
   requirementPopover(value) {
     if (value === 'Twitter') {
       return value + ' (Follow, Retweet, Tweet)';
+    } else if (value === 'Telegram') {
+      return value + ' (Join group, Join channel)';
+    } else if (value === 'Facebook') {
+      return value + ' (Follow, Single share)';
+    } else if (value === 'Bitcointalk') {
+      return value + ' (Posting)';
+    } else if (value === 'Medium') {
+      return value + ' (Follow)';
     } else {
       return value;
     }
