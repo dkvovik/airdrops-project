@@ -24,5 +24,6 @@ export class Airdrop {
   whitePaperLink?: string;
   today?: boolean;
   yesterday?: boolean;
+  verified?: boolean;
   _id?: string;
 }

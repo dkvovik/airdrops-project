@@ -73,6 +73,9 @@ export class FormEditAirdropComponent implements OnInit {
       description: new FormControl(this.airdrop.description),
       commentBlock: new FormControl(this.airdrop.commentBlock),
       requirements: new FormControl(this.airdrop.requirements),
+      rating: new FormControl(this.airdrop.rating),
+      tokenValue: new FormControl(this.airdrop.tokenValue),
+      verified: new FormControl(this.airdrop.verified),
       howToGetToken: new FormControl(null),
       projectLinks: new FormControl(null),
     });

@@ -17,6 +17,29 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="formEditAirdrop">
+    <div class="modal-body-item">
+      <div class="form-group row">
+        <div class="col-md-5">
+          <div class="title">
+            <label for="rating">Rating</label>
+          </div>
+          <input type="text" class="form-control" id="rating" formControlName="rating">
+        </div>
+        <div class="col-md-5">
+          <div class="title">
+            <label for="tokenValue">Token Value</label>
+          </div>
+          <input type="text" class="form-control" id="tokenValue" formControlName="tokenValue">
+        </div>
+        <div class="col-md-2">
+          <div class="title">
+            <label for="verified">Verify</label>
+          </div>
+          <input type="checkbox" class="form-control" id="verified"
+                 formControlName="verified" value="airdrop.verified">
+        </div>
+      </div>
+    </div>
     <div class="modal-body-item modal-body_header">
       <div class="form-group row">
         <div class="col-md-6 upload-token-name">

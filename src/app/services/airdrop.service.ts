@@ -89,14 +89,6 @@ export class AirdropService {
     });
   }
 
-  votedRatingUp(id) {
-    if (this.globals.voitedRatingUp.indexOf(id) !== -1) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   isTodayOrYesterday(airdrops) {
     airdrops.forEach((a) => {
       const startDate = new Date(a.startDate).getDate();
