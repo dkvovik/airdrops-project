@@ -168,8 +168,8 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngIf="filteredAirdrops.length === 0"><td>No data matches the query.</td></tr>
-      <tr *ngFor="let airdrop of filteredAirdrops"
+      <tr *ngIf="airdrops.length === 0"><td>No data matches the query.</td></tr>
+      <tr *ngFor="let airdrop of airdrops"
           (click)="currentAirdrop = airdrop; openModal(detailInfo); airdrop['isVisited'] = true;">
         <td>
           <img class="token-logo" src="{{airdrop.image}}"/>

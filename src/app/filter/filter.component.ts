@@ -3,6 +3,7 @@ import { AirdropService } from '../services/airdrop.service';
 import { Airdrop } from '../shared/models/airdrop';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Globals } from '../shared/globals';
+import { DataFilter } from '../shared/models/dataFilter';
 
 @Component({
   selector: 'app-filter',
@@ -11,8 +12,7 @@ import { Globals } from '../shared/globals';
 })
 export class FilterComponent implements OnInit {
 
-  filteredAirdrops: Airdrop[];
-  sourceAirdrops: Airdrop[];
+  airdrops: Airdrop[];
 
   minTokenValue = 0;
   selectedMinTokenValue;
@@ -29,6 +29,14 @@ export class FilterComponent implements OnInit {
   twoWayRangeRating = [0, 1];
 
   initFilterValues = false;
+
+  filterData: DataFilter = {
+    selectedMinTokenValue: 0,
+    selectedMaxTokenValue: 0,
+    selectedMinRating: 0,
+    selectedMaxRating: 0,
+    selectedRequirements: []
+  };
 
   requirements = [];
   selectedRequirements;
@@ -73,12 +81,11 @@ export class FilterComponent implements OnInit {
   getAirdrops() {
     this.airdropService.getAirdrops().subscribe(
       (response: any) => {
-        this.sourceAirdrops = response.data.airdrops;
-        this.airdropService.isVisitedAirdrop(this.sourceAirdrops);
+        console.log('response', response);
         this.initFilterValue(response.data.tokenValueMin, response.data.tokenValueMax, response.data.ratingMin, response.data.ratingMax);
         this.isInit = true;
       },
-      (error) => console.log('Error getAirdrops', error)
+      (error) => console.log('Error getAirdrops FilterComponent', error)
     );
   }
 
@@ -101,8 +108,44 @@ export class FilterComponent implements OnInit {
   }
 
   getFilteredAirdrops() {
-    this.showData = true;
-    this.filteredAirdrops = this.filterAirdrops(this.requirements, this.twoWayRangeTokenValue, this.twoWayRangeRating);
+    this.prepareSave();
+    this.airdropService.getFilteredAirdrops(this.filterData).subscribe(
+      (response: any) => {
+        console.log('response getFilteredAirdrops', response);
+        if (!this.showData) {
+          this.showData = true;
+        }
+        this.airdrops = response.data.airdrops;
+        this.airdropService.isVisitedAirdrop(this.airdrops);
+        this.initFilterValue(response.data.tokenValueMin, response.data.tokenValueMax, response.data.ratingMin, response.data.ratingMax);
+        this.isInit = true;
+      },
+      (error) => console.log('Error getAirdrops FilterComponent', error)
+    );
+  }
+
+  prepareSave() {
+    this.filterData.selectedMinTokenValue = this.twoWayRangeTokenValue[0];
+    this.filterData.selectedMaxTokenValue = this.twoWayRangeTokenValue[1];
+    this.filterData.selectedMinRating = this.twoWayRangeRating[0];
+    this.filterData.selectedMaxRating = this.twoWayRangeRating[1];
+    this.filterData.selectedRequirements = this.requirements;
+
+    localStorage.setItem('selectedMinTokenValue', this.filterData.selectedMinTokenValue.toString());
+    localStorage.setItem('selectedMaxTokenValue', this.filterData.selectedMaxTokenValue.toString());
+    localStorage.setItem('selectedMinRating', this.filterData.selectedMinRating.toString());
+    localStorage.setItem('selectedMaxRating', this.filterData.selectedMaxRating.toString());
+    localStorage.setItem('selectedRequirements', JSON.stringify(this.filterData.selectedRequirements));
+
+    const formData = new FormData();
+    for (const field in this.filterData) {
+      if (field === 'selectedRequirements') {
+        formData.append(field, JSON.stringify(this.filterData.selectedRequirements));
+      } else {
+        formData.append(field, this.filterData[field]);
+      }
+    }
+    return formData;
   }
 
   toggleRequirements(value) {
@@ -117,8 +160,8 @@ export class FilterComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  filterAirdrops(searchRequirements = [], tokenValue, rating) {
-    let filteredAirdrops = this.sourceAirdrops;
+  /*filterAirdrops(searchRequirements = [], tokenValue, rating) {
+    let filteredAirdrops = this.airdrops;
 
     const minToken = tokenValue[0];
     const maxToken = tokenValue[1];
@@ -151,11 +194,11 @@ export class FilterComponent implements OnInit {
       }
       return filteredAirdropsAfterRequirements;
     }
-  }
+  }*/
 
   refreshAirdrops() {
     this.initFilterValues = false;
-    this.sourceAirdrops = [];
+    this.airdrops = [];
     this.getAirdrops();
   }
 
