@@ -12,7 +12,7 @@ import { DataFilter } from '../shared/models/dataFilter';
 })
 export class FilterComponent implements OnInit {
 
-  airdrops: Airdrop[];
+  airdrops: Airdrop[] = [];
 
   minTokenValue = 0;
   selectedMinTokenValue;
@@ -63,7 +63,6 @@ export class FilterComponent implements OnInit {
     if (maxToken) {
       this.maxTokenValue = maxToken;
     }
-
     if (minRating) {
       this.minRating = minRating;
     }
@@ -81,7 +80,7 @@ export class FilterComponent implements OnInit {
   getAirdrops() {
     this.airdropService.getAirdrops().subscribe(
       (response: any) => {
-        console.log('response', response);
+        console.log('response getAirdrops FilterComponent', response);
         this.initFilterValue(response.data.tokenValueMin, response.data.tokenValueMax, response.data.ratingMin, response.data.ratingMax);
         this.isInit = true;
       },
@@ -105,6 +104,11 @@ export class FilterComponent implements OnInit {
     for (let i = 0; i < checkboxes.length; ++i) {
       checkboxes[i]['checked'] = false;
     }
+    localStorage.setItem('selectedMinTokenValue', '');
+    localStorage.setItem('selectedMaxTokenValue', '');
+    localStorage.setItem('selectedMinRating', '');
+    localStorage.setItem('selectedMaxRating', '');
+    localStorage.setItem('selectedRequirements', JSON.stringify([]));
   }
 
   getFilteredAirdrops() {
@@ -117,10 +121,16 @@ export class FilterComponent implements OnInit {
         }
         this.airdrops = response.data.airdrops;
         this.airdropService.isVisitedAirdrop(this.airdrops);
-        this.initFilterValue(response.data.tokenValueMin, response.data.tokenValueMax, response.data.ratingMin, response.data.ratingMax);
-        this.isInit = true;
       },
-      (error) => console.log('Error getAirdrops FilterComponent', error)
+      (error) => {
+        console.log('Error getAirdrops FilterComponent', error);
+        if (!this.showData) {
+          this.showData = true;
+        }
+        if (error.error.error.code === 3001) {
+          this.airdrops = [];
+        }
+      }
     );
   }
 
@@ -160,53 +170,31 @@ export class FilterComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  /*filterAirdrops(searchRequirements = [], tokenValue, rating) {
-    let filteredAirdrops = this.airdrops;
-
-    const minToken = tokenValue[0];
-    const maxToken = tokenValue[1];
-    filteredAirdrops = filteredAirdrops.filter( (a) => a.tokenValue >= minToken && a.tokenValue <= maxToken);
-
-    if (filteredAirdrops) {
-      const minRating = rating[0];
-      const maxRating = rating[1];
-      filteredAirdrops = filteredAirdrops.filter( (a) => a.rating >= minRating && a.rating <= maxRating);
-    }
-
-    let filteredAirdropsAfterRequirements = [];
-
-    if (searchRequirements.length === 0) {
-      return filteredAirdrops;
-    } else {
-      if (filteredAirdrops) {
-        filteredAirdrops.forEach( (a) => {
-          let flag = true;
-          for (let i = 0; i < searchRequirements.length; i++) {
-            if (a.requirements.indexOf(searchRequirements[i]) === -1) {
-              flag = false;
-              break;
-            }
-          }
-          if (flag) {
-            filteredAirdropsAfterRequirements.push(a);
-          }
-        });
-      }
-      return filteredAirdropsAfterRequirements;
-    }
-  }*/
-
-  refreshAirdrops() {
-    this.initFilterValues = false;
-    this.airdrops = [];
-    this.getAirdrops();
-  }
-
   getSelectedFilterValue() {
     this.selectedMinTokenValue = localStorage.getItem('selectedMinTokenValue') || this.minTokenValue;
+    this.selectedMinTokenValue = +this.selectedMinTokenValue;
+    if (this.selectedMinTokenValue < this.minTokenValue) {
+      this.selectedMinTokenValue = this.minTokenValue;
+    }
+
     this.selectedMaxTokenValue = localStorage.getItem('selectedMaxTokenValue') || this.maxTokenValue;
+    this.selectedMaxTokenValue = +this.selectedMaxTokenValue;
+    if (this.selectedMaxTokenValue > this.maxTokenValue) {
+      this.selectedMaxTokenValue = this.maxTokenValue;
+    }
+
     this.selectedMinRating = localStorage.getItem('selectedMinRating') || this.minRating;
+    this.selectedMinRating = +this.selectedMinRating;
+    if (this.selectedMinRating < this.minRating) {
+      this.selectedMinRating = this.minRating;
+    }
+
     this.selectedMaxRating = localStorage.getItem('selectedMaxRating') || this.maxRating;
+    this.selectedMaxRating = +this.selectedMaxRating;
+    if (this.selectedMaxRating > this.maxRating) {
+      this.selectedMaxRating = this.maxTokenValue;
+    }
+
     this.selectedRequirements = JSON.parse(localStorage.getItem('selectedRequirements')) || [];
 
     if (this.selectedRequirements.length !== 0) {
@@ -222,4 +210,9 @@ export class FilterComponent implements OnInit {
     }
   }
 
+  refreshAirdrops() {
+    this.initFilterValues = false;
+    this.airdrops = [];
+    this.getFilteredAirdrops();
+  }
 }

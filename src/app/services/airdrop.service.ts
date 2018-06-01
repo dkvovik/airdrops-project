@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ResponseServer } from '../shared/models/responce';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Airdrop } from '../shared/models/airdrop';
 import { Globals } from '../shared/globals';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class AirdropService {
 
-  basicUrl = 'http://wilix.org:3000';
-  /*basicUrl = 'http://10.1.1.155:3000';*/
-  /*basicUrl = 'http://10.1.1.12:3001';*/
-  /*basicUrl = 'http://localhost:3000';*/
+  /*basicUrl = 'http://wilix.org:3000';*/
+  basicUrl = 'http://10.1.1.12:3000';
+
   airdrops: Airdrop[] = [];
 
   date = new Date();
@@ -22,7 +25,7 @@ export class AirdropService {
               private globals: Globals) { }
 
   getAirdrops(): any {
-    return this.http.get(`${this.basicUrl}/airdrops-verified`)
+    return this.http.post(`${this.basicUrl}/airdrops-verified`, {})
       .map( (response: any) => {
         if (response.success === false) {
           throw Observable.throw(response);
@@ -53,7 +56,7 @@ export class AirdropService {
   }
 
   getFilteredAirdrops(data): Observable<ResponseServer> {
-    return this.http.post(`${this.basicUrl}/airdrops-verified`, data)
+    return this.http.post(`${this.basicUrl}/airdrops-verified`, data, httpOptions)
       .map( (response: any) => {
         if (response.success === false) {
           throw Observable.throw(response);
