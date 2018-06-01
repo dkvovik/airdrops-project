@@ -52,7 +52,6 @@ export class FormAddAirdropComponent implements OnInit {
       tokenName: new FormControl(null, [Validators.required]),
       projectName: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      whitePaperLink: new FormControl(null, ),
       assetId: new FormControl(null, ),
       platform: new FormControl(null, ),
       website: new FormControl(null, ),
