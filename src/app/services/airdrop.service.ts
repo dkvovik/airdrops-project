@@ -27,10 +27,7 @@ export class AirdropService {
         if (response.success === false) {
           throw Observable.throw(response);
         }
-        this.airdrops = response.data.airdrops;
-        this.isVisitedAirdrop(this.airdrops);
-        this.isTodayOrYesterday(this.airdrops);
-        return this.airdrops;
+        return response;
       });
   }
 
@@ -55,18 +52,14 @@ export class AirdropService {
       });
   }
 
-  getAirdropsSource() {
-    this.getAirdrops();
-    this.isVisitedAirdrop(this.airdrops);
-    return this.airdrops;
-  }
-
-  getSourceAirdrops() {
-    if (!this.airdrops) {
-      this.getAirdrops();
-    } else {
-      return this.airdrops;
-    }
+  getFilteredAirdrops(data): Observable<ResponseServer> {
+    return this.http.post(`${this.basicUrl}/airdrops-verified`, data)
+      .map( (response: any) => {
+        if (response.success === false) {
+          throw Observable.throw(response);
+        }
+        return response;
+      });
   }
 
   ratingUp(id): any {

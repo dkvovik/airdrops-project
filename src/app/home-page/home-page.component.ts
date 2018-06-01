@@ -19,10 +19,6 @@ export class HomePageComponent implements OnInit {
   activeAirdrop: Airdrop[] = [];
   pastAirdrop: Airdrop[] = [];
 
-  date = new Date();
-  today = this.date.getDate();
-  yesterday = this.date.getDate() - 1;
-
   constructor(private modalService: BsModalService,
               private airdropService: AirdropService,
               private globals: Globals) {
@@ -39,37 +35,17 @@ export class HomePageComponent implements OnInit {
   getAirdrops() {
     this.airdropService.getAirdrops().subscribe(
       (d: any) => {
-        this.airdrops = d;
-        this.isTodayOrYesterday(this.airdrops);
+        this.airdrops = d.data.airdrops;
+        this.airdropService.isVisitedAirdrop(this.airdrops);
+        this.airdropService.isTodayOrYesterday(this.airdrops);
         this.sortByStatus(this.airdrops);
       },
-      (error) => console.log('Error getAirdrops', error)
+      (error) => console.log('Error getAirdrops HomePageComponent', error)
     );
-  }
-
-  getAirdropsSource() {
-    this.airdrops  = this.airdropService.getAirdropsSource();
-    this.sortByStatus(this.airdrops);
-  }
-
-  isTodayOrYesterday(airdrops) {
-    airdrops.forEach((a) => {
-      const startDate = new Date(a.startDate).getDate();
-      if (startDate === this.today) {
-        a['today'] = true;
-      } else if (startDate === this.yesterday) {
-        a['yesterday'] = true;
-      }
-    });
   }
 
   sortByStatus(airdrops) {
     airdrops.forEach((a) => {
-      /*console.log(a);
-      if (!a.verified) {
-        return false;
-      }*/
-
       switch (a.status) {
         case('Upcoming'): {
           this.upcomingAirdrop.push(a);

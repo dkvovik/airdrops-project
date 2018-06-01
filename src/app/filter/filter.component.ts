@@ -15,18 +15,23 @@ export class FilterComponent implements OnInit {
   sourceAirdrops: Airdrop[];
 
   minTokenValue = 0;
+  selectedMinTokenValue;
   maxTokenValue = 1;
+  selectedMaxTokenValue;
   stepTokenValue = 1;
   twoWayRangeTokenValue = [0, 1];
 
   minRating = 0;
+  selectedMinRating;
   maxRating = 1;
+  selectedMaxRating;
   stepRating = 1;
   twoWayRangeRating = [0, 1];
 
   initFilterValues = false;
 
   requirements = [];
+  selectedRequirements;
 
   modalRef: BsModalRef;
 
@@ -34,12 +39,6 @@ export class FilterComponent implements OnInit {
 
   isInit = false;
   showData = false;
-  @Input('showData') show;
-
-  isAdmin: false;
-  @Input('isAdmin') admin;
-
-
 
   constructor(private airdropService: AirdropService,
               private modalService: BsModalService,
@@ -47,35 +46,37 @@ export class FilterComponent implements OnInit {
 
   ngOnInit() {
     this.getAirdrops();
-    if (this.show) {
-      this.showData = this.show;
-    }
-    if (this.admin) {
-      this.isAdmin = this.admin;
-    }
   }
 
-  initFilterValue() {
-    this.minTokenValue = this.getMinTokenValue();
-    this.maxTokenValue = this.getMaxTokenValue();
-    this.twoWayRangeTokenValue = [this.minTokenValue, this.maxTokenValue];
+  initFilterValue(minToken, maxToken, minRating, maxRating) {
+    if (minToken) {
+      this.minTokenValue = minToken;
+    }
+    if (maxToken) {
+      this.maxTokenValue = maxToken;
+    }
 
-    this.minRating = this.getMinRating();
-    this.maxRating = this.getMaxRating();
-    this.twoWayRangeRating = [this.minRating, this.maxRating];
+    if (minRating) {
+      this.minRating = minRating;
+    }
+    if (maxRating) {
+      this.maxRating = maxRating;
+    }
+
+    this.getSelectedFilterValue();
+    this.twoWayRangeTokenValue = [this.selectedMinTokenValue, this.selectedMaxTokenValue];
+    this.twoWayRangeRating = [this.selectedMinRating, this.selectedMaxRating];
 
     this.initFilterValues = true;
   }
 
   getAirdrops() {
     this.airdropService.getAirdrops().subscribe(
-      (d: any) => {
-        this.sourceAirdrops = d;
-        if (!this.initFilterValues) {
-          this.initFilterValue();
-          this.getFilteredAirdrops();
-          this.isInit = true;
-        }
+      (response: any) => {
+        this.sourceAirdrops = response.data.airdrops;
+        this.airdropService.isVisitedAirdrop(this.sourceAirdrops);
+        this.initFilterValue(response.data.tokenValueMin, response.data.tokenValueMax, response.data.ratingMin, response.data.ratingMax);
+        this.isInit = true;
       },
       (error) => console.log('Error getAirdrops', error)
     );
@@ -95,14 +96,12 @@ export class FilterComponent implements OnInit {
     this.requirements = [];
     const checkboxes = <NodeListOf<HTMLInputElement>> document.querySelectorAll('.button-filter-wrapper input');
     for (let i = 0; i < checkboxes.length; ++i) {
-      checkboxes[i].checked = false;
+      checkboxes[i]['checked'] = false;
     }
   }
 
   getFilteredAirdrops() {
-    if (this.isInit) {
-      this.showData = true;
-    }
+    this.showData = true;
     this.filteredAirdrops = this.filterAirdrops(this.requirements, this.twoWayRangeTokenValue, this.twoWayRangeRating);
   }
 
@@ -114,12 +113,8 @@ export class FilterComponent implements OnInit {
     }
   }
 
-  openModal(template: TemplateRef<any>, formEditAirdrop: TemplateRef<any>) {
-    if (this.isAdmin) {
-      this.modalRef = this.modalService.show(formEditAirdrop);
-    } else {
-      this.modalRef = this.modalService.show(template);
-    }
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
   filterAirdrops(searchRequirements = [], tokenValue, rating) {
@@ -158,53 +153,30 @@ export class FilterComponent implements OnInit {
     }
   }
 
-  getMinTokenValue() {
-    const airdropWithMinTokenValue = this.sourceAirdrops.reduce(
-      (prev, cur) => {
-        if (!cur.tokenValue) {
-          cur.tokenValue = 0;
-        }
-        return cur.tokenValue < prev.tokenValue ? cur : prev; }, {tokenValue: Infinity}
-      );
-    return airdropWithMinTokenValue.tokenValue;
-  }
-
-  getMaxTokenValue() {
-    const airdropWithMaxTokenValue = this.sourceAirdrops.reduce(
-      (prev, cur) => {
-        if (!cur.tokenValue) {
-          cur.tokenValue = 0;
-        }
-        return cur.tokenValue > prev.tokenValue ? cur : prev; }, {tokenValue: -Infinity}
-      );
-    return airdropWithMaxTokenValue.tokenValue;
-  }
-
-  getMinRating() {
-    const airdropWithMinRating = this.sourceAirdrops.reduce(
-      (prev, cur) => {
-        if (!cur.rating) {
-          cur.rating = 0;
-        }
-        return cur.rating < prev.rating ? cur : prev; }, {rating: Infinity}
-      );
-    return airdropWithMinRating.rating;
-  }
-
-  getMaxRating() {
-    const airdropWithMaxRating = this.sourceAirdrops.reduce(
-      (prev, cur) => {
-        if (!cur.rating) {
-          cur.rating = 0;
-        }
-        return  cur.rating > prev.rating ? cur : prev; }, {rating: -Infinity});
-    return airdropWithMaxRating.rating;
-  }
-
   refreshAirdrops() {
     this.initFilterValues = false;
     this.sourceAirdrops = [];
     this.getAirdrops();
+  }
+
+  getSelectedFilterValue() {
+    this.selectedMinTokenValue = localStorage.getItem('selectedMinTokenValue') || this.minTokenValue;
+    this.selectedMaxTokenValue = localStorage.getItem('selectedMaxTokenValue') || this.maxTokenValue;
+    this.selectedMinRating = localStorage.getItem('selectedMinRating') || this.minRating;
+    this.selectedMaxRating = localStorage.getItem('selectedMaxRating') || this.maxRating;
+    this.selectedRequirements = JSON.parse(localStorage.getItem('selectedRequirements')) || [];
+
+    if (this.selectedRequirements.length !== 0) {
+      const checkboxes = <NodeListOf<HTMLInputElement>> document.querySelectorAll('.button-filter-wrapper input');
+      for (let k = 0; k < this.selectedRequirements.length; ++k) {
+        for (let i = 0; i < checkboxes.length; ++i) {
+          if (checkboxes[i]['name'] === this.selectedRequirements[k]) {
+            checkboxes[i]['checked'] = true;
+          }
+        }
+      }
+      this.requirements = this.selectedRequirements;
+    }
   }
 
 }

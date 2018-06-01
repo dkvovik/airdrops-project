@@ -5,7 +5,7 @@
         <h2 class="title">Requirements</h2>
         <div class="button-filter-wrapper">
           <label for="email" [popover]="'Email'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="email" id="email" (click)="toggleRequirements('Email')">
+            <input type="checkbox" name="Email" id="email" (click)="toggleRequirements('Email')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 20.147 14.576">
             <g id="message-envelope" class="cls-1" transform="translate(0 -1)">
@@ -21,7 +21,7 @@
             </span>
           </label>
           <label for="twitter" [popover]="'Twitter'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="twitter" id="twitter" (click)="toggleRequirements('Twitter')">
+            <input type="checkbox" name="Twitter" id="twitter" (click)="toggleRequirements('Twitter')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 20.162 16.507">
                 <g id="twitter" transform="translate(0 -0.94)">
@@ -33,7 +33,7 @@
             </span>
           </label>
           <label for="telegram" [popover]="'Telegram'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="telegram" id="telegram" (click)="toggleRequirements('Telegram')">
+            <input type="checkbox" name="Telegram" id="telegram" (click)="toggleRequirements('Telegram')">
             <span class="button-filter">
               <svg id="telegram" class="icon" viewBox="0 0 18.845 16.408">
   <path id="XMLID_497_" class="cls-1"
@@ -43,7 +43,7 @@
             </span>
           </label>
           <label for="facebook" [popover]="'Facebook'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="facebook" id="facebook" (click)="toggleRequirements('Facebook')">
+            <input type="checkbox" name="Facebook" id="facebook" (click)="toggleRequirements('Facebook')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 16.408 16.408">
                 <g id="facebook-logo" class="cls-1">
@@ -55,7 +55,7 @@
             </span>
           </label>
           <label for="github" [popover]="'Github'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="github" id="github" (click)="toggleRequirements('Github')">
+            <input type="checkbox" name="Github" id="github" (click)="toggleRequirements('Github')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 18.019 17.6">
   <path id="Path_342" data-name="Path 342" class="cls-1"
@@ -64,7 +64,7 @@
             </span>
           </label>
           <label for="youtube" [popover]="'Youtube'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="youtube" id="youtube" (click)="toggleRequirements('Youtube')">
+            <input type="checkbox" name="Youtube" id="youtube" (click)="toggleRequirements('Youtube')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 20.891 14.783">
   <path id="_001-youtube" data-name="001-youtube" class="cls-1"
@@ -93,7 +93,7 @@
             </span>
           </label>
           <label for="medium" [popover]="'Medium'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="medium" id="medium" (click)="toggleRequirements('Medium')">
+            <input type="checkbox" name="Medium" id="medium" (click)="toggleRequirements('Medium')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 19.793 16.745">
   <path id="medium" class="cls-1"
@@ -168,8 +168,9 @@
       </tr>
       </thead>
       <tbody>
+      <tr *ngIf="filteredAirdrops.length === 0"><td>No data matches the query.</td></tr>
       <tr *ngFor="let airdrop of filteredAirdrops"
-          (click)="currentAirdrop = airdrop; openModal(detailInfo, formEditAirdrop); airdrop['isVisited'] = true;">
+          (click)="currentAirdrop = airdrop; openModal(detailInfo); airdrop['isVisited'] = true;">
         <td>
           <img class="token-logo" src="{{airdrop.image}}"/>
           {{airdrop.tokenName}} <span *ngIf="airdrop.isVisited">
