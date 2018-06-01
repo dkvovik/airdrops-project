@@ -9,7 +9,7 @@
     </div>
     <div class="menu col-md-9">
       <nav mat-tab-nav-bar>
-        <a mat-tab-link *ngFor="let tabLink of tabLinks; let i = index;"
+        <!--<a mat-tab-link *ngFor="let tabLink of tabLinks; let i = index;"
            [routerLink]="tabLink.link"
            routerLinkActive="mat-tab-link-active"
            #rla="routerLinkActive"
@@ -31,7 +31,7 @@
             <path id="Path_16" data-name="Path 16" class="cls-1" d="M19.4,36H11a.99.99,0,0,1-1-1h0a.99.99,0,0,1,1-1h8.4a.99.99,0,0,1,1,1h0A.99.99,0,0,1,19.4,36Z" transform="translate(-6 -20.4)"/>
           </svg>
           {{tabLink.label}}
-        </a>
+        </a>-->
         <a mat-tab-link (click)="openModal(formAddAirdrop)">
           <svg class="icon" viewBox="0 0 20 20">
             <g id="Add" transform="translate(-15 -14.8)">
