@@ -3,6 +3,7 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { Globals } from '../shared/globals';
 import { Airdrop } from '../shared/models/airdrop';
 import { AirdropService } from '../services/airdrop.service';
+import { Requirement } from '../shared/models/requirement';
 
 @Component({
   selector: 'app-detail-info',
@@ -15,6 +16,8 @@ export class DetailInfoComponent implements OnInit {
   @Input() airdrop: Airdrop;
 
   @Output() votedRating: EventEmitter<any> = new EventEmitter();
+
+  currentRequirement: Requirement;
 
   constructor(private globals: Globals,
               private airdropService: AirdropService) {

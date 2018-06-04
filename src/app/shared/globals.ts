@@ -127,20 +127,10 @@ export class Globals {
     return this.sanitize.bypassSecurityTrustHtml(iconLink);
   }
 
-  requirementPopover(value) {
-    if (value === 'Twitter') {
-      return value + ' (Follow, Retweet, Tweet)';
-    } else if (value === 'Telegram') {
-      return value + ' (Join group, Join channel)';
-    } else if (value === 'Facebook') {
-      return value + ' (Follow, Single share)';
-    } else if (value === 'Bitcointalk') {
-      return value + ' (Posting)';
-    } else if (value === 'Medium') {
-      return value + ' (Follow)';
-    } else {
-      return value;
-    }
+  camelize(str) {
+    return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
+      return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
+    }).replace(/\s+/g, '');
   }
 
 }

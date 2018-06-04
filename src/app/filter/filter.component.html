@@ -157,7 +157,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngIf="airdrops.length === 0"><td>No data matches the query.</td></tr>
+      <tr *ngIf="airdrops.length === 0"><td>No data matches the query.</td><td></td><td></td><td></td><td></td><td></td></tr>
       <tr *ngFor="let airdrop of airdrops"
           (click)="currentAirdrop = airdrop; openModal(detailInfo); airdrop['isVisited'] = true;">
         <td>

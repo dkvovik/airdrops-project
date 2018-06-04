@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } fro
 import { BsModalRef } from 'ngx-bootstrap';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AirdropService } from '../services/airdrop.service';
+import { Globals } from '../shared/globals';
 
 @Component({
   selector: 'app-form-add-airdrop',
@@ -27,8 +28,7 @@ export class FormAddAirdropComponent implements OnInit {
   image = '';
   imageReader = '';
 
-  autocompleteRequirements = ['Email', 'Twitter', 'Telegram', 'Reddit', 'Facebook', 'Bitcointalk', 'Medium', 'Youtube',
-    'Steemit', 'Github', 'KYM', 'Google-Plus'];
+  autocompleteRequirements = ['Email', 'Twitter : Follow', 'Twitter : Retweet', 'Twitter : Tweet', 'Telegram : Join group', 'Telegram : Join channel', 'Reddit', 'Facebook : Follow', 'Facebook : Single share', 'Bitcointalk : Posting', 'Medium : Follow', 'Youtube', 'Steemit', 'Github', 'KYM', 'Google-Plus'];
 
   @Input() modalRef: BsModalRef;
 
@@ -39,7 +39,8 @@ export class FormAddAirdropComponent implements OnInit {
   currentIdHTG: any;
 
   constructor(private cd: ChangeDetectorRef,
-              private airdropService: AirdropService) {
+              private airdropService: AirdropService,
+              private globals: Globals) {
   }
 
   ngOnInit() {
@@ -84,6 +85,43 @@ export class FormAddAirdropComponent implements OnInit {
     }
   }
 
+  prepareSaveRequirements() {
+    const selectedRequirements = this.formAddAirdrop.get('requirements').value;
+    const finalRequirements = [];
+
+    selectedRequirements.forEach( r => {
+      const newRequirement = {};
+      if (r.indexOf(' : ') === -1) {
+        newRequirement['name'] = r;
+        finalRequirements.push(newRequirement);
+      } else {
+        const newR = r.split(' : ');
+        let index = 0;
+        if (finalRequirements.length === 0 ) {
+          newRequirement['name'] = newR[0];
+          const fieldName = this.globals.camelize(newR[1]);
+          newRequirement[fieldName] = true;
+          finalRequirements.push(newRequirement);
+        } else {
+          finalRequirements.forEach( (fr) => {
+            if (fr.name === newR[0]) {
+              const field = this.globals.camelize(newR[1]);
+              fr[field] = true;
+              return;
+            } else if (index === finalRequirements.length - 1) {
+              newRequirement['name'] = newR[0];
+              const field = this.globals.camelize(newR[1]);
+              newRequirement[field] = true;
+              finalRequirements.push(newRequirement);
+            }
+            ++index;
+          });
+        }
+      }
+    });
+    return finalRequirements;
+  }
+
   onFileChange(event) {
     const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
@@ -101,6 +139,7 @@ export class FormAddAirdropComponent implements OnInit {
   prepareSave() {
     this.formAddAirdrop.get('howToGetToken').setValue(this.addedHTG);
     this.formAddAirdrop.get('projectLinks').setValue(this.addedProjectLinks);
+    this.formAddAirdrop.get('requirements').setValue(this.prepareSaveRequirements());
     let input = new FormData();
     for (const field in this.formAddAirdrop.controls) {
       if (field === 'requirements' || field === 'projectLinks' || field === 'howToGetToken') {
