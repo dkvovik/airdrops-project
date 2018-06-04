@@ -99,6 +99,8 @@
                        [placeholder]="'+ Add requirement'" [secondaryPlaceholder]="'+ Add requirement'"
                        id="requirements" formControlName="requirements">
               <tag-input-dropdown [showDropdownIfEmpty]="true"
+                                  [dynamicUpdate]="true"
+                                  [offset]="'-180 0'"
                                   [zIndex] = "1100"
                                   [appendToBody]="false"
                                   [autocompleteItems]="autocompleteRequirements">
