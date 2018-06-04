@@ -100,7 +100,7 @@
             <div class="range-slider">
               <nouislider *ngIf="initFilterValues"
                           [connect]="true" [min]="minTokenValue" [max]="maxTokenValue" [step]="stepTokenValue"
-                          [(ngModel)]="twoWayRangeTokenValue" (ngModelChange)="changed()"></nouislider>
+                          [(ngModel)]="twoWayRangeTokenValue"></nouislider>
               <div class="form-group">
             <span class="range-input">
               <input type="number" [(ngModel)]="twoWayRangeTokenValue[0]" (ngModelChange)="changed()">
@@ -122,7 +122,7 @@
             <div class="range-slider">
               <nouislider *ngIf="initFilterValues"
                           [connect]="true" [min]="minRating" [max]="maxRating" [step]="stepRating"
-                          [(ngModel)]="twoWayRangeRating" (ngModelChange)="changed()"></nouislider>
+                          [(ngModel)]="twoWayRangeRating"></nouislider>
               <div class="form-group">
             <span class="range-input">
               <input type="number" [(ngModel)]="twoWayRangeRating[0]" (ngModelChange)="changedRating()">
