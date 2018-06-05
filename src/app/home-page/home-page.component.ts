@@ -45,6 +45,7 @@ export class HomePageComponent implements OnInit {
       res => {
         this.upcomingAirdrop = res.data.airdrops;
         this.airdropService.isVisitedAirdrop(this.upcomingAirdrop);
+        this.airdropService.isTodayOrYesterday(this.upcomingAirdrop);
       },
       error => console.log('error getAirdropsUpcoming', error)
     );
@@ -55,6 +56,7 @@ export class HomePageComponent implements OnInit {
       res => {
         this.activeAirdrop = res.data.airdrops;
         this.airdropService.isVisitedAirdrop(this.activeAirdrop);
+        this.airdropService.isTodayOrYesterday(this.activeAirdrop);
       },
       error => console.log('error getAirdropsActive', error)
     );
@@ -65,6 +67,7 @@ export class HomePageComponent implements OnInit {
       res => {
         this.pastAirdrop = res.data.airdrops;
         this.airdropService.isVisitedAirdrop(this.pastAirdrop);
+        this.airdropService.isTodayOrYesterday(this.pastAirdrop);
       },
       error => console.log('error getAirdropsPast', error)
     );
