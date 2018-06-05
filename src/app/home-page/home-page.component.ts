@@ -19,6 +19,8 @@ export class HomePageComponent implements OnInit {
   activeAirdrop: Airdrop[] = [];
   pastAirdrop: Airdrop[] = [];
 
+  limitAirdrops = '10';
+
   constructor(private modalService: BsModalService,
               private airdropService: AirdropService,
               private globals: Globals) {
@@ -33,34 +35,38 @@ export class HomePageComponent implements OnInit {
   }
 
   getAirdrops() {
-    this.airdropService.getAirdrops().subscribe(
-      (d: any) => {
-        this.airdrops = d.data.airdrops;
-        this.airdropService.isVisitedAirdrop(this.airdrops);
-        this.airdropService.isTodayOrYesterday(this.airdrops);
-        this.sortByStatus(this.airdrops);
+    this.getAirdropsUpcoming();
+    this.getAirdropsActive();
+    this.getAirdropsPast();
+  }
+
+  getAirdropsUpcoming() {
+    this.airdropService.getAirdropsUpcoming({}, this.limitAirdrops).subscribe(
+      res => {
+        this.upcomingAirdrop = res.data.airdrops;
+        this.airdropService.isVisitedAirdrop(this.upcomingAirdrop);
       },
-      (error) => console.log('Error getAirdrops HomePageComponent', error)
+      error => console.log('error getAirdropsUpcoming', error)
     );
   }
 
-  sortByStatus(airdrops) {
-    airdrops.forEach((a) => {
-      switch (a.status) {
-        case('Upcoming'): {
-          this.upcomingAirdrop.push(a);
-          break;
-        }
-        case('Active'): {
-          this.activeAirdrop.push(a);
-          break;
-        }
-        case('Past'): {
-          this.pastAirdrop.push(a);
-          break;
-        }
-      }
-    });
+  getAirdropsActive() {
+    this.airdropService.getAirdropsActive({}, this.limitAirdrops).subscribe(
+      res => {
+        this.activeAirdrop = res.data.airdrops;
+        this.airdropService.isVisitedAirdrop(this.activeAirdrop);
+      },
+      error => console.log('error getAirdropsActive', error)
+    );
   }
 
+  getAirdropsPast() {
+    this.airdropService.getAirdropsPast({}, this.limitAirdrops).subscribe(
+      res => {
+        this.pastAirdrop = res.data.airdrops;
+        this.airdropService.isVisitedAirdrop(this.pastAirdrop);
+      },
+      error => console.log('error getAirdropsPast', error)
+    );
+  }
 }

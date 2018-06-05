@@ -24,26 +24,6 @@ export class AirdropService {
   constructor(private http: HttpClient,
               private globals: Globals) { }
 
-  /*getAirdrops(status = ''): any {
-    if (!status) {
-      return this.http.post(`${this.basicUrl}/airdrops-verified`, {})
-        .map( (response: any) => {
-          if (response.success === false) {
-            throw Observable.throw(response);
-          }
-          return response;
-        });
-    } else {
-      return this.http.post(`${this.basicUrl}/airdrops/${status}`, {})
-        .map( (response: any) => {
-          if (response.success === false) {
-            throw Observable.throw(response);
-          }
-          return response;
-        });
-    }
-  }*/
-
   addAirdrop(data): Observable<ResponseServer> {
     return this.http.post(`${this.basicUrl}/airdrop/add`, data)
       .map( (response: any) => {
@@ -150,6 +130,36 @@ export class AirdropService {
         a['yesterday'] = false;
       }
     });
+  }
+
+  getAirdropsUpcoming(data = {}, limit = '') {
+    return this.http.post(`${this.basicUrl}/airdrops/upcoming?limit=${limit}`, data)
+      .map( (response: any) => {
+        if (response.success === false) {
+          throw Observable.throw(response);
+        }
+        return response;
+      });
+  }
+
+  getAirdropsActive(data = {}, limit = '') {
+    return this.http.post(`${this.basicUrl}/airdrops/active?limit=${limit}`, data)
+      .map( (response: any) => {
+        if (response.success === false) {
+          throw Observable.throw(response);
+        }
+        return response;
+      });
+  }
+
+  getAirdropsPast(data = {}, limit = '') {
+    return this.http.post(`${this.basicUrl}/airdrops/past?limit=${limit}`, data)
+      .map( (response: any) => {
+        if (response.success === false) {
+          throw Observable.throw(response);
+        }
+        return response;
+      });
   }
 
 }
