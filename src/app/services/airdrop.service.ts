@@ -24,7 +24,7 @@ export class AirdropService {
   constructor(private http: HttpClient,
               private globals: Globals) { }
 
-  getAirdrops(status = ''): any {
+  /*getAirdrops(status = ''): any {
     if (!status) {
       return this.http.post(`${this.basicUrl}/airdrops-verified`, {})
         .map( (response: any) => {
@@ -42,7 +42,7 @@ export class AirdropService {
           return response;
         });
     }
-  }
+  }*/
 
   addAirdrop(data): Observable<ResponseServer> {
     return this.http.post(`${this.basicUrl}/airdrop/add`, data)
@@ -66,7 +66,7 @@ export class AirdropService {
 
   }
 
-  getFilteredAirdrops(data, status = ''): Observable<ResponseServer> {
+  getAirdrops(data = {}, status = ''): Observable<ResponseServer> {
     if (!status) {
       return this.http.post(`${this.basicUrl}/airdrops-verified`, data, httpOptions)
         .map( (response: any) => {

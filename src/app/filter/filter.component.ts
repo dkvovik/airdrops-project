@@ -93,17 +93,6 @@ export class FilterComponent implements OnInit {
     this.initFilterValues = true;
   }
 
-  getAirdrops() {
-    this.airdropService.getAirdrops(this.statusFoundAirdrops).subscribe(
-      (response: any) => {
-        console.log('response getAirdrops FilterComponent', response);
-        this.initFilterValue(response.data.tokenValueMin, response.data.tokenValueMax, response.data.ratingMin, response.data.ratingMax);
-        this.isInit = true;
-      },
-      (error) => console.log('Error getAirdrops FilterComponent', error)
-    );
-  }
-
   changed() {
     this.twoWayRangeTokenValue = [...this.twoWayRangeTokenValue];
   }
@@ -129,7 +118,7 @@ export class FilterComponent implements OnInit {
 
   getFilteredAirdrops() {
     this.prepareSave(this.statusFoundAirdrops);
-    this.airdropService.getFilteredAirdrops(this.filterData, this.statusFoundAirdrops).subscribe(
+    this.airdropService.getAirdrops(this.filterData, this.statusFoundAirdrops).subscribe(
       (response: any) => {
         console.log('response getFilteredAirdrops', response);
         if (!this.showData) {
