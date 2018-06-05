@@ -342,6 +342,17 @@ input.input-no-border {
   .modal-dialog {
     max-width: 880px;
     margin: 1.75rem auto;
+
+    &.modal-sm {
+      max-width: 300px;
+
+      .modal-header {
+        padding: 10px 25px;
+      }
+      .modal-body {
+        padding: 0 25px 25px 25px;
+      }
+    }
   }
 }
 

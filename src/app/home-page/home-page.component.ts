@@ -30,8 +30,8 @@ export class HomePageComponent implements OnInit {
     this.getAirdrops();
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+  openModal(template: TemplateRef<any>, className = '') {
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: className }));
   }
 
   getAirdrops() {

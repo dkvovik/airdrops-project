@@ -67,23 +67,13 @@ export class AirdropService {
   }
 
   getFilterValueMinMax(status = ''): any {
-    if (!status) {
-      return this.http.post(`${this.basicUrl}/airdrops-verified`, {})
-        .map( (response: any) => {
-          if (response.success === false) {
-            throw Observable.throw(response);
-          }
-          return response;
-        });
-    } else {
-      return this.http.post(`${this.basicUrl}/airdrops/${status}`, {})
-        .map( (response: any) => {
-          if (response.success === false) {
-            throw Observable.throw(response);
-          }
-          return response;
-        });
-    }
+    return this.http.get(`${this.basicUrl}/airdrop/values?status=${status}`)
+      .map( (response: any) => {
+        if (response.success === false) {
+          throw Observable.throw(response);
+        }
+        return response;
+      });
   }
 
   ratingUp(id): any {

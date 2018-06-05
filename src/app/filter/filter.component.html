@@ -98,7 +98,7 @@
           <div class="col-md-6 range__token-value">
             <h2 class="title">Token Value</h2>
             <div class="range-slider">
-              <nouislider *ngIf="initFilterValues"
+              <nouislider *ngIf="initFilterValues && minTokenValue != maxTokenValue"
                           [connect]="true" [min]="minTokenValue" [max]="maxTokenValue" [step]="stepTokenValue"
                           [(ngModel)]="twoWayRangeTokenValue"></nouislider>
               <div class="form-group">
@@ -120,7 +120,7 @@
           <div class="col-md-6 range__rating">
             <h2 class="title">Rating</h2>
             <div class="range-slider">
-              <nouislider *ngIf="initFilterValues"
+              <nouislider *ngIf="initFilterValues && minRating != maxRating"
                           [connect]="true" [min]="minRating" [max]="maxRating" [step]="stepRating"
                           [(ngModel)]="twoWayRangeRating"></nouislider>
               <div class="form-group">

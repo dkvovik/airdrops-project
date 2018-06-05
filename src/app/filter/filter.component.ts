@@ -61,7 +61,6 @@ export class FilterComponent implements OnInit {
   init() {
     this.airdropService.getFilterValueMinMax(this.statusFoundAirdrops).subscribe(
       (response: any) => {
-        console.log('response initFoundAirdrops', response);
         this.initFilterValue(response.data.tokenValueMin, response.data.tokenValueMax, response.data.ratingMin, response.data.ratingMax);
         this.isInit = true;
         if (this.statusFoundAirdrops) {
