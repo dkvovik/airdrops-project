@@ -48,12 +48,28 @@ export class FilterComponent implements OnInit {
   isInit = false;
   showData = false;
 
+  @Input() statusFoundAirdrops = '';
+
   constructor(private airdropService: AirdropService,
               private modalService: BsModalService,
               private globals: Globals) { }
 
   ngOnInit() {
-    this.getAirdrops();
+    this.init();
+  }
+
+  init() {
+    this.airdropService.getFilterValueMinMax(this.statusFoundAirdrops).subscribe(
+      (response: any) => {
+        console.log('response initFoundAirdrops', response);
+        this.initFilterValue(response.data.tokenValueMin, response.data.tokenValueMax, response.data.ratingMin, response.data.ratingMax);
+        this.isInit = true;
+        if (this.statusFoundAirdrops) {
+          this.getFilteredAirdrops();
+        }
+      },
+      (error) => console.log('Error initFoundAirdrops', error)
+    );
   }
 
   initFilterValue(minToken, maxToken, minRating, maxRating) {
@@ -70,7 +86,7 @@ export class FilterComponent implements OnInit {
       this.maxRating = maxRating;
     }
 
-    this.getSelectedFilterValue();
+    this.getSelectedFilterValue(this.statusFoundAirdrops);
     this.twoWayRangeTokenValue = [this.selectedMinTokenValue, this.selectedMaxTokenValue];
     this.twoWayRangeRating = [this.selectedMinRating, this.selectedMaxRating];
 
@@ -78,7 +94,7 @@ export class FilterComponent implements OnInit {
   }
 
   getAirdrops() {
-    this.airdropService.getAirdrops().subscribe(
+    this.airdropService.getAirdrops(this.statusFoundAirdrops).subscribe(
       (response: any) => {
         console.log('response getAirdrops FilterComponent', response);
         this.initFilterValue(response.data.tokenValueMin, response.data.tokenValueMax, response.data.ratingMin, response.data.ratingMax);
@@ -112,8 +128,8 @@ export class FilterComponent implements OnInit {
   }
 
   getFilteredAirdrops() {
-    this.prepareSave();
-    this.airdropService.getFilteredAirdrops(this.filterData).subscribe(
+    this.prepareSave(this.statusFoundAirdrops);
+    this.airdropService.getFilteredAirdrops(this.filterData, this.statusFoundAirdrops).subscribe(
       (response: any) => {
         console.log('response getFilteredAirdrops', response);
         if (!this.showData) {
@@ -134,18 +150,24 @@ export class FilterComponent implements OnInit {
     );
   }
 
-  prepareSave() {
+  prepareSave(status = '') {
     this.filterData.selectedMinTokenValue = this.twoWayRangeTokenValue[0];
     this.filterData.selectedMaxTokenValue = this.twoWayRangeTokenValue[1];
     this.filterData.selectedMinRating = this.twoWayRangeRating[0];
     this.filterData.selectedMaxRating = this.twoWayRangeRating[1];
     this.filterData.selectedRequirements = this.requirements;
 
-    localStorage.setItem('selectedMinTokenValue', this.filterData.selectedMinTokenValue.toString());
-    localStorage.setItem('selectedMaxTokenValue', this.filterData.selectedMaxTokenValue.toString());
-    localStorage.setItem('selectedMinRating', this.filterData.selectedMinRating.toString());
-    localStorage.setItem('selectedMaxRating', this.filterData.selectedMaxRating.toString());
-    localStorage.setItem('selectedRequirements', JSON.stringify(this.filterData.selectedRequirements));
+    const selectedMinTokenValueLS = 'selectedMinTokenValue' + status;
+    const selectedMaxTokenValueLS = 'selectedMaxTokenValue' + status;
+    const selectedMinRatingLS = 'selectedMinRating' + status;
+    const selectedMaxRatingLS = 'selectedMaxRating' + status;
+    const selectedRequirementsLS = 'selectedRequirements' + status;
+
+    localStorage.setItem(selectedMinTokenValueLS, this.filterData.selectedMinTokenValue.toString());
+    localStorage.setItem(selectedMaxTokenValueLS, this.filterData.selectedMaxTokenValue.toString());
+    localStorage.setItem(selectedMinRatingLS, this.filterData.selectedMinRating.toString());
+    localStorage.setItem(selectedMaxRatingLS, this.filterData.selectedMaxRating.toString());
+    localStorage.setItem(selectedRequirementsLS, JSON.stringify(this.filterData.selectedRequirements));
 
     const formData = new FormData();
     for (const field in this.filterData) {
@@ -170,32 +192,37 @@ export class FilterComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  getSelectedFilterValue() {
-    this.selectedMinTokenValue = localStorage.getItem('selectedMinTokenValue') || this.minTokenValue;
+  getSelectedFilterValue(status = '') {
+    const selectedMinTokenValueLS = 'selectedMinTokenValue' + status;
+    this.selectedMinTokenValue = localStorage.getItem(selectedMinTokenValueLS) || this.minTokenValue;
     this.selectedMinTokenValue = +this.selectedMinTokenValue;
     if (this.selectedMinTokenValue < this.minTokenValue) {
       this.selectedMinTokenValue = this.minTokenValue;
     }
 
-    this.selectedMaxTokenValue = localStorage.getItem('selectedMaxTokenValue') || this.maxTokenValue;
+    const selectedMaxTokenValueLS = 'selectedMaxTokenValue' + status;
+    this.selectedMaxTokenValue = localStorage.getItem(selectedMaxTokenValueLS) || this.maxTokenValue;
     this.selectedMaxTokenValue = +this.selectedMaxTokenValue;
     if (this.selectedMaxTokenValue > this.maxTokenValue) {
       this.selectedMaxTokenValue = this.maxTokenValue;
     }
 
-    this.selectedMinRating = localStorage.getItem('selectedMinRating') || this.minRating;
+    const selectedMinRatingLS = 'selectedMinRating' + status;
+    this.selectedMinRating = localStorage.getItem(selectedMinRatingLS) || this.minRating;
     this.selectedMinRating = +this.selectedMinRating;
     if (this.selectedMinRating < this.minRating) {
       this.selectedMinRating = this.minRating;
     }
 
-    this.selectedMaxRating = localStorage.getItem('selectedMaxRating') || this.maxRating;
+    const selectedMaxRatingLS = 'selectedMaxRating' + status;
+    this.selectedMaxRating = localStorage.getItem(selectedMaxRatingLS) || this.maxRating;
     this.selectedMaxRating = +this.selectedMaxRating;
     if (this.selectedMaxRating > this.maxRating) {
       this.selectedMaxRating = this.maxTokenValue;
     }
 
-    this.selectedRequirements = JSON.parse(localStorage.getItem('selectedRequirements')) || [];
+    const selectedRequirementsLS = 'selectedRequirements' + status;
+    this.selectedRequirements = JSON.parse(localStorage.getItem(selectedRequirementsLS)) || [];
 
     if (this.selectedRequirements.length !== 0) {
       const checkboxes = <NodeListOf<HTMLInputElement>> document.querySelectorAll('.button-filter-wrapper input');

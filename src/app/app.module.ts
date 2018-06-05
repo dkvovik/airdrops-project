@@ -22,6 +22,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { TagInputModule } from 'ngx-chips';
 import { DetailInfoComponent } from './detail-info/detail-info.component';
 import { NouisliderModule } from 'ng2-nouislider';
+import { FindedAirdropPageComponent } from './finded-airdrop-page/finded-airdrop-page.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { NouisliderModule } from 'ng2-nouislider';
     FindedAirdropComponent,
     FormAddAirdropComponent,
     DetailInfoComponent,
+    FindedAirdropPageComponent,
   ],
   entryComponents: [
   ],

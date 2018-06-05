@@ -24,14 +24,24 @@ export class AirdropService {
   constructor(private http: HttpClient,
               private globals: Globals) { }
 
-  getAirdrops(): any {
-    return this.http.post(`${this.basicUrl}/airdrops-verified`, {})
-      .map( (response: any) => {
-        if (response.success === false) {
-          throw Observable.throw(response);
-        }
-        return response;
-      });
+  getAirdrops(status = ''): any {
+    if (!status) {
+      return this.http.post(`${this.basicUrl}/airdrops-verified`, {})
+        .map( (response: any) => {
+          if (response.success === false) {
+            throw Observable.throw(response);
+          }
+          return response;
+        });
+    } else {
+      return this.http.post(`${this.basicUrl}/airdrops/${status}`, {})
+        .map( (response: any) => {
+          if (response.success === false) {
+            throw Observable.throw(response);
+          }
+          return response;
+        });
+    }
   }
 
   addAirdrop(data): Observable<ResponseServer> {
@@ -53,16 +63,47 @@ export class AirdropService {
         }
         return response.data;
       });
+
   }
 
-  getFilteredAirdrops(data): Observable<ResponseServer> {
-    return this.http.post(`${this.basicUrl}/airdrops-verified`, data, httpOptions)
-      .map( (response: any) => {
-        if (response.success === false) {
-          throw Observable.throw(response);
-        }
-        return response;
+  getFilteredAirdrops(data, status = ''): Observable<ResponseServer> {
+    if (!status) {
+      return this.http.post(`${this.basicUrl}/airdrops-verified`, data, httpOptions)
+        .map( (response: any) => {
+          if (response.success === false) {
+            throw Observable.throw(response);
+          }
+          return response;
+        });
+    } else {
+      return this.http.post(`${this.basicUrl}/airdrops/${status}`, data, httpOptions)
+        .map( (response: any) => {
+          if (response.success === false) {
+            throw Observable.throw(response);
+          }
+          return response;
       });
+    }
+  }
+
+  getFilterValueMinMax(status = ''): any {
+    if (!status) {
+      return this.http.post(`${this.basicUrl}/airdrops-verified`, {})
+        .map( (response: any) => {
+          if (response.success === false) {
+            throw Observable.throw(response);
+          }
+          return response;
+        });
+    } else {
+      return this.http.post(`${this.basicUrl}/airdrops/${status}`, {})
+        .map( (response: any) => {
+          if (response.success === false) {
+            throw Observable.throw(response);
+          }
+          return response;
+        });
+    }
   }
 
   ratingUp(id): any {
