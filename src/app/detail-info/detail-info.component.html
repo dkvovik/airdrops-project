@@ -119,7 +119,12 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn">Claim Airdrop</button>
+  <a *ngIf="airdrop.claimButton.display && airdrop.claimButton.link" href="{{airdrop.claimButton.link}}" target="_blank">
+    <button class="btn" >{{airdrop.claimButton.text}}</button>
+  </a>
+  <button class="btn" *ngIf="airdrop.claimButton.display && !airdrop.claimButton.link">
+    {{airdrop.claimButton.text}}
+  </button>
 </div>
 
 <ng-template #popTemplate let-message="currentRequirement">{{ currentRequirement.name }}
