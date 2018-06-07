@@ -163,7 +163,7 @@ export class FormAddAirdropComponent implements OnInit {
           console.log('claimButton', claimButton);
           input.append('claimButton', JSON.stringify(claimButton));
         } else {
-          continue;
+          input.append('claimButton', JSON.stringify(this.claimButtonLink));
         }
       } else {
         input.append(field, this.formAddAirdrop.get(field).value);
