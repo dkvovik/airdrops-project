@@ -30,6 +30,8 @@ export class FormAddAirdropComponent implements OnInit {
 
   autocompleteRequirements = ['Email', 'Twitter : Follow', 'Twitter : Retweet', 'Twitter : Tweet', 'Telegram : Join group', 'Telegram : Join channel', 'Reddit', 'Facebook : Follow', 'Facebook : Single share', 'Bitcointalk : Posting', 'Medium : Follow', 'Youtube', 'Steemit', 'Github', 'KYC', 'Google-Plus'];
 
+  autocompletePlatform = ['Waves', 'Ethereum'];
+
   @Input() modalRef: BsModalRef;
 
   @Output() addAirdrop: EventEmitter<any> = new EventEmitter();
@@ -52,18 +54,20 @@ export class FormAddAirdropComponent implements OnInit {
       image: new FormControl(null, [Validators.required]),
       tokenName: new FormControl(null, [Validators.required]),
       projectName: new FormControl(null, [Validators.required]),
+      firstName: new FormControl(null, [Validators.required]),
+      lastName: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      assetId: new FormControl(null, ),
-      platform: new FormControl(null, ),
-      website: new FormControl(null, ),
+      assetId: new FormControl(null),
+      platform: new FormControl(null),
+      website: new FormControl(null),
       startDate: new FormControl(this.startDate, [Validators.required]),
-      endDate: new FormControl(this.startDate, [Validators.required]),
-      economyOfToken: new FormControl(null, ),
-      totalValue: new FormControl(null, ),
-      tokensPerClaim: new FormControl(null, ),
-      estimatedValue: new FormControl(null, ),
-      description: new FormControl(null, ),
-      commentBlock: new FormControl(null, ),
+      endDate: new FormControl(null),
+      economyOfToken: new FormControl(null),
+      totalValue: new FormControl(null),
+      tokensPerClaim: new FormControl(null),
+      estimatedValue: new FormControl(null),
+      description: new FormControl(null),
+      commentBlock: new FormControl(null),
       requirements: new FormControl([]),
       howToGetToken: new FormControl([]),
       projectLinks: new FormControl([]),
@@ -151,21 +155,23 @@ export class FormAddAirdropComponent implements OnInit {
     return input;
   }
 
-  addHTG(value) {
-    value = value.trim();
+  addHTG(input) {
+    const value = input.value.trim();
     if (value) {
       this.addedHTG.push(value);
+      input.value = '';
     }
   }
   removeAddedHTG(index) {
     this.addedHTG.splice(index, 1);
   }
 
-  addProjectLink(value) {
-    value = value.trim();
+  addProjectLink(input) {
+    const value = input.value.trim();
     if (value) {
       this.addedProjectLinks.push(value);
       this.isOpenPopover.push('closed');
+      input.value = '';
     }
     this.isActiveAddLink = false;
   }
