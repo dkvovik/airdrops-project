@@ -74,15 +74,23 @@ export class FilterComponent implements OnInit {
   initFilterValue(minToken, maxToken, minRating, maxRating) {
     if (minToken) {
       this.minTokenValue = minToken;
+    } else if (minToken === 0) {
+      this.minTokenValue = 0;
     }
     if (maxToken) {
       this.maxTokenValue = maxToken;
+    } else if (minToken === 0) {
+      this.maxTokenValue = 0;
     }
     if (minRating) {
       this.minRating = minRating;
+    } else if (minRating === 0) {
+      this.minRating = 0;
     }
     if (maxRating) {
       this.maxRating = maxRating;
+    } else if (maxRating === 0) {
+      this.maxRating = 0;
     }
 
     this.getSelectedFilterValue(this.statusFoundAirdrops);
