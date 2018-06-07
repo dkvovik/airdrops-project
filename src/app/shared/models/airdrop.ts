@@ -26,4 +26,11 @@ export class Airdrop {
   yesterday?: boolean;
   verified?: boolean;
   _id?: string;
+  claimButton?: {
+    display?: boolean;
+    text?: string;
+    link?: string;
+  };
+  firstName?: string;
+  lastName?: string;
 }

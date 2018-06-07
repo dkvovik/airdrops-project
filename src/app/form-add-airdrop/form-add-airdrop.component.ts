@@ -30,8 +30,6 @@ export class FormAddAirdropComponent implements OnInit {
 
   autocompleteRequirements = ['Email', 'Twitter : Follow', 'Twitter : Retweet', 'Twitter : Tweet', 'Telegram : Join group', 'Telegram : Join channel', 'Reddit', 'Facebook : Follow', 'Facebook : Single share', 'Bitcointalk : Posting', 'Medium : Follow', 'Youtube', 'Steemit', 'Github', 'KYC', 'Google-Plus'];
 
-  autocompletePlatform = ['Waves', 'Ethereum'];
-
   @Input() modalRef: BsModalRef;
 
   @Output() addAirdrop: EventEmitter<any> = new EventEmitter();
@@ -52,22 +50,22 @@ export class FormAddAirdropComponent implements OnInit {
   initFormAddAirdrop() {
     this.formAddAirdrop = new FormGroup({
       image: new FormControl(null, [Validators.required]),
-      tokenName: new FormControl(null, [Validators.required]),
-      projectName: new FormControl(null, [Validators.required]),
-      firstName: new FormControl(null, [Validators.required]),
-      lastName: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      assetId: new FormControl(null),
-      platform: new FormControl(null),
-      website: new FormControl(null),
+      tokenName: new FormControl('', [Validators.required]),
+      projectName: new FormControl('', [Validators.required]),
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      assetId: new FormControl(''),
+      platform: new FormControl(''),
+      website: new FormControl(''),
       startDate: new FormControl(this.startDate, [Validators.required]),
       endDate: new FormControl(null),
-      economyOfToken: new FormControl(null),
-      totalValue: new FormControl(null),
+      economyOfToken: new FormControl(''),
+      totalValue: new FormControl(''),
       tokensPerClaim: new FormControl(null),
-      estimatedValue: new FormControl(null),
-      description: new FormControl(null),
-      commentBlock: new FormControl(null),
+      estimatedValue: new FormControl(''),
+      description: new FormControl(''),
+      commentBlock: new FormControl(''),
       requirements: new FormControl([]),
       howToGetToken: new FormControl([]),
       projectLinks: new FormControl([]),

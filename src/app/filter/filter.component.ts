@@ -16,17 +16,17 @@ export class FilterComponent implements OnInit {
 
   minTokenValue = 0;
   selectedMinTokenValue;
-  maxTokenValue = 1;
+  maxTokenValue = 0;
   selectedMaxTokenValue;
-  stepTokenValue = 1;
-  twoWayRangeTokenValue = [0, 1];
+  stepTokenValue = 0;
+  twoWayRangeTokenValue = [0, 0];
 
   minRating = 0;
   selectedMinRating;
-  maxRating = 1;
+  maxRating = 0;
   selectedMaxRating;
   stepRating = 1;
-  twoWayRangeRating = [0, 1];
+  twoWayRangeRating = [0, 0];
 
   initFilterValues = false;
 
