@@ -28,6 +28,8 @@ export class FormAddAirdropComponent implements OnInit {
   image = '';
   imageReader = '';
 
+  claimButtonLink = '';
+
   autocompleteRequirements = ['Email', 'Twitter : Follow', 'Twitter : Retweet', 'Twitter : Tweet', 'Telegram : Join group', 'Telegram : Join channel', 'Reddit', 'Facebook : Follow', 'Facebook : Single share', 'Bitcointalk : Posting', 'Medium : Follow', 'Youtube', 'Steemit', 'Github', 'KYC', 'Google-Plus'];
 
   @Input() modalRef: BsModalRef;
@@ -69,6 +71,7 @@ export class FormAddAirdropComponent implements OnInit {
       requirements: new FormControl([]),
       howToGetToken: new FormControl([]),
       projectLinks: new FormControl([]),
+      claimButton: new FormControl(this.claimButtonLink)
     });
   }
 
@@ -146,6 +149,22 @@ export class FormAddAirdropComponent implements OnInit {
     for (const field in this.formAddAirdrop.controls) {
       if (field === 'requirements' || field === 'projectLinks' || field === 'howToGetToken') {
         input.append(field, JSON.stringify(this.formAddAirdrop.get(field).value));
+      } else if (field === 'claimButton') {
+        const urlRegex = /(https?:\/\/[^\s]+)[\"]/g;
+        const link = this.addedHTG[0].match(urlRegex);
+        console.log('this.addedHTG[0]', this.addedHTG[0]);
+        console.log('link[0]', link[0]);
+        if (link[0]) {
+          this.claimButtonLink = link[0].slice(0, -1);
+          const claimButton = {};
+          claimButton['display'] = true;
+          claimButton['text'] = 'Claim Airdrop';
+          claimButton['link'] = this.claimButtonLink;
+          console.log('claimButton', claimButton);
+          input.append('claimButton', JSON.stringify(claimButton));
+        } else {
+          continue;
+        }
       } else {
         input.append(field, this.formAddAirdrop.get(field).value);
       }
