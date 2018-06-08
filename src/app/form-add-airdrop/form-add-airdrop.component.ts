@@ -62,7 +62,6 @@ export class FormAddAirdropComponent implements OnInit {
       website: new FormControl(''),
       startDate: new FormControl(this.startDate, [Validators.required]),
       endDate: new FormControl(null),
-      economyOfToken: new FormControl(''),
       totalValue: new FormControl(''),
       tokensPerClaim: new FormControl(null),
       estimatedValue: new FormControl(''),
@@ -149,18 +148,15 @@ export class FormAddAirdropComponent implements OnInit {
     for (const field in this.formAddAirdrop.controls) {
       if (field === 'requirements' || field === 'projectLinks' || field === 'howToGetToken') {
         input.append(field, JSON.stringify(this.formAddAirdrop.get(field).value));
-      } else if (field === 'claimButton') {
+      } else if (field === 'claimButton' && this.addedHTG[0]) {
         const urlRegex = /(https?:\/\/[^\s]+)[\"]/g;
         const link = this.addedHTG[0].match(urlRegex);
-        console.log('this.addedHTG[0]', this.addedHTG[0]);
-        console.log('link[0]', link[0]);
-        if (link[0]) {
+        if (link) {
           this.claimButtonLink = link[0].slice(0, -1);
           const claimButton = {};
           claimButton['display'] = true;
           claimButton['text'] = 'Claim Airdrop';
           claimButton['link'] = this.claimButtonLink;
-          console.log('claimButton', claimButton);
           input.append('claimButton', JSON.stringify(claimButton));
         } else {
           input.append('claimButton', JSON.stringify(this.claimButtonLink));
