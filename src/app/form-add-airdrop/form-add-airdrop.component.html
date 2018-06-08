@@ -72,9 +72,10 @@
                    *ngIf="formAddAirdrop.get('projectName').invalid && formAddAirdrop.get('projectName').touched &&
                  formAddAirdrop.get('projectName')['errors']['required'] || formAddAirdrop.get('projectName').invalid && formInvalidaAfterSubmit">
                 Required</div>
+              <div class="invalid-feedback" *ngIf="responseErrorAirdropExist">Already exists</div>
             </div>
             <input type="text" class="form-control" id="projectName" formControlName="projectName" autocomplete="off"
-                   [ngClass]="{'is-invalid': formAddAirdrop.get('projectName').invalid && formAddAirdrop.get('projectName').touched || formAddAirdrop.get('projectName').invalid && formInvalidaAfterSubmit}">
+                   [ngClass]="{'is-invalid': formAddAirdrop.get('projectName').invalid && formAddAirdrop.get('projectName').touched || formAddAirdrop.get('projectName').invalid && formInvalidaAfterSubmit} || responseErrorAirdropExist">
           </div>
         </div>
         <div class="col-md-6">
@@ -220,7 +221,8 @@
               </svg>
             </button>
             <input type="text" class="form-control" id="endDate" formControlName="endDate"
-                   #dpEndTime="bsDatepicker" bsDatepicker [bsConfig]="bsConfig">
+                   #dpEndTime="bsDatepicker" bsDatepicker [bsConfig]="bsConfig"
+                   [bsValue]="endDate" value="{{endDate | date:'d MMMM y'}}">
           </div>
         </div>
         <div class="col-md-6">
@@ -383,6 +385,7 @@
           <button class="btn_submit" type="submit" class="btn" (click)="onSubmitAddAirdrop()">Submit</button>
           <div class="title" style="justify-content: center; margin-top: 10px;">
             <div class="invalid-feedback" *ngIf="formInvalidaAfterSubmit">Сorrect all errors before sending data.</div>
+            <div class="invalid-feedback" *ngIf="responseErrorAirdropExist">Airdrop already exists.</div>
           </div>
         </div>
       </div>
@@ -402,6 +405,6 @@
         </g>
       </svg>
     </button>
-    <input #url type="text" class="form-control" autofocus>
+    <input #url type="text" class="form-control" autofocus placeholder="https://">
   </div>
 </ng-template>

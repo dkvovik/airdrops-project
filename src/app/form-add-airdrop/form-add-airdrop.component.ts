@@ -1,22 +1,25 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AirdropService } from '../services/airdrop.service';
 import { Globals } from '../shared/globals';
+import { Airdrop } from '../shared/models/airdrop';
 
 @Component({
   selector: 'app-form-add-airdrop',
   templateUrl: './form-add-airdrop.component.html',
   styleUrls: ['./form-add-airdrop.component.scss']
 })
-export class FormAddAirdropComponent implements OnInit {
+export class FormAddAirdropComponent implements OnInit, OnDestroy {
 
   addedHTG = [];
   addedProjectLinks = [];
+  requirementsView = [];
 
   isActiveAddLink = false;
 
   startDate = new Date();
+  endDate: string;
   bsConfig = {
     containerClass: 'theme-default',
     dateInputFormat: 'DD MMMM YYYY',
@@ -32,6 +35,12 @@ export class FormAddAirdropComponent implements OnInit {
 
   autocompleteRequirements = ['Email', 'Twitter : Follow', 'Twitter : Retweet', 'Twitter : Tweet', 'Telegram : Join group', 'Telegram : Join channel', 'Reddit', 'Facebook : Follow', 'Facebook : Single share', 'Bitcointalk : Posting', 'Medium : Follow', 'Youtube', 'Steemit', 'Github', 'KYC', 'Google-Plus'];
 
+  initValue: Airdrop = {};
+  lastValueForm = {};
+
+  successSubmit = false;
+  responseErrorAirdropExist = '';
+
   @Input() modalRef: BsModalRef;
 
   @Output() addAirdrop: EventEmitter<any> = new EventEmitter();
@@ -46,30 +55,39 @@ export class FormAddAirdropComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initValueAddForm();
     this.initFormAddAirdrop();
+  }
+
+  ngOnDestroy() {
+    if (this.successSubmit) {
+      localStorage.setItem('lastValueAddForm', JSON.stringify({}));
+    } else {
+      this.saveLastValue();
+    }
   }
 
   initFormAddAirdrop() {
     this.formAddAirdrop = new FormGroup({
       image: new FormControl(null, [Validators.required]),
-      tokenName: new FormControl('', [Validators.required]),
-      projectName: new FormControl('', [Validators.required]),
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      assetId: new FormControl(''),
-      platform: new FormControl(''),
-      website: new FormControl(''),
+      tokenName: new FormControl(this.initValue.tokenName || '', [Validators.required]),
+      projectName: new FormControl(this.initValue.projectName || '', [Validators.required]),
+      firstName: new FormControl(this.initValue.firstName || '', [Validators.required]),
+      lastName: new FormControl(this.initValue.lastName || '', [Validators.required]),
+      email: new FormControl(this.initValue.email || '', [Validators.required, Validators.email]),
+      assetId: new FormControl(this.initValue.assetId || ''),
+      platform: new FormControl(this.initValue.platform || ''),
+      website: new FormControl(this.initValue.website || ''),
       startDate: new FormControl(this.startDate, [Validators.required]),
-      endDate: new FormControl(null),
-      totalValue: new FormControl(''),
-      tokensPerClaim: new FormControl(null),
-      estimatedValue: new FormControl(''),
-      description: new FormControl(''),
-      commentBlock: new FormControl(''),
-      requirements: new FormControl([]),
-      howToGetToken: new FormControl([]),
-      projectLinks: new FormControl([]),
+      endDate: new FormControl(this.endDate || ''),
+      totalValue: new FormControl(this.initValue.totalValue || ''),
+      tokensPerClaim: new FormControl(this.initValue.tokensPerClaim || ''),
+      estimatedValue: new FormControl(this.initValue.estimatedValue || ''),
+      description: new FormControl(this.initValue.description || ''),
+      commentBlock: new FormControl(this.initValue.commentBlock || ''),
+      requirements: new FormControl(this.initValue.requirements || []),
+      howToGetToken: new FormControl(null),
+      projectLinks: new FormControl(null),
       claimButton: new FormControl(this.claimButtonLink)
     });
   }
@@ -81,10 +99,18 @@ export class FormAddAirdropComponent implements OnInit {
       const formModel = this.prepareSave();
       this.airdropService.addAirdrop(formModel).subscribe(
         response => {
+          this.successSubmit = true;
           this.addAirdrop.emit();
           this.modalRef.hide();
         },
-        error => console.log(error)
+        error => {
+          console.log(error);
+          if (error.error.error.code === 3003) {
+            this.formInvalidaAfterSubmit = false;
+            this.responseErrorAirdropExist =  error.error.error.message;
+          }
+          this.formAddAirdrop.get('requirements').setValue(this.requirementsView);
+        }
       );
     }
   }
@@ -143,6 +169,7 @@ export class FormAddAirdropComponent implements OnInit {
   prepareSave() {
     this.formAddAirdrop.get('howToGetToken').setValue(this.addedHTG);
     this.formAddAirdrop.get('projectLinks').setValue(this.addedProjectLinks);
+    this.requirementsView = this.formAddAirdrop.get('requirements').value;
     this.formAddAirdrop.get('requirements').setValue(this.prepareSaveRequirements());
     let input = new FormData();
     for (const field in this.formAddAirdrop.controls) {
@@ -183,7 +210,6 @@ export class FormAddAirdropComponent implements OnInit {
     const value = input.value.trim();
     if (value) {
       this.addedProjectLinks.push(value);
-      this.isOpenPopover.push('closed');
       input.value = '';
     }
     this.isActiveAddLink = false;
@@ -216,6 +242,34 @@ export class FormAddAirdropComponent implements OnInit {
 
     this.addedHTG[this.currentIdHTG] = stringToUrl;
     this.isOpenPopover[this.currentIdHTG] = false;
+  }
+
+  saveLastValue() {
+    for (const field in this.formAddAirdrop.controls) {
+      if (field === 'projectLinks' || field === 'howToGetToken' || field === 'image' || field === 'claimButton') {
+        continue;
+      }
+      this.lastValueForm[field] = this.formAddAirdrop.get(field).value;
+    }
+    this.lastValueForm['projectLinks'] = this.addedProjectLinks;
+    this.lastValueForm['howToGetToken'] = this.addedHTG;
+    localStorage.setItem('lastValueAddForm', JSON.stringify(this.lastValueForm));
+  }
+
+  initValueAddForm() {
+    if (JSON.parse(localStorage.getItem('lastValueAddForm'))) {
+      this.initValue = JSON.parse(localStorage.getItem('lastValueAddForm'));
+      if (this.initValue.howToGetToken) {
+        this.addedHTG = this.initValue.howToGetToken;
+      }
+      if (this.initValue.projectLinks) {
+        this.addedProjectLinks = this.initValue.projectLinks;
+      }
+      if (this.initValue.endDate) {
+        this.endDate = this.initValue.endDate;
+      }
+      this.lastValueForm = this.initValue;
+    }
   }
 }
 
