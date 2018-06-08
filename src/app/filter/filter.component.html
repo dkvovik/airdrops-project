@@ -145,6 +145,10 @@
   </div>
   <div class="w-100"></div>
   <div class="col-12 table-wrapper main-border" *ngIf="showData">
+    <div class="title-table" *ngIf="statusFoundAirdrops">
+      <div class="title">{{statusFoundAirdrops | titlecase }}</div>
+      <div class="button_back"><a routerLink="/">&#8592;</a></div>
+    </div>
     <table class="table table-striped table-hover">
       <thead>
       <tr>

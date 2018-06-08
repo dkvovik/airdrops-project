@@ -132,6 +132,25 @@
   padding-right: 0;
   margin-bottom: 10px;
 
+  .title-table {
+    padding: 15px;
+    justify-content: space-between;
+    display: flex;
+    color: $app-form-color-header;
+    border-bottom: 2px solid #F0F0F0;
+    align-items: center;
+
+    .button_back a {
+      font-size: 1.10rem;
+      color: #AAB2C0;
+
+      &:hover {
+        color: darken(#AAB2C0, 30%);
+      }
+    }
+
+  }
+
   tr:hover {
     cursor: pointer;
   }
