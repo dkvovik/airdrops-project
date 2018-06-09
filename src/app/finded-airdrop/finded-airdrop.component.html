@@ -19,9 +19,11 @@
                 </span>
             </div>
             <div class="info-social-icon">
-              <a href="{{projectLink}}" *ngFor="let projectLink of airdrop.projectLinks;"
-                 [innerHtml]="globals.parseIconProjectLink(projectLink, 'soc-net')">
-              </a>
+              <span *ngFor="let requirement of airdrop.requirements" (mouseenter)="currentRequirement=requirement;"
+                    [popover]="popTemplate" [popoverContext]="requirement" triggers="mouseenter:mouseleave"
+                    class="requirement-item"
+                    [innerHtml]="globals.parseIconRequirements(requirement.name, 'soc-net')">
+              </span>
             </div>
           </div>
           <div class="finded-airdrop__stat">
@@ -87,4 +89,14 @@
 
 <ng-template #detailInfo>
   <app-detail-info [modalRef]="modalRef" [airdrop]="currentAirdrop"></app-detail-info>
+</ng-template>
+
+<ng-template #popTemplate let-message="currentRequirement">{{ currentRequirement.name }}
+  <p *ngIf="currentRequirement.follow" class="mb-0"><small>&#8226; Follow</small></p>
+  <p *ngIf="currentRequirement.retweet" class="mb-0"><small>&#8226; Retweet</small></p>
+  <p *ngIf="currentRequirement.tweet" class="mb-0"><small>&#8226; Tweet</small></p>
+  <p *ngIf="currentRequirement.joinGroup" class="mb-0"><small>&#8226; Join group</small></p>
+  <p *ngIf="currentRequirement.joinChannel" class="mb-0"><small>&#8226; Join channel</small></p>
+  <p *ngIf="currentRequirement.singleShare" class="mb-0"><small>&#8226; Single share</small></p>
+  <p *ngIf="currentRequirement.posting" class="mb-0"><small>&#8226; Posting</small></p>
 </ng-template>
