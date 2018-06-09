@@ -283,10 +283,10 @@
                   </g>
                 </svg>
               </div>
-              <div #htgInput contenteditable="false" type="text" class="form-control"
-                   [popover]="popUrl" triggers="" [isOpen]="isOpenPopover[idx]"
-                   (click)=" currentIdHTG=idx; selectedTextFunc();" [innerHtml]="htg">
-              </div>
+              <input #htgInput type="text" class="form-control" value="{{htg}}"
+                    [popover]="popUrl" triggers="" [isOpen]="isOpenPopover[idx]"
+                    (click)=" currentIdHTG=idx; selectedTextFunc();"
+                    (focusout)="editHTG(htgInput.value,idx)">
             </div>
           </div>
         </div>
@@ -373,11 +373,14 @@
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 comment-block">
           <div class="title">
-            <label for="commentBlock">Comment Block</label>
+            <label for="commentBlock">Additional comments</label>
           </div>
-          <textarea class="form-control" id="commentBlock" rows="3" formControlName="commentBlock"></textarea>
+          <textarea class="form-control" id="commentBlock" rows="3" formControlName="commentBlock"
+                    [popover]="popUrlTextarea" triggers="" (click)="selectedTextAdditionalComments();"
+                    [isOpen]="isOpenPopoverTextarea"
+                    [innerHtml]="formAddAirdrop.get('commentBlock').value"></textarea>
         </div>
       </div>
       <div class="form-group row">
@@ -406,5 +409,22 @@
       </svg>
     </button>
     <input #url type="text" class="form-control" autofocus placeholder="https://">
+  </div>
+</ng-template>
+
+<ng-template #popUrlTextarea>
+  <span class="text-popover">URL</span>
+  <div class="container-input">
+    <button class="btn-input right"
+            (click)="stringToUrlInTextarea(urlTextarea.value)">
+      <svg class="icon right icon_plus" viewBox="0 0 16.984 16.952">
+        <g id="Close" transform="translate(-566.817 729.509) rotate(-45)">
+          <path id="Path_86" data-name="Path 86" class="cls-1" d="M942.034-75.666a.633.633,0,0,1-.916,0l-3.3-3.3-.472-.471a.633.633,0,0,1,0-.917h0a.633.633,0,0,1,.917,0l.471.471,3.3,3.3A.682.682,0,0,1,942.034-75.666Z" transform="translate(-19.56 -21.561)"/>
+          <path id="Path_87" data-name="Path 87" class="cls-1" d="M922.474-106.854a.633.633,0,0,0-.917,0l-4.871,4.871-4.871-4.871a.632.632,0,0,0-.471-.183.63.63,0,0,0-.471.183.633.633,0,0,0,0,.917l4.844,4.9-4.871,4.871a.633.633,0,0,0,0,.917.633.633,0,0,0,.917,0l10.685-10.684a.631.631,0,0,0,.183-.471A.66.66,0,0,0,922.474-106.854Z" transform="translate(0 -2)"/>
+        </g>
+      </svg>
+    </button>
+    <input #urlTextarea type="text" class="form-control" autofocus placeholder="https://"
+           (keyup.enter)="stringToUrlInTextarea(urlTextarea.value)">
   </div>
 </ng-template>

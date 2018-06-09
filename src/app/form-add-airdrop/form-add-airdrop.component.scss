@@ -60,7 +60,6 @@
 }
 
 .htg-input .form-control {
-  background-color: $app-form-color;
   cursor: text;
   min-height: 42px;
 }
@@ -217,6 +216,7 @@
   }
 
   input.form-control {
+    background-color: $app-form-color;
     border: none;
     border-radius: 0;
     border-bottom: 1px solid #4E5C6E;

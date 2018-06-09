@@ -46,6 +46,7 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
   @Output() addAirdrop: EventEmitter<any> = new EventEmitter();
 
   isOpenPopover = [];
+  isOpenPopoverTextarea = false;
   selectedText: string;
   currentIdHTG: any;
 
@@ -205,6 +206,9 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
   removeAddedHTG(index) {
     this.addedHTG.splice(index, 1);
   }
+  editHTG(value, id) {
+    this.addedHTG[id] = value;
+  }
 
   addProjectLink(input) {
     const value = input.value.trim();
@@ -228,7 +232,17 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
     }
   }
 
+  selectedTextAdditionalComments() {
+    this.selectedText = window.getSelection().toString();
+    if (this.selectedText) {
+      this.isOpenPopoverTextarea = true;
+    } else {
+      this.isOpenPopoverTextarea = false;
+    }
+  }
+
   stringToUrl(url) {
+    url = url.trim();
     if (!url) {
       this.isOpenPopover[this.currentIdHTG] = false;
       return false;
@@ -238,10 +252,27 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
 
     const beforeString = this.addedHTG[this.currentIdHTG].substring(0, startIndex);
     const afterString = this.addedHTG[this.currentIdHTG].substring(beforeString.length + this.selectedText.length);
-    const stringToUrl = `${beforeString}<a href="${url}">${this.selectedText}</a>${afterString}`;
+    const stringToUrl = `${beforeString}<a href="${url}" target="_blank">${this.selectedText}</a>${afterString}`;
 
     this.addedHTG[this.currentIdHTG] = stringToUrl;
     this.isOpenPopover[this.currentIdHTG] = false;
+  }
+
+  stringToUrlInTextarea(url) {
+    url = url.trim();
+    if (!url) {
+      this.isOpenPopoverTextarea = false;
+      return false;
+    }
+    const commentBlock = this.formAddAirdrop.get('commentBlock').value;
+    const startIndex = commentBlock.indexOf(this.selectedText);
+
+    const beforeString = commentBlock.substring(0, startIndex);
+    const afterString = commentBlock.substring(beforeString.length + this.selectedText.length);
+    const stringToUrl = `${beforeString}<a href="${url}" target="_blank">${this.selectedText}</a>${afterString}`;
+
+    this.formAddAirdrop.get('commentBlock').setValue(stringToUrl);
+    this.isOpenPopoverTextarea = false;
   }
 
   saveLastValue() {
