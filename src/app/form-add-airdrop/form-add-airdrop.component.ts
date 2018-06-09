@@ -41,6 +41,8 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
   successSubmit = false;
   responseErrorAirdropExist = '';
   errorAssetId = '';
+  errorPlatform = false;
+  errorHTG = false;
 
   @Input() modalRef: BsModalRef;
 
@@ -70,7 +72,7 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
   }
 
   initFormAddAirdrop() {
-    this.formAddAirdrop = new FormGroup({
+    /*this.formAddAirdrop = new FormGroup({
       image: new FormControl(null, [Validators.required]),
       tokenName: new FormControl(this.initValue.tokenName || '', [Validators.required]),
       projectName: new FormControl(this.initValue.projectName || '', [Validators.required]),
@@ -91,10 +93,44 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
       howToGetToken: new FormControl(null),
       projectLinks: new FormControl(null),
       claimButton: new FormControl(this.claimButtonLink)
+    });*/
+    this.formAddAirdrop = new FormGroup({
+      image: new FormControl(null, [Validators.required]),
+      tokenName: new FormControl(this.initValue.tokenName || '', [Validators.required]),
+      projectName: new FormControl(this.initValue.projectName || '', [Validators.required]),
+      firstName: new FormControl(this.initValue.firstName || '', [Validators.required]),
+      lastName: new FormControl(this.initValue.lastName || '', [Validators.required]),
+      email: new FormControl(this.initValue.email || '', [Validators.required, Validators.email]),
+      assetId: new FormControl(this.initValue.assetId || ''),
+      platform: new FormControl(this.initValue.platform || null),
+      website: new FormControl(this.initValue.website || '', [Validators.required]),
+      startDate: new FormControl(this.startDate, [Validators.required]),
+      endDate: new FormControl(this.endDate || ''),
+      totalValue: new FormControl(this.initValue.totalValue || '', [Validators.required]),
+      tokensPerClaim: new FormControl(this.initValue.tokensPerClaim || '', [Validators.required]),
+      estimatedValue: new FormControl(this.initValue.estimatedValue || null),
+      description: new FormControl(this.initValue.description || '', [Validators.required]),
+      commentBlock: new FormControl(this.initValue.commentBlock || '', [Validators.required]),
+      requirements: new FormControl(this.initValue.requirements || [], [Validators.required]),
+      howToGetToken: new FormControl(null),
+      projectLinks: new FormControl(null),
+      claimButton: new FormControl(this.claimButtonLink)
     });
   }
 
   onSubmitAddAirdrop() {
+    if (this.formAddAirdrop.get('platform').value === null) {
+      this.errorPlatform = true;
+    } else {
+      this.errorPlatform = false;
+    }
+
+    if (this.addedHTG.length === 0) {
+      this.errorHTG = true;
+    } else {
+      this.errorHTG = false;
+    }
+
     if (this.formAddAirdrop.invalid) {
       this.formInvalidaAfterSubmit = true;
     } else {
@@ -200,12 +236,18 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
   addHTG(input) {
     const value = input.value.trim();
     if (value) {
+      if (this.errorHTG) {
+        this.errorHTG = false;
+      }
       this.addedHTG.push(value);
       input.value = '';
     }
   }
   removeAddedHTG(index) {
     this.addedHTG.splice(index, 1);
+    if (this.addedHTG.length === 0) {
+      this.errorHTG = true;
+    }
   }
   editHTG(value, id) {
     this.addedHTG[id] = value;
@@ -322,6 +364,11 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
   }
 
   changePlatform(value) {
+    if (value === null) {
+      this.errorPlatform = true;
+    } else {
+      this.errorPlatform = false;
+    }
     if (value !== 'Waves') {
       this.formAddAirdrop.get('estimatedValue').setValue(null);
       this.formAddAirdrop.get('assetId').setValue('');

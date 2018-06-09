@@ -95,17 +95,26 @@
         <div class="col-md-6">
           <div class="title">
             <label for="website">Website</label>
+            <div class="invalid-feedback"
+                 *ngIf="formAddAirdrop.get('website').invalid && formAddAirdrop.get('website').touched &&
+                   formAddAirdrop.get('website')['errors']['required'] || formAddAirdrop.get('website').invalid && formInvalidaAfterSubmit">
+              Required</div>
           </div>
           <input type="text" class="form-control" id="website" placeholder="https://"
-                 formControlName="website" autocomplete="off">
+                 formControlName="website" autocomplete="off"
+                 [ngClass]="{'is-invalid': formAddAirdrop.get('website').invalid && formAddAirdrop.get('website').touched || formAddAirdrop.get('website').invalid && formInvalidaAfterSubmit}">
         </div>
         <div class="col-md-6">
           <div class="title">
             <label for="platform">Platform</label>
+            <div class="invalid-feedback"
+                 *ngIf="errorPlatform">
+              Required</div>
           </div>
           <select #platformSelect name="platform" id="platform" formControlName="platform"
-                  autocomplete="off" class="form-control" (change)="changePlatform(platformSelect.value)">
-            <option value="null">--||--</option>
+                  autocomplete="off" class="form-control" (change)="changePlatform(platformSelect.value)"
+                  [ngClass]="{'is-invalid': errorPlatform}">
+            <option value="null" disabled>--||--</option>
             <option value="Waves">Waves</option>
             <option value="Ethereum">Ethereum</option>
           </select>
@@ -128,6 +137,10 @@
         <div class="col-md-12">
           <div class="title">
             <label for="requirements">Requirements</label>
+            <div class="invalid-feedback"
+                 *ngIf="formAddAirdrop.get('requirements').invalid && formAddAirdrop.get('requirements').touched &&
+                   formAddAirdrop.get('requirements')['errors']['required'] || formAddAirdrop.get('requirements').invalid && formInvalidaAfterSubmit">
+              Required</div>
           </div>
           <div class="requirements-items-wrapper">
             <tag-input [onlyFromAutocomplete]="true" [modelAsStrings]="true"
@@ -232,8 +245,13 @@
         <div class="col-md-6">
           <div class="title">
             <label for="totalValue">Total value</label>
+            <div class="invalid-feedback"
+                 *ngIf="formAddAirdrop.get('totalValue').invalid && formAddAirdrop.get('totalValue').touched &&
+                 formAddAirdrop.get('totalValue')['errors']['required'] || formAddAirdrop.get('totalValue').invalid && formInvalidaAfterSubmit">
+              Required</div>
           </div>
-          <input type="text" class="form-control" id="totalValue" formControlName="totalValue" autocomplete="off">
+          <input type="text" class="form-control" id="totalValue" formControlName="totalValue" autocomplete="off"
+                 [ngClass]="{'is-invalid': formAddAirdrop.get('totalValue').invalid && formAddAirdrop.get('totalValue').touched || formAddAirdrop.get('totalValue').invalid && formInvalidaAfterSubmit}">
         </div>
       </div>
 
@@ -241,8 +259,13 @@
         <div class="col-md-6">
           <div class="title">
             <label for="tokensPerClaim">Tokens per Claim</label>
+            <div class="invalid-feedback"
+                 *ngIf="formAddAirdrop.get('tokensPerClaim').invalid && formAddAirdrop.get('tokensPerClaim').touched &&
+                 formAddAirdrop.get('tokensPerClaim')['errors']['required'] || formAddAirdrop.get('tokensPerClaim').invalid && formInvalidaAfterSubmit">
+              Required</div>
           </div>
-          <input type="text" class="form-control" id="tokensPerClaim" formControlName="tokensPerClaim" autocomplete="off">
+          <input type="text" class="form-control" id="tokensPerClaim" formControlName="tokensPerClaim" autocomplete="off"
+                 [ngClass]="{'is-invalid': formAddAirdrop.get('tokensPerClaim').invalid && formAddAirdrop.get('tokensPerClaim').touched || formAddAirdrop.get('tokensPerClaim').invalid && formInvalidaAfterSubmit}">
         </div>
         <div class="col-md-6">
           <div class="title">
@@ -258,13 +281,20 @@
       <div class="form-group">
         <div class="title">
           <label for="description">Description</label>
+          <div class="invalid-feedback"
+               *ngIf="formAddAirdrop.get('description').invalid && formAddAirdrop.get('description').touched &&
+                 formAddAirdrop.get('description')['errors']['required'] || formAddAirdrop.get('description').invalid && formInvalidaAfterSubmit">
+            Required</div>
         </div>
-        <textarea class="form-control" id="description" rows="4" formControlName="description" autocomplete="off"></textarea>
+        <textarea class="form-control" id="description" rows="4" formControlName="description" autocomplete="off"
+                  [ngClass]="{'is-invalid': formAddAirdrop.get('description').invalid && formAddAirdrop.get('description').touched || formAddAirdrop.get('description').invalid && formInvalidaAfterSubmit}">
+        </textarea>
       </div>
 
       <div class="form-group">
         <div class="title">
           <label for="howToGetToken">How to get a token</label>
+          <div class="invalid-feedback" *ngIf="errorHTG">Required</div>
         </div>
         <div class="row htg-item htg-item_added" *ngFor="let htg of addedHTG; let idx = index;">
           <div class="col-md-1">
@@ -313,7 +343,8 @@
                 </svg>
               </button>
               <input #addHTGIinput type="text" class="form-control" id="howToGetToken" formControlName="howToGetToken"
-                     autocomplete="off" (keyup.enter)="addHTG(addHTGIinput); addHTGIinput.value = '';">
+                     autocomplete="off" (keyup.enter)="addHTG(addHTGIinput); addHTGIinput.value = '';"
+                     [ngClass]="{'is-invalid': errorHTG}">
             </div>
           </div>
         </div>
@@ -381,11 +412,16 @@
         <div class="col-md-6 comment-block">
           <div class="title">
             <label for="commentBlock">Additional comments</label>
+            <div class="invalid-feedback"
+                 *ngIf="formAddAirdrop.get('commentBlock').invalid && formAddAirdrop.get('commentBlock').touched &&
+                 formAddAirdrop.get('commentBlock')['errors']['required'] || formAddAirdrop.get('commentBlock').invalid && formInvalidaAfterSubmit">
+              Required</div>
           </div>
           <textarea class="form-control" id="commentBlock" rows="3" formControlName="commentBlock"
                     [popover]="popUrlTextarea" triggers="" (click)="selectedTextAdditionalComments();"
                     [isOpen]="isOpenPopoverTextarea"
-                    [value]="formAddAirdrop.get('commentBlock').value"></textarea>
+                    [value]="formAddAirdrop.get('commentBlock').value"
+                    [ngClass]="{'is-invalid': formAddAirdrop.get('commentBlock').invalid && formAddAirdrop.get('commentBlock').touched || formAddAirdrop.get('commentBlock').invalid && formInvalidaAfterSubmit}"></textarea>
         </div>
       </div>
       <div class="form-group row">
