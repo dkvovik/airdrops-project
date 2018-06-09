@@ -19,6 +19,8 @@ export class DetailInfoComponent implements OnInit {
 
   currentRequirement: Requirement;
 
+  estimatedValue = null;
+
   constructor(private globals: Globals,
               private airdropService: AirdropService) {
   }
@@ -28,6 +30,7 @@ export class DetailInfoComponent implements OnInit {
       this.globals.visitedAirdrop.push(this.airdrop.tokenName);
     }
     localStorage.setItem('visitedAirdrop', JSON.stringify(this.globals.visitedAirdrop));
+    this.getEstimateValue();
   }
 
   ratingUp() {
@@ -64,5 +67,16 @@ export class DetailInfoComponent implements OnInit {
     if (this.globals.voitedRatingDown.indexOf(this.airdrop._id) !== -1 || this.globals.voitedRatingUp.indexOf(this.airdrop._id) !== -1) {
       return true;
     }
+  }
+
+  getEstimateValue() {
+    this.airdropService.getEstimateValue(this.airdrop.assetId).subscribe(
+      responseList => {
+        this.estimatedValue = responseList[0]['24h_vwap'] * responseList[1]['24h_vwap'];
+      },
+      error => {
+        this.estimatedValue = null;
+      }
+    );
   }
 }

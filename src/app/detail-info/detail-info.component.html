@@ -89,7 +89,7 @@
     </div>
     <div class="estimated-wrapper">
       <div class="estimated-title">Estimated value</div>
-      <div class="estimated-value">{{airdrop.estimatedValue}}</div>
+      <div class="estimated-value" *ngIf="estimatedValue">{{estimatedValue | currency}}</div>
     </div>
   </div>
   <div class="modal-body__middle">
