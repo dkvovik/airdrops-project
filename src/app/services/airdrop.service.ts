@@ -12,8 +12,8 @@ const httpOptions = {
 @Injectable()
 export class AirdropService {
 
-  basicUrl = 'http://wilix.org:3000';
-  /*basicUrl = 'http://10.1.1.12:3000';*/
+  /*basicUrl = 'http://wilix.org:3000';*/
+  basicUrl = 'http://10.1.1.12:3000';
 
   airdrops: Airdrop[] = [];
 
@@ -150,6 +150,26 @@ export class AirdropService {
         }
         return response;
       });
+  }
+
+  getEstimateValue(term): any {
+    const assedIdToWaves =  this.http.get(`https://marketdata.wavesplatform.com/api/ticker/${term}/WAVES`)
+      .map( (response: any) => {
+        if (response.status === 'error') {
+          throw Observable.throw(response);
+        }
+        return response;
+      });
+
+    const wavesToUSD =  this.http.get(`https://marketdata.wavesplatform.com/api/ticker/WAVES/USD`)
+      .map( (response: any) => {
+        if (response.status === 'error') {
+          throw Observable.throw(response);
+        }
+        return response;
+      });
+
+    return Observable.forkJoin([assedIdToWaves, wavesToUSD]);
   }
 
 }

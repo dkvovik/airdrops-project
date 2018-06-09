@@ -76,7 +76,12 @@
     </div>
     <div class="date-wrapper">
       <div class="date-start"><span class="badge_grey">Start</span> {{airdrop.startDate | date:'d MMMM y'}}</div>
-      <div class="date-end"><span class="badge_grey">End</span> {{airdrop.endDate | date:'d MMMM y'}}</div>
+      <div class="date-end" *ngIf="airdrop.endDate">
+        <span class="badge_grey">End</span> {{airdrop.endDate | date:'d MMMM y'}}
+      </div>
+      <div class="date-end" *ngIf="!airdrop.endDate">
+        <span class="badge_grey">End</span>&infin;
+      </div>
     </div>
     <div class="token-wrapper">
       <div class="token-value"><span class="badge_grey">Total value</span> {{airdrop.totalValue}}</div>

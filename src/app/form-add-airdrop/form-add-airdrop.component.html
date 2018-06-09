@@ -103,7 +103,8 @@
           <div class="title">
             <label for="platform">Platform</label>
           </div>
-          <select name="platform" id="platform" formControlName="platform" autocomplete="off" class="form-control">
+          <select #platformSelect name="platform" id="platform" formControlName="platform"
+                  autocomplete="off" class="form-control" (change)="changePlatform(platformSelect.value)">
             <option value="null">--||--</option>
             <option value="Waves">Waves</option>
             <option value="Ethereum">Ethereum</option>
@@ -115,8 +116,11 @@
         <div class="col-md-12">
           <div class="title">
             <label for="assetId">Asset ID</label>
+            <div class="invalid-feedback" *ngIf="errorAssetId">{{errorAssetId}}</div>
           </div>
-          <input type="text" class="form-control" id="assetId" formControlName="assetId" autocomplete="off">
+          <input #assetIdInput type="text" class="form-control" id="assetId" formControlName="assetId" autocomplete="off"
+                 (focusout)="getEstimateValue(assetIdInput.value)"
+                 [ngClass]="{'is-invalid': errorAssetId}">
         </div>
       </div>
 
@@ -244,7 +248,8 @@
           <div class="title">
             <label for="estimatedValue">Estimated value</label>
           </div>
-          <input type="text" class="form-control" id="estimatedValue" formControlName="estimatedValue" autocomplete="off">
+          <input readonly type="text" class="form-control" id="estimatedValue" formControlName="estimatedValue"
+                 autocomplete="off" [value]="formAddAirdrop.get('estimatedValue').value | currency">
         </div>
       </div>
     </div>
@@ -361,8 +366,8 @@
                   </svg>
                 </button>
                 <input #projectLinks type="text" class="form-control" id="projectLinks" autocomplete="off"
-                       autofocus placeholder="https://" formControlName="projectLinks"
-                       (keyup.enter)="addProjectLink(projectLinks); projectLinks.value = '';">
+                        autofocus placeholder="https://" formControlName="projectLinks"
+                        (keyup.enter)="addProjectLink(projectLinks); projectLinks.value = '';">
               </div>
             </div>
 
@@ -380,7 +385,7 @@
           <textarea class="form-control" id="commentBlock" rows="3" formControlName="commentBlock"
                     [popover]="popUrlTextarea" triggers="" (click)="selectedTextAdditionalComments();"
                     [isOpen]="isOpenPopoverTextarea"
-                    [innerHtml]="formAddAirdrop.get('commentBlock').value"></textarea>
+                    [value]="formAddAirdrop.get('commentBlock').value"></textarea>
         </div>
       </div>
       <div class="form-group row">

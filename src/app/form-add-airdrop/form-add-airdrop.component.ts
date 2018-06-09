@@ -40,6 +40,7 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
 
   successSubmit = false;
   responseErrorAirdropExist = '';
+  errorAssetId = '';
 
   @Input() modalRef: BsModalRef;
 
@@ -83,7 +84,7 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
       endDate: new FormControl(this.endDate || ''),
       totalValue: new FormControl(this.initValue.totalValue || ''),
       tokensPerClaim: new FormControl(this.initValue.tokensPerClaim || ''),
-      estimatedValue: new FormControl(this.initValue.estimatedValue || ''),
+      estimatedValue: new FormControl(this.initValue.estimatedValue || null),
       description: new FormControl(this.initValue.description || ''),
       commentBlock: new FormControl(this.initValue.commentBlock || ''),
       requirements: new FormControl(this.initValue.requirements || []),
@@ -300,6 +301,30 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
         this.endDate = this.initValue.endDate;
       }
       this.lastValueForm = this.initValue;
+    }
+  }
+
+  getEstimateValue(term) {
+    this.airdropService.getEstimateValue(term).subscribe(
+      responseList => {
+        console.log('responseList[0]', responseList[0]);
+        console.log('responseList[1]', responseList[1]);
+        this.errorAssetId = '';
+        let estimatedValue = responseList[0]['24h_vwap'] * responseList[1]['24h_vwap'];
+        this.formAddAirdrop.get('estimatedValue').setValue(estimatedValue);
+      },
+      error => {
+        console.log('error', error);
+        this.errorAssetId = error.error.message;
+        this.formAddAirdrop.get('estimatedValue').setValue(null);
+      }
+    );
+  }
+
+  changePlatform(value) {
+    if (value !== 'Waves') {
+      this.formAddAirdrop.get('estimatedValue').setValue(null);
+      this.formAddAirdrop.get('assetId').setValue('');
     }
   }
 }
