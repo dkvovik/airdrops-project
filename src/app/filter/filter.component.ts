@@ -18,7 +18,7 @@ export class FilterComponent implements OnInit {
   selectedMinTokenValue;
   maxTokenValue = 0;
   selectedMaxTokenValue;
-  stepTokenValue = 0;
+  stepTokenValue = 1;
   twoWayRangeTokenValue = [0, 0];
 
   minRating = 0;
