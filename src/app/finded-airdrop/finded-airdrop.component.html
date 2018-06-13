@@ -36,7 +36,7 @@
               </div>
               <div class="stat-icon">
                 <p>
-                  <svg class="rating" viewBox="0 0 18 18">
+                  <svg class="rating" [ngClass]="{active: isVoted(airdrop._id)}" viewBox="0 0 18 18">
                     <g id="Group_408" data-name="Group 408" transform="translate(-409 -163)">
                       <ellipse id="Ellipse_12" data-name="Ellipse 12" class="cls-1" cx="9" cy="9" rx="9" ry="9"
                                transform="translate(409 163)"/>

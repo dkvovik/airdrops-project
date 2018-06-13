@@ -25,4 +25,10 @@ export class FindedAirdropComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+
+  isVoted(id) {
+    if (this.globals.voitedRatingDown.indexOf(id) !== -1 || this.globals.voitedRatingUp.indexOf(id) !== -1) {
+      return true;
+    }
+  }
 }

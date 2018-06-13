@@ -238,4 +238,10 @@ export class FilterComponent implements OnInit {
     this.airdrops = [];
     this.getFilteredAirdrops();
   }
+
+  isVoted(id) {
+    if (this.globals.voitedRatingDown.indexOf(id) !== -1 || this.globals.voitedRatingUp.indexOf(id) !== -1) {
+      return true;
+    }
+  }
 }

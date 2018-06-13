@@ -171,5 +171,9 @@
     fill: #B1BAC6;
     vertical-align: sub;
     margin-right: 8px;
+
+    &.active {
+      fill: #1F5AF6;
+    }
   }
 }
