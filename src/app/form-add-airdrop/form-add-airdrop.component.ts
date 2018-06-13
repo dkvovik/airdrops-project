@@ -101,7 +101,7 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
       firstName: new FormControl(this.initValue.firstName || '', [Validators.required]),
       lastName: new FormControl(this.initValue.lastName || '', [Validators.required]),
       email: new FormControl(this.initValue.email || '', [Validators.required, Validators.email]),
-      assetId: new FormControl(this.initValue.assetId || ''),
+      assetId: new FormControl(this.initValue.assetId || '', [Validators.minLength(44), Validators.maxLength(44)]),
       platform: new FormControl(this.initValue.platform || null),
       website: new FormControl(this.initValue.website || '', [Validators.required]),
       startDate: new FormControl(this.startDate, [Validators.required]),
@@ -347,6 +347,9 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
   }
 
   getEstimateValue(term) {
+    if (this.formAddAirdrop.get('assetId')['errors']) {
+      return false;
+    }
     this.airdropService.getEstimateValue(term).subscribe(
       responseList => {
         console.log('responseList[0]', responseList[0]);

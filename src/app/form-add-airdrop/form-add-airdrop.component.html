@@ -126,10 +126,18 @@
           <div class="title">
             <label for="assetId">Asset ID</label>
             <div class="invalid-feedback" *ngIf="errorAssetId">{{errorAssetId}}</div>
+            <div class="invalid-feedback"
+                 *ngIf="formAddAirdrop.get('assetId').invalid &&
+                 formAddAirdrop.get('assetId').touched &&
+                 formAddAirdrop.get('assetId')['errors']['minlength'] ||
+                 formAddAirdrop.get('assetId').invalid &&
+                 formAddAirdrop.get('assetId').touched &&
+                 formAddAirdrop.get('assetId')['errors']['maxlength']">
+              Length must be 44 characters.</div>
           </div>
           <input #assetIdInput type="text" class="form-control" id="assetId" formControlName="assetId" autocomplete="off"
                  (focusout)="getEstimateValue(assetIdInput.value)"
-                 [ngClass]="{'is-invalid': errorAssetId}">
+                 [ngClass]="{'is-invalid': errorAssetId || formAddAirdrop.get('assetId').invalid && formAddAirdrop.get('assetId').touched || formAddAirdrop.get('assetId').invalid && formInvalidaAfterSubmit}">
         </div>
       </div>
 
