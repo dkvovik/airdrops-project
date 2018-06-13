@@ -72,7 +72,7 @@ export class DetailInfoComponent implements OnInit {
   getEstimateValue() {
     this.airdropService.getEstimateValue(this.airdrop.assetId).subscribe(
       responseList => {
-        this.estimatedValue = responseList[0]['24h_vwap'] * responseList[1]['24h_vwap'];
+        this.estimatedValue = responseList[0]['24h_vwap'] * responseList[1]['24h_vwap'] * this.airdrop.tokensPerClaim;
       },
       error => {
         this.estimatedValue = null;

@@ -44,6 +44,8 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
   errorPlatform = false;
   errorHTG = false;
 
+  estimatedValue = 0;
+
   @Input() modalRef: BsModalRef;
 
   @Output() addAirdrop: EventEmitter<any> = new EventEmitter();
@@ -355,13 +357,12 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
         console.log('responseList[0]', responseList[0]);
         console.log('responseList[1]', responseList[1]);
         this.errorAssetId = '';
-        let estimatedValue = responseList[0]['24h_vwap'] * responseList[1]['24h_vwap'];
-        this.formAddAirdrop.get('estimatedValue').setValue(estimatedValue);
+        this.estimatedValue = responseList[0]['24h_vwap'] * responseList[1]['24h_vwap'];
       },
       error => {
         console.log('error', error);
+        this.estimatedValue = 0;
         this.errorAssetId = error.error.message;
-        this.formAddAirdrop.get('estimatedValue').setValue(null);
       }
     );
   }
@@ -376,6 +377,13 @@ export class FormAddAirdropComponent implements OnInit, OnDestroy {
       this.formAddAirdrop.get('estimatedValue').setValue(null);
       this.formAddAirdrop.get('assetId').setValue('');
     }
+  }
+
+  setEstimateValue() {
+    if (!this.estimatedValue || !this.formAddAirdrop.get('tokensPerClaim').value) {
+      return 0;
+    }
+    return this.estimatedValue * this.formAddAirdrop.get('tokensPerClaim').value;
   }
 }
 
