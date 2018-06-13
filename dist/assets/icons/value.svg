@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15">
+  <defs>
+    <style>
+      .value {
+        fill: #fff;
+        font-size: 10px;
+        font-family: Roboto-Regular, Roboto;
+      }
+    </style>
+  </defs>
+  <g id="Group_260" data-name="Group 260" transform="translate(-370 -195)">
+    <circle id="Ellipse_12" data-name="Ellipse 12" class="cls-1" cx="7.5" cy="7.5" r="7.5" transform="translate(370 195)"/>
+    <text id="_" data-name="~" class="value" transform="translate(381 206)"><tspan x="-6.802" y="0">~</tspan></text>
+  </g>
+</svg>

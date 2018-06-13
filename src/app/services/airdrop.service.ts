@@ -12,8 +12,9 @@ const httpOptions = {
 @Injectable()
 export class AirdropService {
 
-  /*basicUrl = 'http://wilix.org:3000';*/
-  basicUrl = 'http://10.1.1.12:3000';
+  // basicUrl = 'http://wilix.org:3000/api';
+  basicUrl = 'http://airdropwaves.com/api';
+  /*basicUrl = 'http://10.1.1.12:3000/api';*/
 
   airdrops: Airdrop[] = [];
 
