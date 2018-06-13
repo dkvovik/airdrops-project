@@ -1,0 +1,50 @@
+.footer {
+  background-color: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.social-networks {
+  padding-top: 4px;
+
+  &__icon {
+    margin-right: 30px;
+  }
+  svg {
+    height: 13px;
+  }
+}
+
+.copyright {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+
+  a {
+    display: flex;
+    align-items: center;
+    color: #9BA6B2;
+    font-weight: 500;
+    font-size: 17px;
+
+    &:hover {
+      opacity: 1;
+
+      svg {
+        opacity: 1;
+      }
+    }
+
+    span {
+      margin-left: 3px;
+      font-size: 14px;
+      line-height: 23px;
+    }
+
+    svg {
+      fill: #9BA6B2;
+      height: 29px;
+      margin-right: 15px;
+    }
+  }
+}

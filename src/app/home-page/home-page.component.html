@@ -1,39 +1,48 @@
-<section class="filter-wrapper">
-  <app-filter></app-filter>
+<app-header></app-header>
 
-  <div class="row finded-airdrops-wrapper">
-    <div class="col-md-12 col-lg-4 finded-airdrops-item">
-      <app-finded-airdrops [airdrops]="upcomingAirdrop" title="Upcoming"></app-finded-airdrops>
-    </div>
-    <div class="col-md-12 col-lg-4 finded-airdrops-item">
-      <app-finded-airdrops [airdrops]="activeAirdrop" title="Active"></app-finded-airdrops>
-    </div>
-    <div class="col-md-12 col-lg-4 finded-airdrops-item">
-      <app-finded-airdrops [airdrops]="pastAirdrop" title="Past"></app-finded-airdrops>
-    </div>
-  </div>
+<div class="container content">
 
-  <div class="row">
-    <div class="col-md-12 submit-airdrop-wrapper main-border">
-      <button class="btn" (click)="openModal(formAddAirdrop)">Submit New Airdrop</button>
-    </div>
-  </div>
-</section>
+  <section class="filter-wrapper">
+    <app-filter></app-filter>
 
-<ng-template #formAddAirdrop>
-  <app-form-add-airdrop [modalRef]="modalRef" (addAirdrop)="openModal(successAdded, 'modal-sm')"></app-form-add-airdrop>
-</ng-template>
+    <div class="row finded-airdrops-wrapper">
+      <div class="col-md-12 col-lg-4 finded-airdrops-item">
+        <app-finded-airdrops [airdrops]="upcomingAirdrop" title="Upcoming"></app-finded-airdrops>
+      </div>
+      <div class="col-md-12 col-lg-4 finded-airdrops-item">
+        <app-finded-airdrops [airdrops]="activeAirdrop" title="Active"></app-finded-airdrops>
+      </div>
+      <div class="col-md-12 col-lg-4 finded-airdrops-item">
+        <app-finded-airdrops [airdrops]="pastAirdrop" title="Past"></app-finded-airdrops>
+      </div>
+    </div>
 
-<ng-template #successAdded>
-  <div class="modal-success">
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Success</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <div class="row">
+      <div class="col-md-12 submit-airdrop-wrapper main-border">
+        <button class="btn" (click)="openModal(formAddAirdrop)">Submit New Airdrop</button>
+      </div>
     </div>
-    <div class="modal-body">
-      Airdrop sent to moderation.
+  </section>
+
+  <ng-template #formAddAirdrop>
+    <app-form-add-airdrop [modalRef]="modalRef"
+                          (addAirdrop)="openModal(successAdded, 'modal-sm')"></app-form-add-airdrop>
+  </ng-template>
+
+  <ng-template #successAdded>
+    <div class="modal-success">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Success</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Airdrop sent to moderation.
+      </div>
     </div>
-  </div>
-</ng-template>
+  </ng-template>
+
+</div>
+
+<app-footer></app-footer>

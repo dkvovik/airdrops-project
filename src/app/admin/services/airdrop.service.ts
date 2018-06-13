@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ResponseServer } from '../shared/models/responce';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Airdrop } from '../shared/models/airdrop';
 import { Globals } from '../shared/globals';
+import { Airdrop } from '../../shared/models/airdrop';
+import { ResponseServer } from '../../shared/models/responce';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,7 +14,6 @@ export class AirdropService {
 
   basicUrl = 'http://wilix.org:3000';
   /*basicUrl = 'http://10.1.1.12:3000';*/
-
   airdrops: Airdrop[] = [];
 
   date = new Date();
@@ -24,32 +23,9 @@ export class AirdropService {
   constructor(private http: HttpClient,
               private globals: Globals) { }
 
-  addAirdrop(data): Observable<ResponseServer> {
-    return this.http.post(`${this.basicUrl}/airdrop/add`, data)
-      .map( (response: any) => {
-        if (!response.success) {
-          throw Observable.throw(response);
-        }
-        console.log('response Add Airdrop', response);
-        this.airdrops.push(response.data);
-        return response.data;
-      });
-  }
-
-  updateAirdrop(data): Observable<ResponseServer> {
-    return this.http.post(`${this.basicUrl}/airdrop/update`, data)
-      .map( (response: any) => {
-        if (!response.success) {
-          throw Observable.throw(response);
-        }
-        return response.data;
-      });
-
-  }
-
   getAirdrops(data = {}, status = ''): Observable<ResponseServer> {
     if (!status) {
-      return this.http.post(`${this.basicUrl}/airdrops-verified`, data, httpOptions)
+      return this.http.post(`${this.basicUrl}/airdrops`, data, httpOptions)
         .map( (response: any) => {
           if (response.success === false) {
             throw Observable.throw(response);
@@ -63,14 +39,45 @@ export class AirdropService {
             throw Observable.throw(response);
           }
           return response;
-      });
+        });
     }
   }
 
-  getFilterValueMinMax(status = ''): any {
-    return this.http.get(`${this.basicUrl}/airdrop/values?status=${status}`)
+  getFilterValueMinMax(): any {
+    return this.http.get(`${this.basicUrl}/airdrop/values?status=admin`)
       .map( (response: any) => {
         if (response.success === false) {
+          throw Observable.throw(response);
+        }
+        return response;
+      });
+  }
+
+  addAirdrop(data): Observable<ResponseServer> {
+    return this.http.post(`${this.basicUrl}/airdrop/add?role='admin'`, data)
+      .map( (response: any) => {
+        if (!response.success) {
+          throw Observable.throw(response);
+        }
+        this.airdrops.push(response.data);
+        return response.data;
+      });
+  }
+
+  updateAirdrop(data): Observable<ResponseServer> {
+    return this.http.post(`${this.basicUrl}/airdrop/update`, data)
+      .map( (response: any) => {
+        if (!response.success) {
+          throw Observable.throw(response);
+        }
+        return response.data;
+      });
+  }
+
+  removeAirdrop(id) {
+    return this.http.get(`${this.basicUrl}/airdrop/remove?id=${id}`)
+      .map( (response: any) => {
+        if (!response.success) {
           throw Observable.throw(response);
         }
         return response;
@@ -121,36 +128,6 @@ export class AirdropService {
         a['yesterday'] = false;
       }
     });
-  }
-
-  getAirdropsUpcoming(data = {}, limit = '') {
-    return this.http.post(`${this.basicUrl}/airdrops/upcoming?limit=${limit}`, data)
-      .map( (response: any) => {
-        if (response.success === false) {
-          throw Observable.throw(response);
-        }
-        return response;
-      });
-  }
-
-  getAirdropsActive(data = {}, limit = '') {
-    return this.http.post(`${this.basicUrl}/airdrops/active?limit=${limit}`, data)
-      .map( (response: any) => {
-        if (response.success === false) {
-          throw Observable.throw(response);
-        }
-        return response;
-      });
-  }
-
-  getAirdropsPast(data = {}, limit = '') {
-    return this.http.post(`${this.basicUrl}/airdrops/past?limit=${limit}`, data)
-      .map( (response: any) => {
-        if (response.success === false) {
-          throw Observable.throw(response);
-        }
-        return response;
-      });
   }
 
   getEstimateValue(term): any {

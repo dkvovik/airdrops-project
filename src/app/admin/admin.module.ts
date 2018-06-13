@@ -1,53 +1,51 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatTabsModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './app.routing';
-
-import { AppComponent } from './app.component';
+import { AdminRoutingModule } from './admin.routing';
+import { AdminComponent } from './admin.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { HomePageComponent } from './home-page/home-page.component';
 import { FilterComponent } from './filter/filter.component';
 import { AirdropService } from './services/airdrop.service';
-import { FindedAirdropComponent } from './finded-airdrop/finded-airdrop.component';
 import { BsDatepickerModule, ModalModule, PopoverModule } from 'ngx-bootstrap';
 import { FormAddAirdropComponent } from './form-add-airdrop/form-add-airdrop.component';
 import { Globals } from './shared/globals';
 import { ClipboardModule } from 'ngx-clipboard';
 import { TagInputModule } from 'ngx-chips';
-import { DetailInfoComponent } from './detail-info/detail-info.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { FormEditAirdropComponent } from './form-edit-airdrop/form-edit-airdrop.component';
 import { NouisliderModule } from 'ng2-nouislider';
-import { FindedAirdropPageComponent } from './finded-airdrop-page/finded-airdrop-page.component';
+import { AuthModule } from './auth/auth.module';
+import { TokenInterceptor } from './auth/token.interceptor';
+import { LoggedGuard } from './guard/logged.service';
+import { AuthGuard } from './guard/auth-guard.service';
+import { AuthService } from './services/auth.service';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AdminComponent,
     HeaderComponent,
     FooterComponent,
-    HomePageComponent,
     FilterComponent,
-    FindedAirdropComponent,
     FormAddAirdropComponent,
-    DetailInfoComponent,
-    FindedAirdropPageComponent,
+    AdminPageComponent,
+    FormEditAirdropComponent
   ],
   entryComponents: [
   ],
   imports: [
-    BrowserModule,
-    RouterModule,
-    FormsModule,
-    AppRoutingModule,
+    CommonModule,
     HttpClientModule,
+    FormsModule,
+    AdminRoutingModule,
     MatTabsModule,
-    BrowserAnimationsModule,
+    // BrowserAnimationsModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ReactiveFormsModule,
@@ -55,9 +53,15 @@ import { FindedAirdropPageComponent } from './finded-airdrop-page/finded-airdrop
     ClipboardModule,
     TagInputModule,
     NouisliderModule,
+    AuthModule
   ],
-  providers: [Globals, AirdropService],
-  bootstrap: [AppComponent]
+  providers: [Globals, AirdropService, AuthService, AuthGuard, LoggedGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ]
 })
-export class AppModule {
+export class AdminModule {
 }

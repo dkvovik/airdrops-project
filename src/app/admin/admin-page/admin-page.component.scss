@@ -1,0 +1,29 @@
+.content {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.submit-airdrop-wrapper {
+  background-image: url(/assets/bg-submit-wrapper.jpg);
+  background-repeat: no-repeat;
+  padding-top: 45px;
+  padding-bottom: 45px;
+  background-size: cover;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+
+  .btn {
+    width: 276px;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.btn-add-airdrop {
+  position: absolute;
+  top: 7px;
+  right: 15px;
+  padding: 4px 15px;
+}

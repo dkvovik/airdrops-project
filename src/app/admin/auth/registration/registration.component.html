@@ -1,0 +1,35 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+  <small class="form-text text-from-server" *ngIf="messageFromServer">{{ messageFromServer }}</small>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" formControlName="email">
+    <small class="form-text text-muted"
+           *ngIf="registrationForm.get('email').invalid && registrationForm.get('email').touched">
+      Enter the correct email.</small>
+  </div>
+  <div formGroupName="passwordConfirmed">
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" formControlName="password">
+      <small class="form-text text-muted"
+             *ngIf="registrationForm.get('passwordConfirmed.password').invalid && registrationForm.get('passwordConfirmed.password').touched">
+        Password must not be empty.</small>
+    </div>
+    <div class="form-group">
+      <label for="passwordConfirm">Confirm password</label>
+      <input type="password" class="form-control" id="passwordConfirm" formControlName="passwordConfirm">
+      <small class="form-text text-muted"
+             *ngIf="registrationForm.get('passwordConfirmed.password').valid &&
+                    registrationForm.get('passwordConfirmed.passwordConfirm').touched &&
+                    registrationForm.get('passwordConfirmed').hasError('mismatch')">
+        Passwords must match.</small>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  <hr>
+  <div class="form-group ">
+    <p class="text-muted text-center">
+      I already have an account. <a [routerLink]="'/admin/login'">Log In!</a>
+    </p>
+  </div>
+</form>

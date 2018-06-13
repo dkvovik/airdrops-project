@@ -5,7 +5,7 @@
         <h2 class="title">Requirements</h2>
         <div class="button-filter-wrapper">
           <label for="email" [popover]="'Email'" triggers="mouseenter:mouseleave" class="button-filter-label">
-            <input type="checkbox" name="Email" id="email" (click)="toggleRequirements('Email')">
+            <input type="checkbox" name="email" id="email" (click)="toggleRequirements('Email')">
             <span class="button-filter">
               <svg class="icon" viewBox="0 0 20.147 14.576">
             <g id="message-envelope" class="cls-1" transform="translate(0 -1)">
@@ -144,11 +144,7 @@
     </div>
   </div>
   <div class="w-100"></div>
-  <div class="col-12 table-wrapper main-border" *ngIf="showData">
-    <div class="title-table" *ngIf="statusFoundAirdrops">
-      <div class="title">{{statusFoundAirdrops | titlecase }}</div>
-      <div class="button_back"><a routerLink="/">&#8592;</a></div>
-    </div>
+  <div class="col-12 table-wrapper main-border">
     <table class="table table-striped table-hover">
       <thead>
       <tr>
@@ -162,8 +158,8 @@
       </thead>
       <tbody>
       <tr *ngIf="airdrops.length === 0"><td>No data matches the query.</td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr *ngFor="let airdrop of airdrops"
-          (click)="currentAirdrop = airdrop; openModal(detailInfo); airdrop['isVisited'] = true;">
+      <tr *ngFor="let airdrop of airdrops" [ngClass]="{notVerified: !airdrop.verified}"
+          (click)="currentAirdrop = airdrop; openModal(formEditAirdrop); airdrop['isVisited'] = true;">
         <td>
           <img class="token-logo" src="{{airdrop.image}}"/>
           {{airdrop.tokenName}} <span *ngIf="airdrop.isVisited">
@@ -180,7 +176,7 @@
         <td>{{airdrop.startDate | date:'d MMMM y'}}</td>
         <td>{{airdrop.endDate | date:'d MMMM y'}}</td>
         <td>
-          <svg class="rating" [ngClass]="{active: isVoted(airdrop._id)}" viewBox="0 0 18 18">
+          <svg class="rating" viewBox="0 0 18 18">
             <g id="Group_408" data-name="Group 408" transform="translate(-409 -163)">
               <ellipse id="Ellipse_12" data-name="Ellipse 12" class="cls-1" cx="9" cy="9" rx="9" ry="9"
                        transform="translate(409 163)"/>
@@ -208,7 +204,7 @@
   </div>
 </div>
 
-<ng-template #detailInfo>
-  <app-detail-info [modalRef]="modalRef" [airdrop]="currentAirdrop"
-                   (votedRating)="refreshAirdrops()"></app-detail-info>
+<ng-template #formEditAirdrop>
+  <app-form-edit-airdrop [modalRef]="modalRef" [airdrop]="currentAirdrop"
+                         (editAirdrop)="refreshAirdrops()"></app-form-edit-airdrop>
 </ng-template>

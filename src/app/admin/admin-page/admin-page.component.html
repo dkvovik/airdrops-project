@@ -1,0 +1,14 @@
+<app-header></app-header>
+
+<div class="container content">
+  <section class="filter-wrapper">
+    <button class="btn btn-add-airdrop" (click)="openModal(formAddAirdrop)">Submit New Airdrop</button>
+    <app-filter #filter></app-filter>
+  </section>
+
+  <ng-template #formAddAirdrop>
+    <app-form-add-airdrop [modalRef]="modalRef" (addAirdrop)="filter.refreshAirdrops()"></app-form-add-airdrop>
+  </ng-template>
+</div>
+
+<app-footer></app-footer>
