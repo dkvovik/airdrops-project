@@ -115,11 +115,11 @@ export class FilterComponent implements OnInit {
     for (let i = 0; i < checkboxes.length; ++i) {
       checkboxes[i]['checked'] = false;
     }
-    localStorage.setItem('selectedMinTokenValue', '');
-    localStorage.setItem('selectedMaxTokenValue', '');
-    localStorage.setItem('selectedMinRating', '');
-    localStorage.setItem('selectedMaxRating', '');
-    localStorage.setItem('selectedRequirements', JSON.stringify([]));
+    localStorage.setItem('selectedMinTokenValueAdmin', '');
+    localStorage.setItem('selectedMaxTokenValueAdmin', '');
+    localStorage.setItem('selectedMinRatingAdmin', '');
+    localStorage.setItem('selectedMaxRatingAdmin', '');
+    localStorage.setItem('selectedRequirementsAdmin', JSON.stringify([]));
   }
 
   getFilteredAirdrops() {
@@ -156,11 +156,11 @@ export class FilterComponent implements OnInit {
     this.filterData.selectedMaxRating = this.twoWayRangeRating[1];
     this.filterData.selectedRequirements = this.requirements;
 
-    const selectedMinTokenValueLS = 'selectedMinTokenValue' + status;
-    const selectedMaxTokenValueLS = 'selectedMaxTokenValue' + status;
-    const selectedMinRatingLS = 'selectedMinRating' + status;
-    const selectedMaxRatingLS = 'selectedMaxRating' + status;
-    const selectedRequirementsLS = 'selectedRequirements' + status;
+    const selectedMinTokenValueLS = 'selectedMinTokenValueAdmin' + status;
+    const selectedMaxTokenValueLS = 'selectedMaxTokenValueAdmin' + status;
+    const selectedMinRatingLS = 'selectedMinRatingAdmin' + status;
+    const selectedMaxRatingLS = 'selectedMaxRatingAdmin' + status;
+    const selectedRequirementsLS = 'selectedRequirementsAdmin' + status;
 
     localStorage.setItem(selectedMinTokenValueLS, this.filterData.selectedMinTokenValue.toString());
     localStorage.setItem(selectedMaxTokenValueLS, this.filterData.selectedMaxTokenValue.toString());
@@ -192,35 +192,35 @@ export class FilterComponent implements OnInit {
   }
 
   getSelectedFilterValue(status = '') {
-    const selectedMinTokenValueLS = 'selectedMinTokenValue' + status;
+    const selectedMinTokenValueLS = 'selectedMinTokenValueAdmin' + status;
     this.selectedMinTokenValue = localStorage.getItem(selectedMinTokenValueLS) || this.minTokenValue;
     this.selectedMinTokenValue = +this.selectedMinTokenValue;
     if (this.selectedMinTokenValue < this.minTokenValue) {
       this.selectedMinTokenValue = this.minTokenValue;
     }
 
-    const selectedMaxTokenValueLS = 'selectedMaxTokenValue' + status;
+    const selectedMaxTokenValueLS = 'selectedMaxTokenValueAdmin' + status;
     this.selectedMaxTokenValue = localStorage.getItem(selectedMaxTokenValueLS) || this.maxTokenValue;
     this.selectedMaxTokenValue = +this.selectedMaxTokenValue;
     if (this.selectedMaxTokenValue > this.maxTokenValue) {
       this.selectedMaxTokenValue = this.maxTokenValue;
     }
 
-    const selectedMinRatingLS = 'selectedMinRating' + status;
+    const selectedMinRatingLS = 'selectedMinRatingAdmin' + status;
     this.selectedMinRating = localStorage.getItem(selectedMinRatingLS) || this.minRating;
     this.selectedMinRating = +this.selectedMinRating;
     if (this.selectedMinRating < this.minRating) {
       this.selectedMinRating = this.minRating;
     }
 
-    const selectedMaxRatingLS = 'selectedMaxRating' + status;
+    const selectedMaxRatingLS = 'selectedMaxRatingAdmin' + status;
     this.selectedMaxRating = localStorage.getItem(selectedMaxRatingLS) || this.maxRating;
     this.selectedMaxRating = +this.selectedMaxRating;
     if (this.selectedMaxRating > this.maxRating) {
       this.selectedMaxRating = this.maxTokenValue;
     }
 
-    const selectedRequirementsLS = 'selectedRequirements' + status;
+    const selectedRequirementsLS = 'selectedRequirementsAdmin' + status;
     this.selectedRequirements = JSON.parse(localStorage.getItem(selectedRequirementsLS)) || [];
 
     if (this.selectedRequirements.length !== 0) {

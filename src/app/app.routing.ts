@@ -12,8 +12,8 @@ export const routes: Routes = [
   {path: 'past', component: FindedAirdropPageComponent},
   {
     path: 'admin',
-    // loadChildren: './admin/admin.module#AdminModule'
-    loadChildren: () => AdminModule
+    loadChildren: './admin/admin.module#AdminModule'
+    // loadChildren: () => AdminModule
   },
 ];
 
